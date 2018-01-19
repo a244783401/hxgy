@@ -13,7 +13,7 @@ public class WechatApplicationTests {
 	private final Logger logger = LoggerFactory.getLogger(WechatApplication.class);
 	@Test
 	public void contextLoads() {
-		logger.info("hello word");
+		logger.info("hello word!!");
 		logger.error("error");
 	}
 
