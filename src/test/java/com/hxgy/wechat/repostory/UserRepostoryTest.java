@@ -19,9 +19,8 @@ public class UserRepostoryTest {
     @Autowired
     private UserRepostory userRepostory;
     @Test
-    public void testFindOne(){
-        UserTest userTest = userRepostory.findOne(1L);
-        System.out.print(userTest.getUserName());
-        Assert.assertEquals("张三",userTest.getUserName());
+    public void testuser(){
+       UserTest userTest = userRepostory.findOne(1L);
+        System.out.printf(userTest.getUserName());
     }
 }
