@@ -1,4 +1,9 @@
 package com.hxgy.wechat.repostory;
 
-public interface HealthHistoryRepostory {
+
+import com.hxgy.wechat.entity.HealthHistory;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface HealthHistoryRepostory extends JpaRepository<HealthHistory,Long> {
+
 }

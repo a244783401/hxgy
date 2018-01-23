@@ -1,4 +1,9 @@
 package com.hxgy.wechat.repostory;
 
-public interface HealthScoreRepostory {
+
+import com.hxgy.wechat.entity.HealthScore;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface HealthScoreRepostory extends JpaRepository<HealthScore,Long> {
+
 }
