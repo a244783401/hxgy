@@ -63,5 +63,155 @@ public class HealthCourseItem {
 
     private float score;
 
-   
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getVideoDesc() {
+        return videoDesc;
+    }
+
+    public void setVideoDesc(String videoDesc) {
+        this.videoDesc = videoDesc;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
+
+    public Long getViewNum() {
+        return viewNum;
+    }
+
+    public void setViewNum(Long viewNum) {
+        this.viewNum = viewNum;
+    }
+
+    public Long getPraiseNum() {
+        return praiseNum;
+    }
+
+    public void setPraiseNum(Long praiseNum) {
+        this.praiseNum = praiseNum;
+    }
+
+    public Integer getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Integer enable) {
+        this.enable = enable;
+    }
+
+    public Integer getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public Integer getAuthorDeptId() {
+        return authorDeptId;
+    }
+
+    public void setAuthorDeptId(Integer authorDeptId) {
+        this.authorDeptId = authorDeptId;
+    }
+
+    public String getAuthorDeptName() {
+        return authorDeptName;
+    }
+
+    public void setAuthorDeptName(String authorDeptName) {
+        this.authorDeptName = authorDeptName;
+    }
+
+    public String getAuthorHospName() {
+        return authorHospName;
+    }
+
+    public void setAuthorHospName(String authorHospName) {
+        this.authorHospName = authorHospName;
+    }
+
+    public Integer getAuthorHospId() {
+        return authorHospId;
+    }
+
+    public void setAuthorHospId(Integer authorHospId) {
+        this.authorHospId = authorHospId;
+    }
+
+    public Integer getItemIndex() {
+        return itemIndex;
+    }
+
+    public void setItemIndex(Integer itemIndex) {
+        this.itemIndex = itemIndex;
+    }
+
+    public String getVideoTime() {
+        return videoTime;
+    }
+
+    public void setVideoTime(String videoTime) {
+        this.videoTime = videoTime;
+    }
+
+    public float getScore() {
+        return score;
+    }
+
+    public void setScore(float score) {
+        this.score = score;
+    }
 }
