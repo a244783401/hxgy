@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>确认订单</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.0.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jweixin-1.0.0.js}"></script>
+    
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/weui.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/order.css}" type="text/css"/>
+</head>
+<body style="background-color:#EBEBEB;">
+    <div class="order_title">订单信息</div>
+    <div class="order_item"><span>订单名称</span><div class="order_text">全套课程报名费</div></div>
+    <div class="order_item"><span>订单编号</span><div class="order_text">201704171144326</div></div>
+    <div class="order_item"><span>订单日期</span><div class="order_text">2017-04-17</div></div>
+    <div class="order_item"><span>订单金额</span><div class="order_price"><span style="color: #f98412;">￥</span>4500</div></div>
+    <a class="order_submit">支付</a>
+</body>
+<script type="text/javascript" th:src="@{/js/order.js}"></script>
+<script type="text/javascript" th:src="@{/js/dialog.js}"></script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>设置</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.0.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jweixin-1.0.0.js}"></script>
+  
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/weui.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/setting.css}" type="text/css"/>
+</head>
+<body style="background-color:#EBEBEB;">
+    <div id="modifyInfo" class="setting_buttonDiv_item" style="margin-top: 40px;">
+        <img th:src="@{/images/register/username.png}" class="setting_buttonDiv_item_icon" />
+        <div class="setting_buttonDiv_item_div">完善资料</div>
+        <img th:src="@{/images/center/go.png}" class="setting_buttonDiv_item_go" />
+    </div>
+    <a class="setting_login_out">退出</a>
+</body>
+<script type="text/javascript" th:src="@{/js/setting.js}"></script>
+<script type="text/javascript" th:src="@{/js/dialog.js}"></script>
+</html>

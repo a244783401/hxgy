@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>课程管理</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/weui.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/iframeStyle.css}" type="text/css"/>
+    
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.0.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>  
+    <script type="text/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script> 
+    <script type="text/javascript" th:src="@{/js/dialog.js}"></script> 
+    <script type="text/javascript" th:src="@{/js/ajax.js}"></script> 
+</head>
+<body>
+    <div class="iframe_menu">
+         <span style="float: left;">
+                            视频管理系统&nbsp;&nbsp;>&nbsp;&nbsp;
+         </span>
+         <span style="color: red">
+                            课程管理
+         </span>    
+         <div style="float:right;">
+            <button id="add">新增</button>&nbsp;&nbsp;
+            <button id="update">修改</button>&nbsp;&nbsp;
+            <button id="delete">删除</button>
+         </div>
+    </div>
+    <div class="iframe_tableDiv">
+        <table id="example" class="display" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>名称</th>
+                    <th>描述</th>
+                    <th>价格</th>
+                    <th>适用人群</th>
+                    <th>学习人数</th>
+                    <th>是否推荐</th>
+                    <th>评分</th>
+                    <th>是否开课</th>
+                    <th>所属分类</th>
+                    <th>创建时间</th>
+                    <th>作者姓名</th>
+                    <th>部门</th>
+                    <th>机构</th>
+                </tr>
+            </thead>      
+        </table>
+    </div>
+    <div id="editorDiv" class="iframe_editorDiv" style="width:320px;height:620px;top:10%;left:35%;">
+        <div id="titleDiv" class="iframe_editorDiv_title" style="padding-left:42%;">添加课程</div>
+        <input type="hidden" id="addOrUpdate"/>
+        <div class="iframe_editorDiv_item" style="margin-top:20px;"><span>课程名称:</span><input type="text" id="courseName"/>
+        <div id="nameCheck" style="display:none;height:20px;color:red;font-size:10px;padding-left:70px;">名称不能为空!</div>
+        </div>        
+        <div  class="iframe_editorDiv_item"><span>课程描述:</span><input type="text" id="courseDesc" /></div>
+        <div  class="iframe_editorDiv_item"><span>课程价格:</span><input type="text" id="coursePrice" />
+        <div id="priceCheck" style="display:none;height:20px;color:red;font-size:10px;padding-left:70px;">价格必须是正数!</div>
+        </div>
+        <div  class="iframe_editorDiv_item"><span>适用人群:</span><input type="text" id="forcrow" /></div>
+        <div  class="iframe_editorDiv_item"><span>是否推荐:</span>
+            <select style="width:180px;height:30px;" id="isrecommend">
+                <option value="1">是</option>
+                <option value="0" selected="selected">否</option>
+            </select></div>
+        <div  class="iframe_editorDiv_item"><span>是否开课:</span>
+            <select style="width:180px;height:30px;" id="enable">
+                <option value="1" selected="selected">是</option>
+                <option value="0">否</option>
+            </select>
+        </div>
+        <div  class="iframe_editorDiv_item"><span>所属分类:</span>
+            <select style="width:180px;height:30px;" id="courseCateg"></select>
+        </div>
+        <div  class="iframe_editorDiv_item"><span>课程作者:</span><input type="text" id="courseAuthor" /></div>
+        <div  class="iframe_editorDiv_item"><span>作者部门:</span><input type="text" id="courseDept" /></div>
+        <div  class="iframe_editorDiv_item"><span>作者机构:</span><input type="text" id="courseHospital" /></div>
+        <div class="iframe_editorDiv_buttonDiv">
+            <input type="button" value="确认" id="confirm" style="float:left;margin-left:25%;" />
+            <input type="button" value="取消" id="cancel" style="float:right;margin-right:25%;" />
+        </div>
+    </div>
+</body>
+<script type="text/javascript" th:src="@{/js/course.js}"></script>
+</html>

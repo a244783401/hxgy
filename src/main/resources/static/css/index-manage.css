@@ -1,0 +1,15 @@
+html, body{ margin:0;padding:0; height:100%;width: 100%; }
+.banner{color:white;background:#4c4c4c;border-bottom:0;}
+.banner_left{width:250px;height:70px;background:#3C3D3F;float:left;line-height:70px;}
+.banner_left img{height:50px;margin:-10px 0 0 15px;}
+.banner_left span{margin-left:20px;font-size:25px;}
+.banner_right{height:70px;float:right;line-height:60px;margin-right:40px;}
+.useraccount{margin-left:5px;font-size:15px;}
+.loginout{height:15px;width:20px;background-color:#DC535A;padding:1px 8px;margin-left:5px;border-radius:5px;line-height:15px;cursor:pointer;}
+.leftnav{width:250px;height:100%;float:left;background-color:#38B1C6;padding-top:70px;margin-left:-100%;}
+.leftnav_item{display:block; height:70px;width:100%;line-height:70px;margin-top:20px;cursor:pointer;text-decoration:none;}
+.leftnav_item:HOVER{text-decoration: none;}
+.leftnav_item:FOCUS{text-decoration: none;}
+.leftnav_item img{height:40px;width:40px;margin:-15px 0 0 30px;}
+.leftnav_item span{color:white;margin-left:15px;font-size:20px;}
+.navselect{background-color:#289BB0;border-top:2px solid #16869C;border-bottom:2px solid #45C6DB;}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>课程报名</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.0.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+  
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/weui.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/centerIntro.css}" type="text/css"/>
+</head>
+<body style="background-color:#EBEBEB;">
+    <div class="intro_item" style="margin-top:20px;">
+        <img th:src="@{/images/centerIntro/intro_hospital.png}" class="intro_item_icon"/>
+        <div class="intro_item_div">华西心理卫生中心</div>
+        <img th:src="@{/images/index/go.png}" class="intro_item_go" />
+    </div>
+    <div class="intro_item">
+        <img th:src="@{/images/centerIntro/intro_tips.png}" class="intro_item_icon"/>
+        <div class="intro_item_div">教学方式和特点</div>
+        <img th:src="@{/images/index/go.png}" class="intro_item_go" />
+    </div>
+     <div class="intro_item">
+        <img th:src="@{/images/centerIntro/intro_student.png}" class="intro_item_icon"/>
+        <div class="intro_item_div">招生</div>
+        <img th:src="@{/images/index/go.png}" class="intro_item_go" />
+    </div>
+    <div class="intro_item">
+        <img th:src="@{/images/centerIntro/intro_teacher.png}" class="intro_item_icon"/>
+        <div class="intro_item_div">教师</div>
+        <img th:src="@{/images/index/go.png}" class="intro_item_go" />
+    </div>
+</body>
+<script type="text/javascript" th:src="@{/js/centerIntro.js}"></script>
+</html>

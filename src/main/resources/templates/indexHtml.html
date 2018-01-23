@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>视频资源管理</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.0.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/index-manage.css}" type="text/css"/>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top banner">
+    <div class="banner_left"><img th:src="@{/images/login_logo.png}"/><span>视频资源管理</span></div>
+    <div class="banner_right">
+        <img th:src="@{/images/user_green.png}" style="height:20px;"/>
+        <span class="useraccount">admin</span>
+        <span class="loginout">退出</span>
+    </div>
+    </div>
+    <div id="content" style="height:100%;width:100%;">
+    <!-- content -->
+        <div class="rightContent" style="padding-top:70px;float:left;height:100%;border:0;width:100%;">
+            <div style="height:100%;margin-left:250px;">
+                <iframe name="content" style="height:99%;width:100%;border:0;" src="categIndex" ></iframe>
+            </div>        
+        </div>
+        <div class="leftnav">
+            <a id='categ' href="categIndex" target="content" class="leftnav_item navselect"><img th:src="@{/images/categ_select.png}"/><span>分类管理</span></a>
+            <a id='course' href="courseIndex" target="content" class="leftnav_item"><img th:src="@{/images/course_unselect.png}"/><span>课程管理</span></a>
+            <a id='video' href="videoIndex" target="content" class="leftnav_item"><img th:src="@{/images/video_unselect.png}"/><span>视频管理</span></a>
+            <a id='comment' href="commentIndex" target="content" class="leftnav_item"><img th:src="@{/images/comment_unselect.png}"/><span>评论管理</span></a>
+            <a id='setting' target="content" class="leftnav_item" style="position:absolute;bottom:10px;width:250px; "><img th:src="@{/images/setting_unselect.png}"/><span>设置</span></a>
+        </div>
+    <!-- content end -->
+    </div>
+</body>
+<script type="text/javascript">
+$(document).ready(function(){  
+    $('.leftnav_item').click(function(){
+        if($(this).hasClass('navselect')){
+            return;
+        }else{
+            $('.leftnav_item').removeClass('navselect');
+            $('.leftnav').find('.leftnav_item').each(function(){
+                $(this).children(':first').attr('src','/images/'+$(this).attr('id')+'_unselect.png');
+            });
+            $(this).addClass('navselect');
+            $(this).children(':first').attr('src','/images/'+$(this).attr('id')+'_select.png')
+        }
+    });
+});  
+</script>
+</html>
