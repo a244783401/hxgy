@@ -10,7 +10,7 @@ import java.util.Map;
  * @create 2018-01-18 22:43
  **/
 @Component
-@ConfigurationProperties(prefix = "wechcat")
+@ConfigurationProperties(prefix = "wechat")
 public class WechatAccountConfig {
     /**
      * 公众平台id
