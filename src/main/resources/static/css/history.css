@@ -1,0 +1,22 @@
+.history_header{margin:0;border:0;background-color:white;width:100%;min-height:50px;border-bottom:5px solid #EBEBEB;}
+.history_delete{float:right;height:45px;width:60px; padding-top:12px;padding-right:20px;text-align:right;font-size:16px;}
+.history_header img{float:right;height:20px;}
+.history_list{margin:50px 0 0 0;width:100%;}
+.history_list_item{width:100%;height:120px; background-color:white;border-bottom:1px solid #EBEBEB;}
+.history_list_circle{width:5%;height:100%;line-height:120px;float: left;margin-left:3%;display: none; }
+.history_list_circle img{height:18px; }
+.history_list_cover{height:100%;width:40%;border:1px solid white;float: left;}
+.history_list_coverImg{width:80%;height:85px;margin-left:10%;border-radius:15px;margin-top:18px;}
+.history_list_coverImg img{width:100%;height:100%;border-radius:15px;float:left;}
+.history_list_coverTime{z-index:999;float:right;margin:-19px 5px 0 0;font-size:12px; opacity: 0.4;text-align:center;width:40px;height:15px;line-height:14px; border-radius:5px;color:white;background-color:#333;}
+.history_list_content{width:60%;float:left;height:100%;padding-right:20px;}
+.history_list_title{margin-top:22px;font-size:16px; clear:both;word-break:keep-all;whitewhite-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.history_list_author{font-size:16px;color: #868686;font-size:15px;}
+.history_list_time{margin-top:10px;font-size:13px;color: #868686;height:20px;line-height:18px;}
+.history_list_time img{height:18px;float:left;}
+.history_list_time span{float:left; margin-left:5px;}
+.history_last{margin-top:10px;width:100%;text-align:center;margin-bottom:10px;color:#999;}
+.history_footer{bottom:-50px; margin:0;border:0;background-color:white;width:100%;min-height:50px;border-top:1px solid #EBEBEB;font-size:16px;}
+.history_footer_selectAll{width:50%;height:50px;border-right:1px solid #EBEBEB;float:left;line-height:50px;text-align:center;}
+.history_footer_selectAll img{height:18px;}
+.history_footer_delete{width:49%;height:50px;float:left;line-height:50px;text-align:center;color: #999;}

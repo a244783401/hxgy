@@ -1,0 +1,6 @@
+.setting_buttonDiv_item{width:90%;height:55px;box-shadow:5px 5px 5px rgba(0,0,0,.1);background-color:#FFFFFF;margin:20px 0 0 5%;}
+.setting_buttonDiv_item_div{color:#333;font-size:18px;height:100%;float:left;line-height:55px; margin-left:25px;}
+.setting_buttonDiv_item_icon{width:25px;margin-left:10px;float:left;margin-top:15px;}
+.setting_buttonDiv_item_go{height:18px;margin-right:8px;float:right;margin-top:19px;}
+
+.setting_login_out{display:block;width:90%;margin:30px 0 0 5%;background-color:#ff8580;height:50px;color:white;font-size:18px;text-align:center;line-height:50px;border-radius:3px;}

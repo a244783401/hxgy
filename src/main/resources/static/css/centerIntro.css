@@ -1,0 +1,10 @@
+.intro_item{
+	background-color:white;
+	width:90%;
+	margin:12px 0 0 5%;
+	height:75px;
+	border-radius:8px;
+	padding:20px 15px 0 15px;}
+.intro_item_icon{float: left;width:30px;}
+.intro_item_div{float: left;font-size:18px;color:#444;margin:0 0 0 8px;}
+.intro_item_go{float: right;height:15px;margin-top:7px;}
