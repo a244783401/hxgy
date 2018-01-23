@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>个人中心</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.0.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+  
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/weui.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/center.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}" type="text/css"/>
+</head>
+<body style="background-color:#EBEBEB;">
+    <div class="center_bg">
+        <img th:src="@{/images/center/center_header.png}" class="center_header"/>
+        <a id="loginIndex" class="center_btn">登录/注册</a>
+        <img th:src="@{/images/center/center_fish.png}" class="center_fish"/>
+    </div>
+    <div id='center_button' class="center_buttonDiv" >
+        <div id="visitIndex" class="center_buttonDiv_item">
+            <img th:src="@{/images/center/center_mycourse.png}" class="center_buttonDiv_item_icon" />
+            <div class="center_buttonDiv_item_div">我的课程</div>
+            <img th:src="@{/images/center/go.png}" class="center_buttonDiv_item_go" />
+        </div>
+        <div id="history" class="center_buttonDiv_item" style="margin-top:10px;">
+            <img th:src="@{/images/center/center_history.png}" class="center_buttonDiv_item_icon"/>
+            <div class="center_buttonDiv_item_div">观看记录</div>
+            <img th:src="@{/images/center/go.png}" class="center_buttonDiv_item_go" />
+        </div>
+        <div id="msg" class="center_buttonDiv_item" style="margin-top:10px;">
+            <img th:src="@{/images/center/center_msg.png}" class="center_buttonDiv_item_icon"/>
+            <div class="center_buttonDiv_item_div">消息</div>
+            <img th:src="@{/images/center/go.png}" class="center_buttonDiv_item_go" />
+        </div>
+        <div id="setting" class="center_buttonDiv_item" style="margin-top:10px;">
+            <img th:src="@{/images/center/center_setting.png}" class="center_buttonDiv_item_icon"/>
+            <div class="center_buttonDiv_item_div">设置</div>
+            <img th:src="@{/images/center/go.png}" class="center_buttonDiv_item_go" />
+        </div>
+    </div>
+    <div class="center_footImg"><img th:src="@{/images/center/center_footer_img.png}" /></div>   
+    <!-- 底部导航 -->
+    <div  class="navbar navbar-inverse navbar-fixed-bottom">    
+        <div class="weui-tabbar" style="height:60px;">
+            <a  type="index" class="weui-tabbar__item">
+                <img th:src="@{/images/index/indexIcon.png}" class="weui-tabbar__icon"/>
+                <p class="weui-tabbar__label footer_font">主页</p>
+            </a>
+            <a  type="visitIndex" class="weui-tabbar__item">
+                <img th:src="@{/images/index/visitIcon.png}"  class="weui-tabbar__icon"/>
+                <p class="weui-tabbar__label footer_font">全部课程</p>
+            </a>
+            <a  type="myCenterIndex" class="weui-tabbar__item item_act">
+                <img th:src="@{/images/index/centerIcon_selected.png}"  class="weui-tabbar__icon"/>
+                <p class="weui-tabbar__label item_act">我的</p>
+            </a>
+        </div>
+    </div>
+    <!-- 底部导航end -->
+</body>
+<script type="text/javascript" th:src="@{/js/center.js}"></script>
+<script type="text/javascript" th:src="@{/js/footer.js}"></script>
+<script th:inline="javascript">
+    var userInfo = [[${userInfo}]];
+</script>
+</html>

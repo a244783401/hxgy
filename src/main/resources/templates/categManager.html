@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>分类管理</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/weui.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/iframeStyle.css}" type="text/css"/>
+    
+    <script type="text/javascript" th:src="@{/js/jquery-3.1.0.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>  
+    <script type="text/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script> 
+    <script type="text/javascript" th:src="@{/js/dialog.js}"></script> 
+    <script type="text/javascript" th:src="@{/js/ajax.js}"></script> 
+</head>
+<body>
+    <div class="iframe_menu">
+         <span style="float: left;">
+                            视频管理系统&nbsp;&nbsp;>&nbsp;&nbsp;
+         </span>
+         <span style="color: red">
+                            分类管理
+         </span>    
+         <div style="float:right;">
+            <button id="add">新增</button>&nbsp;&nbsp;
+            <button id="update">修改</button>&nbsp;&nbsp;
+            <button id="delete">删除</button>
+         </div>
+    </div>
+    <div class="iframe_tableDiv">
+        <table id="example" class="display" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>编号</th>
+                    <th>名称</th>
+                </tr>
+            </thead>      
+        </table>
+    </div>
+    <div id="editorDiv" class="iframe_editorDiv" style="width:300px;height:220px;top:25%;left:35%;">
+        <div id="titleDiv" class="iframe_editorDiv_title" style="padding-left:42%;">添加分类</div>
+        <input type="hidden" id="addOrUpdate"/>
+        <div class="iframe_editorDiv_item" style="margin-top:20px;">
+            <span>编号:</span><input type="text" id="categCode"/>
+        </div>
+        <div  class="iframe_editorDiv_item">
+            <span>名称:</span><input type="text" id="categDesc"/>
+        </div>
+        <div class="iframe_editorDiv_buttonDiv">
+            <input type="button" value="确认" id="confirm" style="float:left;margin-left:25%;" />
+            <input type="button" value="取消" id="cancel" style="float:right;margin-right:25%;" />
+        </div>
+    </div>
+</body>
+<script type="text/javascript" th:src="@{/js/categ.js}"></script>
+</html>

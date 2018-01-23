@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>西南心理培训中心</title>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/mui.min.js}"> </script>
+    <link rel="stylesheet" th:href="@{/css/mui.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/mui.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/weui.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}" type="text/css"/>
+    <script th:src="@{/js/jquery.min.js}"></script>
+</head>
+<body style="background-color:#EBEBEB;">
+    <!--轮播图-->
+    <div class="mui-slider" style="box-shadow:5px 5px 5px rgba(0,0,0,.1);">
+        <div class="mui-slider-group">
+            <!--第一个内容区容器-->
+            <div class="mui-slider-item">
+                <!-- 具体内容 -->
+                <img th:src="@{/images/index/psy_banner.png}" style="width: 100%;"/>
+            </div>
+            <div class="mui-slider-item">
+                <!-- 具体内容 -->
+                <img th:src="@{/images/index/psy_banner.png}" style="width: 100%;"/>
+            </div>
+        </div>
+    </div>
+    <div class="index_areaDiv">
+        <div id="signupIndex" class="index_areaDiv_item1">
+            <img th:src="@{/images/index/signUp.png}"/>
+            <div class="index_areaDiv_item1_text">报名培训</div>
+        </div>
+        <div class="index_areaDiv_item2">
+            <div id="visitIndex" class="index_areaDiv_item2_div" style="background-color:#84DB96;">
+                <img th:src="@{/images/index/visit.png}"/>
+                <div class="index_areaDiv_item2_div_text">听课</div>
+            </div>
+            <div id="share" class="index_areaDiv_item2_div" style="background-color:#FCD173;margin-top:10px;">
+                <img th:src="@{/images/index/share.png}" style="width:45px;"/>
+                <div class="index_areaDiv_item2_div_text">讨论分享</div>
+            </div>
+        </div>
+    </div>
+    <div class="index_buttonDiv" >
+        <div id="free_course" class="index_buttonDiv_item">
+            <img th:src="@{/images/index/free_course.png}" class="index_buttonDiv_item_icon"  />
+            <div class="index_buttonDiv_item_div">免费公开课</div>
+            <img th:src="@{/images/index/go.png}" class="index_buttonDiv_item_go" />
+        </div>
+        <div id="center_intro" class="index_buttonDiv_item" style="margin-top:10px;">
+            <img th:src="@{/images/index/center_intro.png}" class="index_buttonDiv_item_icon"/>
+            <div class="index_buttonDiv_item_div">中心介绍</div>
+            <img th:src="@{/images/index/go.png}" class="index_buttonDiv_item_go" />
+        </div>
+    </div>
+    <!-- 底部导航 -->
+    <div  class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="weui-tabbar" style="height:60px;">
+            <a  type="index" class="weui-tabbar__item item_act">
+                <img th:src="@{/images/index/indexIcon_selected.png}" class="weui-tabbar__icon"/>
+                <p class="weui-tabbar__label item_act">主页</p>
+            </a>
+            <a href="visitIndex" type="visitIndex" class="weui-tabbar__item">
+                <img th:src="@{/images/index/visitIcon.png}"  class="weui-tabbar__icon"/>
+                <p class="weui-tabbar__label footer_font">全部课程</p>
+            </a>
+            <a  type="myCenterIndex" class="weui-tabbar__item">
+                <img th:src="@{/images/index/centerIcon.png}"  class="weui-tabbar__icon"/>
+                <p class="weui-tabbar__label footer_font">我的</p>
+            </a>
+        </div>
+    </div>
+    <!-- 底部导航end -->
+</body>
+<script type="text/javascript" th:src="@{/static/js/index.js}"> </script>
+<script type="text/javascript" th:src="@{/static/js/dialog.js}"> </script>
+<script type="text/javascript" th:src="@{/static/js/footer.js}"> </script>
+</html>

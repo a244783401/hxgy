@@ -1,0 +1,10 @@
+html, body{ margin:0;padding:0; height:100%;width: 100%; }
+.iframe_menu{width:100%;height:40px;background-color:#F1F1F1;padding:0 10px 0 10px;margin-bottom:10px;border-bottom:1px solid #111111;line-height:40px;}
+.iframe_menu button{height:25px;line-height:20px;width:50px;}
+.iframe_tableDiv{width:100%;padding:0 10px 0 10px;}
+.iframe_editorDiv{display:none;border:1px solid #111111;position:absolute;background-color:white;font-size:15px;}
+.iframe_editorDiv_title{width:100%;height:40px;background-color:#289BB0;line-height:40px;color:white;}
+.iframe_editorDiv_item{width:100%;height:40px;margin-top:10px;padding-left:30px;}
+.iframe_editorDiv_buttonDiv{width:100%;height:40px;margin-top:10px;}
+.iframe_editorDiv_buttonDiv input{width:60px;}
+.iframe_editorDiv_item input{margin-left:5px;width:180px;height:30px;}
