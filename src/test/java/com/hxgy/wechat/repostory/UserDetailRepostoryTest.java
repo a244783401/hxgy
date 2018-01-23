@@ -1,7 +1,7 @@
 package com.hxgy.wechat.repostory;
 
 
-import com.alibaba.fastjson.JSONObject;
+//import com.alibaba.fastjson.JSONObject;
 import com.hxgy.wechat.entity.UserDetail;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +17,7 @@ public class UserDetailRepostoryTest {
     @Test
     public void getData(){
         UserDetail userDetail=userDetailRepostory.findOne(7L);
-        System.out.println(JSONObject.toJSONString(userDetail));
+//        System.out.println(JSONObject.toJSONString(userDetail));
     }
     @Test
     public void addData(){

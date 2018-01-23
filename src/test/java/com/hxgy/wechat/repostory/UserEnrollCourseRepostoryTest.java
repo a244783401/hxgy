@@ -1,7 +1,7 @@
 package com.hxgy.wechat.repostory;
 
 
-import com.alibaba.fastjson.JSONObject;
+//import com.alibaba.fastjson.JSONObject;
 import com.hxgy.wechat.entity.UserEnrollCourse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +17,7 @@ public class UserEnrollCourseRepostoryTest {
     @Test
     public void getData(){
         UserEnrollCourse userEnrollCourse=userEnrollCourseRepostory.findOne(6L);
-        System.out.println(JSONObject.toJSONString(userEnrollCourse));
+//        System.out.println(JSONObject.toJSONString(userEnrollCourse));
     }
     @Test
     public void addData(){

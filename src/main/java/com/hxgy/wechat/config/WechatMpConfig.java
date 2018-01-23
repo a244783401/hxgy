@@ -6,7 +6,11 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * 微信配置
@@ -15,6 +19,7 @@ import org.springframework.stereotype.Component;
  * @create 2018-01-18 22:29
  **/
 @Component
+@Configuration
 public class WechatMpConfig {
     @Autowired
     private WechatAccountConfig wechatAccountConfig;
@@ -32,4 +37,5 @@ public class WechatMpConfig {
         wxMpInMemoryConfigStorage.setSecret(wechatAccountConfig.getMpAppSecret());
         return wxMpInMemoryConfigStorage;
     }
+
 }

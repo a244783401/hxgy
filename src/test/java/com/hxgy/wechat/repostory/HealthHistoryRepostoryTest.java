@@ -1,7 +1,5 @@
 package com.hxgy.wechat.repostory;
 
-
-import com.alibaba.fastjson.JSONObject;
 import com.hxgy.wechat.entity.HealthHistory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,11 +14,11 @@ import java.util.Date;
 public class HealthHistoryRepostoryTest {
     @Autowired
     HealthHistoryRepostory healthHistoryRepostory;
-    @Test
-    public void getData(){
-        HealthHistory healthHistory=healthHistoryRepostory.findOne(127L);
-        System.out.println(JSONObject.toJSONString(healthHistory));
-    }
+//    @Test
+//    public void getData(){
+//        HealthHistory healthHistory=healthHistoryRepostory.findOne(127L);
+//        System.out.println(JSONObject.toJSONString(healthHistory));
+//    }
     @Test
     public void addData(){
         HealthHistory healthHistory=new HealthHistory();
