@@ -1,0 +1,27 @@
+.signup_top{height:75px;width:100%;background-color:#75bde9;color:white;line-height:75px;font-size:20px;text-align:center;}
+.signup_allCourseImg{width:100%;height:25px;text-align:center;margin-top:10px;}
+.signup_allCourseImg img{height:17px;}
+.signup_allCourseDiv{width:90%;height:103px;margin:8px 5% 0 5%;background-color:white;border-radius:2px;padding-top:10px;}
+.sign_allCourseDvi_title{height:33px;width:100%;font-size:17px;color:#444444;line-height:25px;padding-left:10px;}
+.sign_allCourseDvi_title img{width:14px;margin-top:-3px;}
+.sign_allCourse{width:100%;height:50px;}
+.sign_allCourse_price{width:35%;float:left;height:100%;padding-left:7px;color:#f98412;font-size:24px;line-height:50px;}
+.sign_allCourse_button{width:65%;float:left;height:100%;padding:8px 0 0 10px;font-size:16px;}
+.sign_allCourse_btn_desc{display:block;float:right;width:70px;height:32px;line-height:30px;
+border:1px solid #75bde9;color:#75bde9;border-radius:3px;text-align:center;margin-right:15px;}
+.sign_allCourse_btn_sign{display:block;float:right;width:70px;height:32px;line-height:30px;
+background-color:#75bde9;color:white;border-radius:3px;text-align:center;margin-right:10px;}
+
+.signup_singleCourseImg{width:100%;height:25px;text-align:center;margin-top:30px;}
+.signup_singleCourseImg img{height:17px;}
+.signup_singleCourse{height:68px;width:90%;margin:17px 0 0 5%;background-color:white;border-radius:3px;}
+
+.sign_singleCourse_price{width:35%;float:left;height:100%;padding:8px 0 0 15px;color:#f98412;font-size:17px;}
+.sign_singleCourse_button{width:65%;float:left;height:100%;padding:17px 0 0 10px;font-size:16px;}
+.sign_singleCourse_btn_desc{display:block;float:right;width:70px;height:32px;line-height:30px;
+border:1px solid #75bde9;color:#75bde9;border-radius:3px;text-align:center;margin-right:15px;}
+.sign_singleCourse_btn_sign{display:block;float:right;width:70px;height:32px;line-height:30px;
+background-color:#75bde9;color:white;border-radius:3px;text-align:center;margin-right:10px;}
+
+.center_footImg{width:100%;height:60px;text-align:center;}
+.center_footImg img{height:50px;}

@@ -1,0 +1,14 @@
+.login_inputDiv{width:90%;height:52px;margin:45px 5% 0 5%;background-color:white;}
+.login_img{height:100%;width:15%;float:left;text-align:center;}
+.login_img img{height:26px;margin-top:13px;}
+.login_input{height:100%;width:85%;float:left;}
+.login_input input{border:0;background-color:white;width:100%; height:100%;float: left;font-size:16px;}
+.login_button{width:90%;height:45px;background-color:#75bde9;margin:45px 5% 0 5%;display:block;border-radius:3px;line-height:45px;text-align:center;color:white;font-size:18px;}
+.login_text{width:90%;margin:17px 5% 0 5%;height:30px;color:#888888; font-size:16px;}
+.login_register{color:#75bde9;margin-left:10px;}
+.login_forget{color:#75bde9;float:right;}
+.login_thirdBg{width:100%;margin-top:40px;}
+.login_thirdBg img{width:100%;}
+.login_thirdImg{width:100%;margin-top:30px;}
+.login_thirdImg_qq{width:55px;float:left;margin-left:20%;}
+.login_thirdImg_wechat{width:55px;float:right;margin-right:20%;}
