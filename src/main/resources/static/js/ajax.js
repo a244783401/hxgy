@@ -2,9 +2,8 @@ function excuteAjax(url, data, fun) {
 	$.ajax({
 		url : url,
 		type : "post",
-		data : JSON.stringify(data),
-		dataType : "json",
-		contentType : "application/json",
+		data : data,
+		dataType : 'json',
 		success : function(jsonObj) {
 			fun(jsonObj);
 		} ,
