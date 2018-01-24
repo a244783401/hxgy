@@ -30,6 +30,16 @@ public class UserDetail {
     private Long userId;
     @Column(name="sex")
     private Boolean sex;
+    @Column(name = "password")
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Boolean getSex() {
         return sex;
