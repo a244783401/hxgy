@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/test")
 public class newTest {
+    @RequestMapping("/hello")
     public String Test(){
-        return "";
+        return "ManagerLogin";
     }
 }
