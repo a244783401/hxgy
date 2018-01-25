@@ -10,7 +10,6 @@ public class ServerResponse<T> {
     private int status;
     private String message;
     private T data;
-    private boolean isSuccess;
 
     public ServerResponse() {
     }
@@ -59,12 +58,8 @@ public class ServerResponse<T> {
         this.data = data;
     }
 
-    public boolean getSuccess() {
-        return isSuccess;
-    }
-
-    public void setSuccess(boolean success) {
-        isSuccess = success;
+    private boolean getSuccess(){
+        return this.status == ResonseCode.SUCCESS.getCode();
     }
 
     public static<T> ServerResponse<T> createSuccess(){
