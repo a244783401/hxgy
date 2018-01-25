@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -23,5 +26,11 @@ public class HealthDescRepostoryTest {
     public void testFindOne(){
         HealthCourseDesc healthCourseDesc = heal.findOne(1L);
         Assert.assertNotNull(healthCourseDesc);
+    }
+    @Test
+    public void testFindBycode(){
+        List<Long> codes = Arrays.asList(2L,3L);
+        List<HealthCourseDesc> healthCourseDescs = heal.findByCourseCategoryIdIn(codes);
+        Assert.assertNotEquals(0,healthCourseDescs.size());
     }
 }

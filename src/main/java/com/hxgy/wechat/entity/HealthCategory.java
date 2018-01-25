@@ -18,6 +18,26 @@ public class HealthCategory {
     @Column(name = "category_desc")
     private String categoryDesc;
 
+    private Integer version;
+
+    private Integer stand;
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public Integer getStand() {
+        return stand;
+    }
+
+    public void setStand(Integer stand) {
+        this.stand = stand;
+    }
+
     public Long getId() {
         return id;
     }
