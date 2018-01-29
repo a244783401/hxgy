@@ -2,7 +2,6 @@ package com.hxgy.wechat.base;
 
 /**
  * 返回类
- *
  * @author zy
  * @create 2018-01-18 22:06
  **/

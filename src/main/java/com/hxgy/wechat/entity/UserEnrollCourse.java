@@ -10,15 +10,15 @@ public class UserEnrollCourse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private Long userId;
-    @Column(name = "courseId")
+    @Column(name = "course_id")
     private Long courseId;
-    @Column(name = "courseCategId")
+    @Column(name = "course_categ_id")
     private Long courseCategId;
-    @Column(name = "totalPeriod")
+    @Column(name = "total_period")
     private Long totalPeriod;
-    @Column(name = "learnPeriod")
+    @Column(name = "learn_period")
     private Long learnPeriod;
 
     public Long getId() {

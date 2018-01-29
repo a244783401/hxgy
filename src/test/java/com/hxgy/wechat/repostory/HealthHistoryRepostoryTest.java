@@ -1,6 +1,7 @@
 package com.hxgy.wechat.repostory;
 
 import com.hxgy.wechat.entity.HealthHistory;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,20 +22,14 @@ public class HealthHistoryRepostoryTest {
 //        System.out.println(JSONObject.toJSONString(healthHistory));
 //    }
     @Test
-    public void addData(){
-        HealthHistory healthHistory=new HealthHistory();
-        healthHistory.setAccountCode("sqfa");
-        healthHistory.setCourseId(1L);
-        healthHistory.setEnable(true);
-        healthHistory.setUserID(2L);
-        healthHistory.setVideoCurrentTime(20);
-        healthHistory.setVideoId(3L);
-        healthHistory.setViewDate(new Date());
-        healthHistoryRepostory.save(healthHistory);
+    public void findOne(){
+        HealthHistory healthHistory = healthHistoryRepostory.findOne(122L);
+        Assert.assertNotNull(healthHistory);
     }
     @Test
-    public void deleteData(){
-        healthHistoryRepostory.delete(140L);
+    public void findVideoIdByUserId(){
+        List<Long> longs = healthHistoryRepostory.findVideoIdByUserId(2L);
+        Assert.assertNotEquals(0,longs.size());
     }
 
 }

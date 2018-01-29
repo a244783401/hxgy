@@ -10,19 +10,30 @@ public class HealthHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "videoId")
+
+    @Column(name = "video_id")
     private Long videoId;
-    @Column(name = "courseId")
+
+    @Column(name = "course_id")
     private Long courseId;
-    @Column(name = "userID")
-    private Long userID;
-    @Column(name = "viewDate")
+
+    @Column(name = "user_id")
+    private Long userId;
+
+
+    @Column(name = "view_date")
     private Date viewDate;
-    @Column(name = "videoCurrentTime")
+
+
+    @Column(name = "video_currentTime")
     private Integer videoCurrentTime;
+
+
     @Column(name = "enable")
     private Boolean enable;
-    @Column(name = "accountCode")
+
+
+    @Column(name = "account_code")
     private String accountCode;
 
     public Long getId() {
@@ -49,12 +60,12 @@ public class HealthHistory {
         this.courseId = courseId;
     }
 
-    public Long getUserID() {
-        return userID;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Date getViewDate() {

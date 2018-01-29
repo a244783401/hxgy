@@ -3,7 +3,8 @@ $(function(){
 		if ($(this).hasClass('item_act')) {
 			return;
 		}else{
-			location.href=''+$(this).attr('type')+'';
+			console.log($(this).attr("type"))
+			location.href='/'+$(this).attr("type");
 		}
 	});
 });

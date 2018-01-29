@@ -62,6 +62,9 @@ public class CourseServiceimpl implements ICourseService {
                 courseDescVo.setCoursePrice(courseDesc.getCoursePrice());
                 courseDescVo.setRecommend(courseDesc.getRecommend());
                 courseDescVo.setCourseName(courseDesc.getCourseName());
+                courseDescVo.setRecommend(courseDesc.getRecommend());
+                courseDescVo.setCourseCode(courseDesc.getCourseCode());
+                courseDesc.setEnable(courseDesc.getEnable());
                 courseDescVos.add(courseDescVo);
             }
             return courseDescVos;

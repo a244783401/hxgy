@@ -21,7 +21,7 @@ $(function(){
 					for (var i = 0; i < courseList.length; i++) {
 						if (courseList[i].recommend==1) {
 							$('#allCourse_price').text(courseList[i].coursePrice);
-							$('#aEnroll').attr("index",courseList[i].id)
+							$('#aEnroll').on("click",clickThing(courseList[i].id))
 						}else{
 							totalStr+= '<span>'+courseList[i].courseName+'</span>'+
 								'<img src="images/signup/add.png"/>';
@@ -31,8 +31,8 @@ $(function(){
 								'<span style="font-size:16px;">￥</span>'+courseList[i].coursePrice+''+
 								'</div>'+
 								'<div class="sign_singleCourse_button">'+
-								'<a id="sign_up" onclick="clickThing(' + courseList[i].id  + ')" class="sign_singleCourse_btn_sign">报名</a>'+
-								'<a onclick="getDetilInfo(' + courseList[i].id  + ')" class="sign_singleCourse_btn_desc">详情</a>'+
+								'<a id="sign_up" onclick="clickThing(' + courseList[i].id  + ')"  class="sign_singleCourse_btn_sign">报名</a>'+
+								'<a class="sign_singleCourse_btn_desc">详情</a>'+
 								'</div>'+
 								'</div>';
 						}
@@ -49,24 +49,15 @@ $(function(){
 /**
  * 点击报名
  */
-$("#aEnroll").on("click",function(){
-	clickThing($(this).attr("index"))
-})
+
 function clickThing(id){
+	console.log(id)//传入的id值 你打印一下 看对不对 点击事件
 	excuteAjax("/user/course/signup_info",{'id':id},function(jsonObj){
 		if (jsonObj.status != 0){
 			showSingleDialogWithContent(jsonObj.message, null);
 		}else {
-			location.href="/user/course/signup_info_index";
+			location.href="signupinfo";
 		}
 	})
 }
-/**
- * 点击详情
- */
-$('#aDetil').on("click", function () {
-	getDetilInfo($("#aEnroll").attr("index"))
-})
-function getDetilInfo(id){
 
-}

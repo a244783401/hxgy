@@ -35,4 +35,16 @@ public class HomeController {
         session.removeAttribute(Const.CURRENT_USER);
         return "psychologyIndex";
     }
+    @GetMapping("/visitIndex")
+    public String visitIndex(){
+        return "visitindex";
+    }
+    @GetMapping("/myCenterIndex")
+    public String index(){
+        return "myCenterIndex";
+    }
+    @GetMapping("/history")
+    public String history(){
+        return "history";
+    }
 }

@@ -16,6 +16,36 @@ public class CourseDescVo {
 
     private String courseName;
 
+    private String forCrowd;
+
+    private String courseCode;
+
+    private Integer enable;
+
+    public String getForCrowd() {
+        return forCrowd;
+    }
+
+    public void setForCrowd(String forCrowd) {
+        this.forCrowd = forCrowd;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    public Integer getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Integer enable) {
+        this.enable = enable;
+    }
+
     public Long getId() {
         return id;
     }

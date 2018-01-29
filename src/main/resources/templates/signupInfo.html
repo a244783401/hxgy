@@ -19,6 +19,7 @@
 <link rel="stylesheet" th:href="@{/css/signupInfo.css}" type="text/css" />
 </head>
 <body style="background-color: #EBEBEB;">
+<!--表单-->
 	<form id="detailForm" method="post"
 		enctype="application/x-www-form-urlencoded" action="enterForCourse">
 		<div class="signupInfo_item" style="margin-top: 6px;">
@@ -68,6 +69,7 @@
 		<input type="hidden" id="courseid" name="courseid" />
 		<input type="hidden" id="coursecategid" name="coursecategid" />
 	</form>
+<!--图片上传-->
 	<form action="updateHeadImg" id="user_form" method="post"
 		enctype="multipart/form-data">
 		<div class="signupInfo_item"
@@ -81,6 +83,7 @@
 			</a>
 		</div>
 	</form>
+
 	<a class="sigunupInfo_submit">提交</a>
 </body>
 <script type="text/javascript" th:src="@{/js/signupInfo.js}"></script>

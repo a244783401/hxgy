@@ -8,7 +8,9 @@ public enum ResonseCode {
     SUCCESS(0,"SUCCESS"),
     ERROR(1,"ERROR"),
     NEED_LONGIN(10,"NEED_LOGIN"),
-    ILLEGAL_ARGUMENT(2,"ILLEGAL_ARGUMENT");
+    ILLEGAL_ARGUMENT(2,"ILLEGAL_ARGUMENT"),
+    NEED_BUY(11,"NEED_BUY"),
+    NEED_PAY(12,"NEED_PAY")
     ;
     private int code;
     private String msg;

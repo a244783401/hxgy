@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -24,4 +26,10 @@ public class HealthItemRepostoryTestTest {
         HealthCourseItem healthCourseItem = healthItemRepostory.findOne(1L);
         Assert.assertNotNull(healthCourseItem);
     }
+    @Test
+    public void testFindByCourseId(){
+        List<HealthCourseItem> healthCourseItems = healthItemRepostory.findByCourseId(4L);
+        Assert.assertNotEquals(0,healthCourseItems.size());
+    }
+
 }

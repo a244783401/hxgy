@@ -5,22 +5,23 @@ $(function(){
 });
 
 function initUI(){
-	excuteAjax('signList', {'periodNum':44}, function(jsonObj) {
-		if (jsonObj.code!=1) {
-			showSingleDialogWithContent(jsonObj.msg, null);
+	excuteAjax('/video/allcourse_info', {'periodNum':44}, function(jsonObj) {
+		console.log(jsonObj)
+		if (jsonObj.status !=0 ) {
+			showSingleDialogWithContent(jsonObj.message, null);
 		} else {
 			var itemStr = '',wrapStr =  '';
 			var courseFlag = [];
-			var descList = jsonObj.courseDescList
+			var descList = jsonObj.data
 			//加载选择项
 			if (descList!=null && descList.length>0) {
 				var num = 0;
 				for (var i = 0; i < descList.length; i++) {					
-					if (descList[i].isrecommend!=1) {
+					if (descList[i].recommend!=1) {
 						if (num==0) {
-							itemStr += '<div class="itemView" num="'+num+'"><span class="itemFont fontSelect">'+descList[i].coursename+'</span></div>';
+							itemStr += '<div class="itemView"  onclick="findAllVideoByCourseId(' + descList[i].id  + ')" num="'+num+'"><span class="itemFont fontSelect">'+descList[i].courseName+'</span></div>';
 						}else{
-							itemStr += '<div class="itemView" num="'+num+'"><span class="itemFont">'+descList[i].coursename+'</span></div>';
+							itemStr += '<div class="itemView"onclick="findAllVideoByCourseId(' + descList[i].id  + ')"><span class="itemFont">'+descList[i].courseName+'</span></div>';
 						}
 						num++;
 						wrapStr += '<div class="swiper-slide" style="overflow: hidden;text-align:center;" id="'+descList[i].forcrowd+'"></div>';
@@ -49,53 +50,129 @@ function initUI(){
 			        $(this).find(".itemFont").first().addClass("fontSelect");
 			        mySwiper.slideTo($(this).attr("num"), 300, false);
 			    });
-			    
-			    //查询视频
-			    for (var i = 0; i < courseFlag.length; i++) {
-			    	excuteAjax('videoListByCode', {'code':courseFlag[i].code,'enable':courseFlag[i].enable}, function(jsonObj) {
-						if (jsonObj.code!=1) {
-							showSingleDialogWithContent(jsonObj.msg , null);
-						}else{
-						    //查询视频列表ajax
-							var videoList= jsonObj.videoList;	
-							var tempStr = '';
-							if (jsonObj.enable=='true'&&videoList!=null&&videoList.length>0) {
-								for (var j = 0; j < videoList.length; j++) {
-									tempStr+='<div class="visit_courseList" videoId="'+videoList[j].id+'">'+
-							        '<img src="'+videoList[j].coverurl+'"  class="visit_courseList_img" />'+
-							        '<div class="visit_courseList_text">'+
-							            '<div class="visit_courseList_title" style="text-align:left;">'+videoList[j].name+'</div>'+
-							            '<div class="visit_courseList_author" style="text-align:left;">主讲人：<span>'+videoList[j].authorname+'</span></div>'+
-							            '<div class="visit_courseList_info">'+
-							                '<img src="/psychologyWeb/images/visit/visit_eye.png"/><span class="visit_courseList_eye">'+videoList[j].viewnum+'</span>'+
-							                '<img src="/psychologyWeb/images/visit/visit_heart.png" style="margin-left:10px;"/><span class="visit_courseList_heart" >'+videoList[j].praisenum+'</span>'+
-							                '<div class="visit_courseList_date" style="">'+videoList[j].createdatestr+'</div>'+
-							            '</div>'+
-							        '</div>'+
-							    '</div>';
-								}
-								tempStr+='<div class="visit_courseList_end">暂时只有这么多</div>';
-								$('#'+jsonObj.courseCode).html(tempStr);
-								$('.visit_courseList').click(function(){
-									location.href='videoPlay?videoId='+$(this).attr('videoId');
-								});
-							    $('.visit_courseList_text').width($(window).width()-170);
-							    $('.visit_courseList_date').width($(window).width()-170-100);
-							    //enable 为 false 或 查询出的视频列表为空  则显示 未开课 
-							}else{
-								tempStr+='<img src="/psychologyWeb/images/visit/visit_sun.png" class="visit_null_sun" />'+
-							    '<div class="visit_null_text">课程还没有开始哦</div>'+
-							    '<div class="visit_null_text">耐心等待下下~</div>'
-							    $('#'+jsonObj.courseCode).html(tempStr);
-								$('.visit_courseList_text').width($(window).width()-170);  
-							    $('.visit_courseList_date').width($(window).width()-170-100);	
-							}
-						}
-					});	
-				}							    
+			    findAllVideoByCourseId();
+                ////查询视频
+                //for (var i = 0; i < courseFlag.length; i++) {
+			    	//excuteAjax('videoListByCode', {'code':courseFlag[i].code,'enable':courseFlag[i].enable}, function(jsonObj) {
+				//		if (jsonObj.status!=1) {
+				//			showSingleDialogWithContent(jsonObj.msg , null);
+				//		}else{
+				//		    //查询视频列表ajax
+				//			var videoList= jsonObj.data;
+				//			var tempStr = '';
+				//			if (jsonObj.enable=='true'&&videoList!=null&&videoList.length>0) {
+				//				for (var j = 0; j < videoList.length; j++) {
+				//					tempStr+='<div class="visit_courseList" videoId="'+videoList[j].id+'">'+
+				//			        '<img src="'+videoList[j].coverurl+'"  class="visit_courseList_img" />'+
+				//			        '<div class="visit_courseList_text">'+
+				//			            '<div class="visit_courseList_title" style="text-align:left;">'+videoList[j].name+'</div>'+
+				//			            '<div class="visit_courseList_author" style="text-align:left;">主讲人：<span>'+videoList[j].authorName+'</span></div>'+
+				//			            '<div class="visit_courseList_info">'+
+				//			                '<img src="/psychologyWeb/images/visit/visit_eye.png"/><span class="visit_courseList_eye">'+videoList[j].viewNum+'</span>'+
+				//			                '<img src="/psychologyWeb/images/visit/visit_heart.png" style="margin-left:10px;"/><span class="visit_courseList_heart" >'+videoList[j].praisenum+'</span>'+
+				//			                '<div class="visit_courseList_date" style="">'+videoList[j].createdatestr+'</div>'+
+				//			            '</div>'+
+				//			        '</div>'+
+				//			    '</div>';
+				//				}
+				//				tempStr+='<div class="visit_courseList_end">暂时只有这么多</div>';
+				//				$('#'+jsonObj.courseCode).html(tempStr);
+				//				$('.visit_courseList').click(function(){
+				//					location.href='videoPlay?videoId='+$(this).attr('videoId');
+				//				});
+				//			    $('.visit_courseList_text').width($(window).width()-170);
+				//			    $('.visit_courseList_date').width($(window).width()-170-100);
+				//			    //enable 为 false 或 查询出的视频列表为空  则显示 未开课
+				//			}else{
+				//				tempStr+='<img src="/psychologyWeb/images/visit/visit_sun.png" class="visit_null_sun" />'+
+				//			    '<div class="visit_null_text">课程还没有开始哦</div>'+
+				//			    '<div class="visit_null_text">耐心等待下下~</div>'
+				//			    $('#'+jsonObj.courseCode).html(tempStr);
+				//				$('.visit_courseList_text').width($(window).width()-170);
+				//			    $('.visit_courseList_date').width($(window).width()-170-100);
+				//			}
+				//		}
+				//	});
+				//}
 			}
 		}
 	});
+}
+/**
+ * 根据分类查询视频
+ * @param data
+ */
+function findAllVideoByCourseId(id){
+	if (!id){
+		id = null;
+	}
+	excuteAjax("/video/find_all_video",{'courseId':id}, function (result) {
+		if (result.status != 0){
+			showSingleDialogWithContent(result.message, null);
+	}else{
+			var videoList= result.data;
+			var tempStr = '';
+			if (videoList!=null&&videoList.length>0) {
+				for (var j = 0; j < videoList.length; j++) {
+					tempStr+='<div class="visit_courseList" courseId = "'+videoList[j].courseId+'" videoId="'+videoList[j].id+'">'+
+						'<img src="'+videoList[j].coverurl+'"  class="visit_courseList_img" />'+
+						'<div class="visit_courseList_text">'+
+						'<div class="visit_courseList_title" style="text-align:left;">'+videoList[j].name+'</div>'+
+						'<div class="visit_courseList_author" style="text-align:left;">主讲人：<span>'+videoList[j].authorName+'</span></div>'+
+						'<div class="visit_courseList_info">'+
+						'<img src="/static/images/visit/visit_eye.png"/><span class="visit_courseList_eye">'+videoList[j].viewNum+'</span>'+
+						'<img src="/static/images/visit/visit_heart.png" style="margin-left:10px;"/><span class="visit_courseList_heart" >'+videoList[j].praiseNum+'</span>'+
+						'<div class="visit_courseList_date" style="">'+getMyDate(videoList[j].createdatestr)+'</div>'+
+						'</div>'+
+						'</div>'+
+						'</div>';
+				}
+				tempStr+='<div class="visit_courseList_end">暂时只有这么多</div>';
+				$('.swiper-wrappersssssss').html(tempStr);
+				$('.visit_courseList').click(function(){
+					excuteAjax("/video/video_play", {'videoId':$(this).attr('videoId'),'courseId':$(this).attr('courseId')},function(result){
+							if (result.status != 0){
+								showSingleDialogWithContent(result.message, null);
+							}else{
+								location.href=result.data
+							}
+					})
+				});
+				$('.visit_courseList_text').width($(window).width()-170);
+				$('.visit_courseList_date').width($(window).width()-170-100);
+				//enable 为 false 或 查询出的视频列表为空  则显示 未开课
+			}else{
+				tempStr+='<img src="/static/images/visit/visit_sun.png" class="visit_null_sun" />'+
+					'<div class="visit_null_text">课程还没有开始哦</div>'+
+					'<div class="visit_null_text">耐心等待下下~</div>'
+				$('.swiper-wrapper').html(tempStr);
+				$('.visit_courseList_text').width($(window).width()-170);
+				$('.visit_courseList_date').width($(window).width()-170-100);
+			}
+		}
+	})
+}
+/**
+ * 日期转换
+ * @param str
+ * @returns {string}
+ */
+function getMyDate(str) {
+	var oDate = new Date(str),
+		oYear = oDate.getFullYear(),
+		oMonth = oDate.getMonth() + 1,
+		oDay = oDate.getDate(),
+		oHour = oDate.getHours(),
+		oMin = oDate.getMinutes(),
+		oSen = oDate.getSeconds(),
+		oTime = oYear + '-' + getzf(oMonth) + '-' + getzf(oDay);//最后拼接时间
+	return oTime;
+	function getzf(num) {
+		if (parseInt(num) < 10) {
+			num = '0' + num;
+		}
+		return num;
+	}
 }
 function initZXKC(data){
 	var htmlStr = "";
@@ -123,7 +200,7 @@ function initLWZD(data){
 	//论文指导
     var htmlStr = '';
     if (data==undefined||data.length==0) {
-		htmlStr+='<img src="/psychologyWeb/images/visit/visit_sun.png" class="visit_null_sun" />'+
+		htmlStr+='<img src="/static/images/visit/visit_sun.png" class="visit_null_sun" />'+
 	    '<div class="visit_null_text">课程还没有开始哦</div>'+
 	    '<div class="visit_null_text">耐心等待下下~</div>'
 	}else if(data.isPay=="0"){

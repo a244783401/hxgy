@@ -1,8 +1,8 @@
 $(function(){ 
 	//加载视频列表
-	excuteAjax('getHistoryListByUserid','', function(jsonObj) {
+	excuteAjax('/video/history','', function(result) {
 	var historyStr = '';
-	if (jsonObj.code!=1) {
+	if (jsonObj.status != 0) {
 		showSingleDialogWithContent(jsonObj.msg, null);
 	}else {			
 		var historyList = jsonObj.historyList;
