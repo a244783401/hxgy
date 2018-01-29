@@ -13,13 +13,13 @@ public class HealthScore {
     private Long id;
     @Column(name = "score")
     private float score;
-    @Column(name = "userName")
+    @Column(name = "user_name")
     private String userName;
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private Long userId;
-    @Column(name = "scoreDate")
+    @Column(name = "score_date")
     private Date scoreDate;
-    @Column(name = "courseId")
+    @Column(name = "course_id")
     private Long courseId;
 
     public Long getId() {

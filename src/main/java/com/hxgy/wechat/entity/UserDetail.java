@@ -32,6 +32,36 @@ public class UserDetail {
     private Boolean sex;
     @Column(name = "password")
     private String password;
+    @Column(name = "open_id")
+    private String openId;
+    @Column(name = "login_status")
+    private String loginStatus;
+    @Column(name = "real_name")
+    private String realName;
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public String getLoginStatus() {
+        return loginStatus;
+    }
+
+    public void setLoginStatus(String loginStatus) {
+        this.loginStatus = loginStatus;
+    }
 
     public String getPassword() {
         return password;

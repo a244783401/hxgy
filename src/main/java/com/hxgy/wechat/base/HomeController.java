@@ -47,4 +47,10 @@ public class HomeController {
     public String history(){
         return "history";
     }
+    @GetMapping("/loginIndex")
+    public String loginIndex(){
+        return "login";
+    }
+
+
 }

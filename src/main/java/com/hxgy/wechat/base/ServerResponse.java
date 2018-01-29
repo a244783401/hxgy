@@ -61,6 +61,7 @@ public class ServerResponse<T> {
         return this.status == ResonseCode.SUCCESS.getCode();
     }
 
+
     public static<T> ServerResponse<T> createSuccess(){
         return new ServerResponse(ResonseCode.SUCCESS.getCode());
     }

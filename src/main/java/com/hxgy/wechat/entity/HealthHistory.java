@@ -13,26 +13,18 @@ public class HealthHistory {
 
     @Column(name = "video_id")
     private Long videoId;
-
     @Column(name = "course_id")
     private Long courseId;
-
     @Column(name = "user_id")
     private Long userId;
-
-
     @Column(name = "view_date")
     private Date viewDate;
-
-
     @Column(name = "video_currentTime")
     private Integer videoCurrentTime;
 
 
     @Column(name = "enable")
     private Boolean enable;
-
-
     @Column(name = "account_code")
     private String accountCode;
 
