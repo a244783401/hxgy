@@ -18,7 +18,7 @@
 <body style="background-color:#EBEBEB;">
     <div class="center_bg">
         <img th:src="@{/images/center/center_header.png}" class="center_header"/>
-        <a id="loginIndex" class="center_btn">登录/注册</a>
+        <a id="loginIndex" class="center_btn" herf="/user/login">登录/注册</a>
         <img th:src="@{/images/center/center_fish.png}" class="center_fish"/>
     </div>
     <div id='center_button' class="center_buttonDiv" >
@@ -64,6 +64,7 @@
     <!-- 底部导航end -->
 </body>
 <script type="text/javascript" th:src="@{/js/center.js}"></script>
+<script type="text/javascript" th:src="@{/js/ajax.js}"></script>
 <script type="text/javascript" th:src="@{/js/footer.js}"></script>
 <script th:inline="javascript">
     var userInfo = [[${userInfo}]];

@@ -218,6 +218,12 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.7</version>
 		</dependency>
+		<!-- 腾讯云依赖 -->
+		<dependency>
+			<groupId>com.github.qcloudsms</groupId>
+			<artifactId>qcloudsms</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 	</dependencies>
 
 	<!-- 打包上线 -->
@@ -257,6 +263,7 @@
 							<goal>check</goal>
 						</goals>
 						<configuration>
+
 							<rules>
 								<rule>
 									<element>CLASS</element>

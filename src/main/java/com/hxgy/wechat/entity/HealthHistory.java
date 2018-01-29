@@ -10,19 +10,19 @@ public class HealthHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "videoId")
+    @Column(name = "video_id")
     private Long videoId;
-    @Column(name = "courseId")
+    @Column(name = "course_id")
     private Long courseId;
-    @Column(name = "userID")
+    @Column(name = "user_id")
     private Long userID;
-    @Column(name = "viewDate")
+    @Column(name = "view_date")
     private Date viewDate;
-    @Column(name = "videoCurrentTime")
+    @Column(name = "video_currentTime")
     private Integer videoCurrentTime;
     @Column(name = "enable")
     private Boolean enable;
-    @Column(name = "accountCode")
+    @Column(name = "account_code")
     private String accountCode;
 
     public Long getId() {
