@@ -6,5 +6,4 @@ package com.hxgy.wechat.base;
  **/
 public class Const {
     public static final String CURRENT_USER = "currentUser";
-    public static final String RANDOM_CODE="randomCode";
 }

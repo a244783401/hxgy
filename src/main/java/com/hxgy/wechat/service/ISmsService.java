@@ -2,6 +2,8 @@ package com.hxgy.wechat.service;
 
 import com.hxgy.wechat.base.ServerResponse;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * 验证码的使用
  * Created by zy on 2018/1/20.
@@ -12,18 +14,13 @@ public interface ISmsService {
      * @param phoneNum
      * @return
      */
-    ServerResponse<String> sendSms(String phoneNum);
-
+    ServerResponse sendSms(String phoneNum);
     /**
-     * 获取缓存中的验证码
-     * @param phoneNum
+     *验证验证码
+     * @param phoneNum,inputCode,randomCode
      * @return
      */
-    String getSmsCode(String phoneNum);
+    ServerResponse validateSms(String phoneNum,String inputCode);
 
-    /**
-     * 移除指定缓存中的验证码
-     * @param phoneNum
-     */
-    void remove(String phoneNum);
+
 }

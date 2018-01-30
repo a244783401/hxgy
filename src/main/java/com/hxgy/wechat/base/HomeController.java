@@ -51,6 +51,26 @@ public class HomeController {
     public String loginIndex(){
         return "login";
     }
+    @GetMapping("/registerIndex")
+    public String registerIndex(){
+        return "register";
+    }
+    @GetMapping("/setting")
+    public String setting(){
+        return "setting";
+    }
+    @GetMapping("/modifyInfo")
+    public String modifyInfo(){
+        return "modifyInfo";
+    }
+    @GetMapping("/modifyPwd")
+    public String modifyPwd(){
+        return "modifyPwd";
+    }
+    @GetMapping("/logout")
+    public String logout(){
+        return "logout";
+    }
 
 
 }

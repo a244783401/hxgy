@@ -58,11 +58,11 @@ public class Userserviceimpl implements IUserService {
 
     @Override
     public ServerResponse registerNew(String phoneno, String name, String password) {
-        if(userDetailRepostory.findByPhoneno(phoneno)!=null){
-            return ServerResponse.createErrorMessage("该手机已被注册!");
-        }
         if(userDetailRepostory.findByName(name)!=null){
             return ServerResponse.createErrorMessage("该用户名已被注册!");
+        }
+        if(userDetailRepostory.findByPhoneno(phoneno)!=null){
+            return ServerResponse.createErrorMessage("该手机已被注册!");
         }
         UserDetail userDetail=new UserDetail();
         userDetail.setName(name);
@@ -70,6 +70,38 @@ public class Userserviceimpl implements IUserService {
         userDetail.setPassword(MD5Util.MD5EncodeUtf8(password));
         userDetailRepostory.save(userDetail);
         return  ServerResponse.isSuccess("注册成功!",userDetail);
+    }
+
+    @Override
+    public ServerResponse validatePhone(String phoneno,String isRegister) {
+        if(isRegister.equals("00")) {
+            if (userDetailRepostory.findByPhoneno(phoneno) != null) {
+                return ServerResponse.createErrorMessage("该手机已被注册!");
+            } else {
+                return ServerResponse.createSuccess();
+            }
+        }
+        if(isRegister.equals("01")){
+            if(userDetailRepostory.findByPhoneno(phoneno)==null){
+                return ServerResponse.createErrorMessage("该手机未被注册!");
+            }else {
+                return ServerResponse.createSuccess();
+            }
+        }
+        return ServerResponse.createErrorMessage("未知错误");
+    }
+
+    @Override
+    public ServerResponse editPassword(String phoneno, String newPassword) {
+        UserDetail userDetail=userDetailRepostory.findByPhoneno(phoneno);
+        if(userDetail==null){
+            return ServerResponse.createErrorMessage("该手机未被注册!");
+        }
+        else {
+            userDetail.setPassword(MD5Util.MD5EncodeUtf8(newPassword));
+            userDetailRepostory.save(userDetail);
+            return ServerResponse.isSuccess("修改成功!请重新登陆",userDetail);
+        }
     }
 
 

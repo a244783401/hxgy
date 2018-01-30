@@ -24,20 +24,20 @@ $(function(){
 	    var repPwd = $('#seccondPass').val();  	    
 		if (check(phoneno,code,pwd,repPwd)) {
 			//验证验证码
-			excuteAjax('validateRandomCode',{'phoneno':phoneno,'inputCode':code,'codeType':'01'},function(jsonObj){
-				if (jsonObj.code != 1) {
-					showSingleDialogWithContent(jsonObj.msg,null);
+			excuteAjax('/validate/validateRandomCode',{'phoneno':phoneno,'inputCode':code,'codeType':'01'},function(jsonObj){
+				if (jsonObj.status == 1) {
+					showSingleDialogWithContent(jsonObj.message,null);
 				}else{
-					excuteAjax('findPassword',{"phoneno" : phoneno.trim(),
+					excuteAjax('/user/login/findPassword',{"phoneno" : phoneno.trim(),
 											   "channel" : "WECHAT",
 											   "randomCode" : code,
 											   "newPassword" : pwd},function(json){
-							if (json.code != 1) {
-								showSingleDialogWithContent(json.msg,null);
+							if (json.status == 1) {
+								showSingleDialogWithContent(json.message,null);
 							}else{
-								toastSucceed(json.msg);
+								toastSucceed(json.message);
 								setTimeout(function () {
-									location.href= 'myCenterIndex';
+									location.href= 'loginIndex';
                				 	},1500);
 							}				
 					});
@@ -56,11 +56,11 @@ function random(obj){
 	var phoneno = $('#phoneno').val();
 	if (checkPhone(phoneno)) {
 		var data = {'phoneno': phoneno.trim(),'channel': '2','isRegister':'01','type': '0'};
-        excuteAjax('generateRandomCode', data, function (jsonObj) {
-            if (jsonObj.code != 1) {
-                showSingleDialogWithContent(jsonObj.msg,null);
+        excuteAjax('/validate/generateRandomCode', data, function (jsonObj) {
+            if (jsonObj.status == 1) {
+                showSingleDialogWithContent(jsonObj.message,null);
             } else {
-                toastSucceed(jsonObj.msg);
+                toastSucceed(jsonObj.message);
                 var count = 60;
                 $(obj).css({"background-color": "#dcdcdc", "color": "white"}).text("重新获取("+count+")");                
                 var countFun = window.setInterval(function changeTime() {
