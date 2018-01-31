@@ -54,7 +54,7 @@ public class UserController {
     @RequestMapping("/login/getuserInfo")
     @ResponseBody
     public ServerResponse getuserInfo(HttpSession session){
-        if(session!=null) {
+        if(session.getAttribute(Const.CURRENT_USER)!=null) {
             ServerResponse<LoginInfoVo> serverResponse = iUserService.getuserInfo(session);
             if (serverResponse.getstatus() == 0) {
                 return serverResponse;
@@ -101,16 +101,18 @@ public class UserController {
                                        @RequestParam(value = "newPassword") String newPassword,
                                        HttpSession session)
     {
-        if(getKey(phoneno)!=null){
-            ServerResponse serverResponse=iUserService.editPassword(phoneno,newPassword);
-            if(serverResponse.getstatus()==0) {
-                session.setAttribute(Const.CURRENT_USER, serverResponse.getData());
+        if("psy".equals(channel)) {
+            if (getKey(phoneno) != null) {
+                ServerResponse serverResponse = iUserService.editPassword(phoneno, newPassword);
+                if (serverResponse.getstatus() == 0) {
+                    session.setAttribute(Const.CURRENT_USER, serverResponse.getData());
+                }
+                return serverResponse;
+            } else {
+                return ServerResponse.createErrorMessage("验证码已过期!");
             }
-            return serverResponse;
         }
-        else {
-            return ServerResponse.createErrorMessage("验证码已过期!");
-        }
+        return ServerResponse.createErrorMessage("未知渠道!");
 
     }
 

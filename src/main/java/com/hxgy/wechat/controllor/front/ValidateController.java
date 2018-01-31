@@ -1,5 +1,6 @@
 package com.hxgy.wechat.controllor.front;
 
+import com.hxgy.wechat.VO.ReqRandomCodeVo;
 import com.hxgy.wechat.base.ServerResponse;
 import com.hxgy.wechat.service.ISmsService;
 import com.hxgy.wechat.service.IUserService;
@@ -8,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpSession;
 
 import static com.hxgy.wechat.utils.TokenCacheUtil.getKey;
 
@@ -29,8 +28,7 @@ public class ValidateController {
     @ResponseBody
     public ServerResponse validateRandomCode(@RequestParam(value = "phoneno") String phoneno,
                                              @RequestParam(value = "inputCode") String inputCode,
-                                             @RequestParam(value = "codeType") String codeType,
-                                             HttpSession session){
+                                             @RequestParam(value = "codeType") String codeType){
         if(phoneno!=null&&inputCode!=null){
             if(getKey(phoneno)==null)
             {
@@ -51,19 +49,19 @@ public class ValidateController {
      * 获取验证码
      *
      * */
-    @RequestMapping("/generateRandomCode")
+    @RequestMapping(value = "/generateRandomCode")
     @ResponseBody
     public ServerResponse generateRandomCode(@RequestParam(value = "phoneno") String phoneno,
                                              @RequestParam(value = "channel") String channel,
                                              @RequestParam(value = "isRegister") String isRegister,
-                                             @RequestParam(value = "type") String type,
-                                             HttpSession session){
-        if(iUserService.validatePhone(phoneno,isRegister).getstatus()!=0){
-            return iUserService.validatePhone(phoneno,isRegister);
-        }
-        else {
-            return iSmsService.sendSms(phoneno);
-        }
+                                             @RequestParam(value = "type") String type) throws Exception {
+        ReqRandomCodeVo reqRandomCodeVo=new ReqRandomCodeVo();
+        reqRandomCodeVo.setPhoneno(phoneno);
+        reqRandomCodeVo.setChannel(channel);
+        reqRandomCodeVo.setIsRegister(isRegister);
+        reqRandomCodeVo.setType(type);
+        return iSmsService.sendSms(reqRandomCodeVo);
+
     }
 
 }

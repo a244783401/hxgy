@@ -10,6 +10,5 @@ public interface IUserService {
     ServerResponse validateLogin(WxMpUser wxMpUser);
     ServerResponse getuserInfo(HttpSession session);
     ServerResponse registerNew(String phoneno,String name,String password);
-    ServerResponse validatePhone(String phoneno,String isRegister);
     ServerResponse editPassword(String phoneno,String password);
 }

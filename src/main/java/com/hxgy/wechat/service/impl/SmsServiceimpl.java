@@ -1,7 +1,11 @@
 package com.hxgy.wechat.service.impl;
-
+import com.alibaba.fastjson.JSONObject;
+import com.hxgy.wechat.VO.RandomCodePtReqVo;
+import com.hxgy.wechat.VO.ReqRandomCodeVo;
+import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ServerResponse;
 import com.hxgy.wechat.config.SmsConfig;
+import com.hxgy.wechat.repostory.UserDetailRepostory;
 import com.hxgy.wechat.service.ISmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,26 +24,52 @@ import static com.hxgy.wechat.utils.TokenCacheUtil.setKey;
 public class SmsServiceimpl implements ISmsService{
     @Autowired
     SmsConfig smsConfig;
+    @Autowired
+    UserDetailRepostory userDetailRepostory;
     @Override
-    public ServerResponse sendSms(String phoneNum) {
-        String randomCode = getRandNum(6);
-        setKey(phoneNum,randomCode);
-        System.out.println(randomCode);
-       /* try {
-            SmsSingleSender ssender = new SmsSingleSender(smsConfig.getAppid(),smsConfig.getAppkey());
-            SmsSingleSenderResult result = ssender.send(0, "86", phoneNum,
-                    "【华西公用】您的验证码是:"+randomCode, "", "");*/
-            return ServerResponse.createSuccessMessage("验证码发送成功");
-       /* } catch (HTTPException e) {
-            // HTTP响应码错误
-            e.printStackTrace();
-            return ServerResponse.createErrorMessage("HTTP响应码错误!");
-        } catch (IOException e) {
-            // 网络IO错误
-            e.printStackTrace();
-            return ServerResponse.createErrorMessage("网络IO错误!");
-        }*/
+    public ServerResponse sendSms(ReqRandomCodeVo reqRandomCodeVo) throws Exception {
+        RandomCodePtReqVo randomCodePtReqVo = new RandomCodePtReqVo();
+        randomCodePtReqVo.setChannelType(Const.CHANNEL_CODE_APP);
+        randomCodePtReqVo.setMsgDest(reqRandomCodeVo.getPhoneno());
+        randomCodePtReqVo.setProductType("patient");
+        if (reqRandomCodeVo.getType().equals("0")) {
+            randomCodePtReqVo.setMsgType("msg");
+            randomCodePtReqVo.setTemplateId(Const.RANDOM_CODE_MSG);
+        } else {
+            randomCodePtReqVo.setMsgType("voice");
+            randomCodePtReqVo.setTemplateId(Const.RANDOM_CODE_VOICE);
+        }
+        if ("00".equals(reqRandomCodeVo.getIsRegister())) {
+            if (userDetailRepostory.findByPhoneno(reqRandomCodeVo.getPhoneno()) != null) {
+                return ServerResponse.createErrorMessage("该手机号已被注册");
+            } else {
+                String randomCode = getRandNum(6);
+                System.out.println(randomCode);
+                randomCodePtReqVo.setMsgContent("您正在注册账号，验证码为:" + randomCode
+                        + "\"}");
+                String reqContent = JSONObject.toJSONString(randomCodePtReqVo);
+                String routeCode = Const.ROUTE_CODE_RANDOM_CODE;
+                String url = "";
+                    setKey(reqRandomCodeVo.getPhoneno(), randomCode);
+                    return ServerResponse.createSuccessMessage("验证码发送成功");
+            }
+        } else if ("01".equals(reqRandomCodeVo.getIsRegister())) {
+            if (userDetailRepostory.findByPhoneno(reqRandomCodeVo.getPhoneno()) != null) {
+                String randomCode = getRandNum(6);
+                System.out.println(randomCode);
+                randomCodePtReqVo.setMsgContent("您正在尝试找回密码，验证码为：" + randomCode
+                        + "\"}");
+                String reqContent = JSONObject.toJSONString(randomCodePtReqVo);
+                String routeCode = Const.ROUTE_CODE_RANDOM_CODE;
+                String url = "";
+                    setKey(reqRandomCodeVo.getPhoneno(), randomCode);
+                    return ServerResponse.createSuccessMessage("验证码发送成功");
+            }
+
+        }
+        return null;
     }
+
 
     @Override
     public ServerResponse validateSms(String phoneNum, String inputCode) {

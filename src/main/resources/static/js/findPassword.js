@@ -29,7 +29,7 @@ $(function(){
 					showSingleDialogWithContent(jsonObj.message,null);
 				}else{
 					excuteAjax('/user/login/findPassword',{"phoneno" : phoneno.trim(),
-											   "channel" : "WECHAT",
+											   "channel" : "psy",
 											   "randomCode" : code,
 											   "newPassword" : pwd},function(json){
 							if (json.status == 1) {

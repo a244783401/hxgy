@@ -4,7 +4,7 @@ function excuteAjax(url, data, fun) {
 		type : "post",
 		data : data,
 		dataType : 'json',
-		success : function(jsonObj) {
+        success : function(jsonObj) {
 			fun(jsonObj);
 		} ,
 		error : function(error){

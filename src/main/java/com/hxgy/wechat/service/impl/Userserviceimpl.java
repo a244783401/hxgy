@@ -53,6 +53,14 @@ public class Userserviceimpl implements IUserService {
     @Override
     public ServerResponse getuserInfo(HttpSession session) {
         UserDetail userDetail= (UserDetail) session.getAttribute(Const.CURRENT_USER);
+        if(userDetail!=null) {
+            Long id = userDetail.getId();
+            UserDetail currentUser = userDetailRepostory.findOne(id);
+            if (!userDetail.equals(currentUser)) {
+                session.setAttribute(Const.CURRENT_USER, currentUser);
+            }
+            return ServerResponse.isSuccess(toObjVO(currentUser));
+        }
         return ServerResponse.isSuccess(toObjVO(userDetail));
     }
 
@@ -72,24 +80,6 @@ public class Userserviceimpl implements IUserService {
         return  ServerResponse.isSuccess("注册成功!",userDetail);
     }
 
-    @Override
-    public ServerResponse validatePhone(String phoneno,String isRegister) {
-        if(isRegister.equals("00")) {
-            if (userDetailRepostory.findByPhoneno(phoneno) != null) {
-                return ServerResponse.createErrorMessage("该手机已被注册!");
-            } else {
-                return ServerResponse.createSuccess();
-            }
-        }
-        if(isRegister.equals("01")){
-            if(userDetailRepostory.findByPhoneno(phoneno)==null){
-                return ServerResponse.createErrorMessage("该手机未被注册!");
-            }else {
-                return ServerResponse.createSuccess();
-            }
-        }
-        return ServerResponse.createErrorMessage("未知错误");
-    }
 
     @Override
     public ServerResponse editPassword(String phoneno, String newPassword) {
