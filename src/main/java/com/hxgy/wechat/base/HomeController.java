@@ -71,6 +71,26 @@ public class HomeController {
     public String logout(){
         return "logout";
     }
+    @GetMapping("/centerIntro")
+    public String centerIntro(){
+        return "centerIntro";
+    }
+    @GetMapping("/intro_hospital")
+    public String introHospital(){
+        return "centerIntro/introHospital";
+    }
+    @GetMapping("/intro_tips")
+    public String intro_tips(){
+        return "centerIntro/introTips";
+    }
+    @GetMapping("/intro_student")
+    public String intro_student(){
+        return "centerIntro/introStudent";
+    }
+    @GetMapping("/intro_teacher")
+    public String intro_teacher(){
+        return "centerIntro/introTeacher";
+    }
 
 
 }

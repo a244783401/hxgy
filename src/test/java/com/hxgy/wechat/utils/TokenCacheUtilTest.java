@@ -8,8 +8,8 @@ import static com.hxgy.wechat.utils.TokenCacheUtil.setKey;
 public class TokenCacheUtilTest {
     @Test
     public void setData() throws Exception {
-        setKey("15202809020","123456");
-        System.out.println(getKey("15202809020"));
+        String[] params = {"5678","2"};
+        System.out.println(params[1]);
     }
 
 

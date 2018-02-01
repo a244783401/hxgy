@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class SmsConfig {
     private int appid;
     private String appkey;
-    private String templateId;
+    private int templateId;
     private String smsSign;
 
     public int getAppid() {
@@ -30,11 +30,11 @@ public class SmsConfig {
         this.appkey = appkey;
     }
 
-    public String getTemplateId() {
+    public int getTemplateId() {
         return templateId;
     }
 
-    public void setTemplateId(String templateId) {
+    public void setTemplateId(int templateId) {
         this.templateId = templateId;
     }
 
