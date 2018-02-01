@@ -1,4 +1,4 @@
-package com.hxgy.wechat.controllor.front;
+package com.hxgy.wechat.controller.front;
 
 import com.hxgy.wechat.base.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;

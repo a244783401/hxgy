@@ -10,32 +10,47 @@ public class UserDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "id")
     private Long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "head_portrait")
     private String headPortrait;
+
     @Column(name = "id_card")
     private String idCard;
+
     @Column(name = "education")
-    private Long education;
+    private String education;
+
     @Column(name = "profession")
-    private Long profession;
+    private String profession;
+
     @Column(name = "cop")
     private String cop;
+
     @Column(name = "phoneno")
     private String phoneno;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "user_id")
     private Long userId;
+
+
     @Column(name="sex")
     private Boolean sex;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "open_id")
     private String openId;
+
     @Column(name = "login_status")
     private String loginStatus;
+
     @Column(name = "real_name")
     private String realName;
 
@@ -111,19 +126,19 @@ public class UserDetail {
         this.idCard = idCard;
     }
 
-    public Long getEducation() {
+    public String getEducation() {
         return education;
     }
 
-    public void setEducation(Long education) {
+    public void setEducation(String education) {
         this.education = education;
     }
 
-    public Long getProfession() {
+    public String getProfession() {
         return profession;
     }
 
-    public void setProfession(Long profession) {
+    public void setProfession(String profession) {
         this.profession = profession;
     }
 

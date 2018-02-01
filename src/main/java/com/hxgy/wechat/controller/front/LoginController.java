@@ -1,4 +1,4 @@
-package com.hxgy.wechat.controllor.front;
+package com.hxgy.wechat.controller.front;
 
 
 import com.hxgy.wechat.VO.LoginInfoVo;
