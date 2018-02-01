@@ -14,12 +14,22 @@ public class UserEnrollCourse {
     private Long userId;
     @Column(name = "course_id")
     private Long courseId;
-    @Column(name = "course_categ_id")
+    @Column(name = "course_category_id")
     private Long courseCategId;
     @Column(name = "total_period")
     private Long totalPeriod;
     @Column(name = "learn_period")
     private Long learnPeriod;
+    @Column(name = "pay")
+    private Integer pay;
+
+    public Integer getPay() {
+        return pay;
+    }
+
+    public void setPay(Integer pay) {
+        this.pay = pay;
+    }
 
     public Long getId() {
         return id;
