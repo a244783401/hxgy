@@ -12,6 +12,4 @@ import org.springframework.stereotype.Service;
 public interface ICourseService {
 
     ServerResponse findAllCourseByVersion(Integer periodNum);
-    ServerResponse signUp(Long courseId,Long userId);
-    ServerResponse getCourseDetil(Long courseId);
 }

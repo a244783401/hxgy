@@ -1,56 +1,22 @@
 package com.hxgy.wechat.service.impl;
 
-import com.hxgy.wechat.VO.BowerObject;
 import com.hxgy.wechat.VO.LoginInfoVo;
 import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ServerResponse;
 import com.hxgy.wechat.entity.UserDetail;
-import com.hxgy.wechat.entity.UserEnrollCourse;
 import com.hxgy.wechat.repostory.UserDetailRepostory;
-import com.hxgy.wechat.repostory.UserEnrollCourseRepostory;
 import com.hxgy.wechat.service.IUserService;
 import com.hxgy.wechat.utils.MD5Util;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 @Service("iUserService")
 public class Userserviceimpl implements IUserService {
     @Autowired
     UserDetailRepostory  userDetailRepostory;
-    @Autowired
-    private UserEnrollCourseRepostory userEnrollCourseRepostory;
-
-    public void updateUserImage(String imageUrl,Long userId){
-        UserDetail userDetail = userDetailRepostory.findOne(userId);
-        userDetail.setHeadPortrait(imageUrl);
-        userDetailRepostory.save(userDetail);
-    }
-
-    public ServerResponse addUserDetail(BowerObject bowerObject,Long userId){
-        UserEnrollCourse userEnrollCourse = new UserEnrollCourse();
-        userEnrollCourse.setCourseId(Long.parseLong(bowerObject.getCourseid()));
-        userEnrollCourse.setUserId(userId);
-        userEnrollCourse.setPay(Const.NOT_PAY);
-        userEnrollCourse.setOrderNo((int)System.currentTimeMillis());
-        userEnrollCourse.setOrderDate(new Date());
-        UserDetail userDetail = userDetailRepostory.findOne(userId);
-        userDetail.setRealName(bowerObject.getUsername());
-        userDetail.setProfession(bowerObject.getProfession());
-        userDetail.setHeadPortrait(bowerObject.getHeadPortrait());
-        userDetail.setIdCard(bowerObject.getIdCard());
-        userDetail.setEducation(bowerObject.getEducation());
-        userDetail.setCop(bowerObject.getCop());
-        userDetail.setPhoneno(bowerObject.getPhoneno());
-        userDetail.setEmail(bowerObject.getEmail());
-        userDetailRepostory.save(userDetail);
-        UserEnrollCourse enrollCourse = userEnrollCourseRepostory.save(userEnrollCourse);
-        return ServerResponse.isSuccess(enrollCourse);
-    }
 
     @Override
     public ServerResponse validateLogin(String phoneno, String password) {
