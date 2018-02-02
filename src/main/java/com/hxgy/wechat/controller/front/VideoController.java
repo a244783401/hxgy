@@ -1,4 +1,4 @@
-package com.hxgy.wechat.controllor.front;
+package com.hxgy.wechat.controller.front;
 
 import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ResonseCode;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/video")
 public class VideoController {
 
-    private static final Logger log = LoggerFactory.getLogger(SignUpController.class);
+    private static final Logger log = LoggerFactory.getLogger(CourseController.class);
 
     @Autowired
     private ICourseService iCourseService;

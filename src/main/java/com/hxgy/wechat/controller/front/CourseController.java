@@ -1,6 +1,5 @@
-package com.hxgy.wechat.controllor.front;
+package com.hxgy.wechat.controller.front;
 
-import com.google.common.base.Strings;
 import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ResonseCode;
 import com.hxgy.wechat.base.ServerResponse;
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.expression.Arrays;
-import org.thymeleaf.util.ArrayUtils;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,10 +24,10 @@ import javax.servlet.http.HttpSession;
  **/
 @Controller
 @RequestMapping("/user/course")
-public class SignUpController {
+public class CourseController {
     @Autowired
     private ICourseService iCourseService;
-    private static final Logger log = LoggerFactory.getLogger(SignUpController.class);
+    private static final Logger log = LoggerFactory.getLogger(CourseController.class);
     /**
      * 点击报名 切换页面
      * @param model
