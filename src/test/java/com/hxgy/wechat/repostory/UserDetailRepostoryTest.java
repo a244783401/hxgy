@@ -28,13 +28,13 @@ public class UserDetailRepostoryTest {
     public void addData(){
         UserDetail userDetail=new UserDetail();
         userDetail.setCop("hxgy");
-        userDetail.setEducation(20L);
+        userDetail.setEducation("asdas");
         userDetail.setEmail("hxgy@xxx.com");
         userDetail.setHeadPortrait("url");
         userDetail.setIdCard("123");
         userDetail.setName("吴谢");
         userDetail.setPhoneno("a1234");
-        userDetail.setProfession(10L);
+        userDetail.setProfession("10");
         userDetail.setUserId(7L);
         userDetail.setPassword(MD5Util.MD5EncodeUtf8("123456"));
         userDetailRepostory.save(userDetail);
@@ -45,6 +45,6 @@ public class UserDetailRepostoryTest {
     }
     @Test
     public void get(){
-
+//        int re = userDetailRepostory.save();
     }
 }

@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface UserEnrollCourseRepostory extends JpaRepository<UserEnrollCourse,Long> {
         List<UserEnrollCourse> findByCourseId(Long courseId);
+        List<UserEnrollCourse> findByUserId(Long userId);
 }

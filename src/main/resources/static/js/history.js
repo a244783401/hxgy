@@ -2,26 +2,25 @@ $(function(){
 	//加载视频列表
 	excuteAjax('/video/history','', function(result) {
 	var historyStr = '';
-	if (jsonObj.status != 0) {
-		showSingleDialogWithContent(jsonObj.msg, null);
+	if (result.status != 0) {
+		showSingleDialogWithContent(result.message, null);
 	}else {			
-		var historyList = jsonObj.historyList;
-	for (var i = 0; i < jsonObj.data.length; i++) {
-		var time=timeFor(jsonObj.data[i].videocurrenttime);
-		historyStr+='<div class="history_list_item">'+
+		var historyList = result.data;
+	for (var i = 0; i < historyList.length; i++) {
+		historyStr+='<div class="history_list_item" courseId = "'+historyList[i].courseId+'" videoId="'+historyList[i].id+'" >'+
             		'<div class="history_list_circle" action="0" id="'+i+'">'+
             			'<img src="images/history/circle.png"/>'+
             		'</div>'+
             		'<div class="history_list_cover">'+
-            			'<div class="history_list_coverImg" >'+'<img src="'+jsonObj.data[i].coverurl+'"/>'+
-            				'<div class="history_list_coverTime">'+jsonObj.data[i].videotime+'</div>'+
+            			'<div class="history_list_coverImg" >'+'<img src="'+historyList[i].coverurl+'"/>'+
+            				//'<div class="history_list_coverTime">'+getMyDate(historyList[i].viewDate)+'</div>'+
             			'</div>'+              
             		'</div>'+
             		'<div class="history_list_content">'+
-            			'<div class="history_list_title">'+jsonObj.data[i].name+'</div>'+
-            			'<div class="history_list_author">'+jsonObj.data[i].authorname+'</div>'+
+            			'<div class="history_list_title">'+historyList[i].name+'</div>'+
+            			'<div class="history_list_author">'+historyList[i].authorName+'</div>'+
             			'<div class="history_list_time">'+
-            				'<img src="images/history/clock.png"/><span>已观看时间：'+time+'</span>'+
+            				'<img src="images/history/clock.png"/><span>上次观看日期：'+getMyDate(historyList[i].viewDate)+'</span>'+
             			'</div>'+
             		'</div>'+
             	'</div>';
@@ -30,7 +29,11 @@ $(function(){
 	$('.history_list').html(historyStr);	
 	
 	$('.history_list_item').click(function(){
-		location.href='videoPlay';
+		excuteAjax("/video/video_play", {"videoId":$(this).attr('videoId'),"courseId":$(this).attr('courseId')},function(re){
+			if (re.status != 0){
+				showSingleDialogWithContent(re.message, null);
+			}else location.href = re.data
+		})
 	});
 	});
 	

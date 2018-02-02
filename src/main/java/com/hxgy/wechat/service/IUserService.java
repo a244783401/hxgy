@@ -11,4 +11,6 @@ public interface IUserService {
     ServerResponse getuserInfo(HttpSession session);
     ServerResponse registerNew(String phoneno,String name,String password);
     ServerResponse editPassword(String phoneno,String password);
+    ServerResponse addUserDetail(BowerObject bowerObject, Long userId);
+    void updateUserImage(String imageUrl,Long userId);
 }
