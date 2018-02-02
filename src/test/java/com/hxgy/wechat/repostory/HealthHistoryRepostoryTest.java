@@ -1,6 +1,5 @@
 package com.hxgy.wechat.repostory;
 
-import com.hxgy.wechat.VO.HistoryVideoVo;
 import com.hxgy.wechat.entity.HealthHistory;
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,12 +28,8 @@ public class HealthHistoryRepostoryTest {
     }
     @Test
     public void findVideoIdByUserId(){
-        List<HealthHistory> longs = healthHistoryRepostory.findVideoIdByUserId(2L);
+        List<Long> longs = healthHistoryRepostory.findVideoIdByUserId(2L);
         Assert.assertNotEquals(0,longs.size());
     }
-    @Test
-    public void findByVideoId(){
-        HealthHistory healthHistory = healthHistoryRepostory.findByVideoId(88L);
-        Assert.assertNotNull(healthHistory);
-    }
+
 }

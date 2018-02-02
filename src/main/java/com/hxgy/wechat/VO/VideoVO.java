@@ -24,16 +24,6 @@ public class VideoVO {
 
     private Long courseId;
 
-    private String videoTime;
-
-    public String getVideoTime() {
-        return videoTime;
-    }
-
-    public void setVideoTime(String videoTime) {
-        this.videoTime = videoTime;
-    }
-
     public Long getCourseId() {
         return courseId;
     }

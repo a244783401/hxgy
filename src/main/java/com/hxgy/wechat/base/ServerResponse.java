@@ -1,7 +1,5 @@
 package com.hxgy.wechat.base;
 
-import com.hxgy.wechat.utils.MD5Util;
-
 /**
  * 返回类
  * @author zy
