@@ -25,7 +25,7 @@ public class UserEnrollCourseRepostoryTest {
     @Test
     public void addData(){
         UserEnrollCourse userEnrollCourse=new UserEnrollCourse();
-
+        userEnrollCourse.setCourseCategId(3L);
         userEnrollCourse.setCourseId(2L);
         userEnrollCourse.setLearnPeriod(5L);
         userEnrollCourse.setTotalPeriod(10L);
@@ -41,11 +41,4 @@ public class UserEnrollCourseRepostoryTest {
         List<UserEnrollCourse> userEnrollCourses= userEnrollCourseRepostory.findByCourseId(2L);
         Assert.assertNotEquals(0,userEnrollCourses.size());
     }
-
-    @Test
-    public void findByUserId(){
-//        UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByUserId(6L);
-//        Assert.assertNotNull(userEnrollCourse);
-    }
-
 }

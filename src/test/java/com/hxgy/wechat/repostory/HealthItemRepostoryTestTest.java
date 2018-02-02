@@ -1,6 +1,5 @@
 package com.hxgy.wechat.repostory;
 
-import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.entity.HealthCourseItem;
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,9 +31,5 @@ public class HealthItemRepostoryTestTest {
         List<HealthCourseItem> healthCourseItems = healthItemRepostory.findByCourseId(4L);
         Assert.assertNotEquals(0,healthCourseItems.size());
     }
-    @Test
-    public void testFindByFree(){
-        List<HealthCourseItem> healthCourseItems = healthItemRepostory.findByFree(Const.FREE);
-        Assert.assertNotEquals(0,healthCourseItems.size());
-    }
+
 }

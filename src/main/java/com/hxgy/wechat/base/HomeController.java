@@ -3,7 +3,6 @@ package com.hxgy.wechat.base;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
@@ -52,5 +51,46 @@ public class HomeController {
     public String loginIndex(){
         return "login";
     }
+    @GetMapping("/registerIndex")
+    public String registerIndex(){
+        return "register";
+    }
+    @GetMapping("/setting")
+    public String setting(){
+        return "setting";
+    }
+    @GetMapping("/modifyInfo")
+    public String modifyInfo(){
+        return "modifyInfo";
+    }
+    @GetMapping("/modifyPwd")
+    public String modifyPwd(){
+        return "modifyPwd";
+    }
+    @GetMapping("/logout")
+    public String logout(){
+        return "logout";
+    }
+    @GetMapping("/centerIntro")
+    public String centerIntro(){
+        return "centerIntro";
+    }
+    @GetMapping("/intro_hospital")
+    public String introHospital(){
+        return "centerIntro/introHospital";
+    }
+    @GetMapping("/intro_tips")
+    public String intro_tips(){
+        return "centerIntro/introTips";
+    }
+    @GetMapping("/intro_student")
+    public String intro_student(){
+        return "centerIntro/introStudent";
+    }
+    @GetMapping("/intro_teacher")
+    public String intro_teacher(){
+        return "centerIntro/introTeacher";
+    }
+
 
 }

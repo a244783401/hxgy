@@ -7,11 +7,10 @@ package com.hxgy.wechat.base;
 public enum ResonseCode {
     SUCCESS(0,"SUCCESS"),
     ERROR(1,"ERROR"),
-    NEED_LOGIN(10,"NEED_LOGIN"),
+    NEED_LONGIN(10,"NEED_LOGIN"),
 
     ILLEGAL_ARGUMENT(2,"ILLEGAL_ARGUMENT"),
     NEED_BUY(11,"NEED_BUY"),
-    BOUGHT(13,"BOUGHT"),
     NEED_PAY(12,"NEED_PAY")
     ;
 

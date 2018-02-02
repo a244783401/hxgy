@@ -1,15 +1,11 @@
 package com.hxgy.wechat.service.impl;
 
 import com.hxgy.wechat.VO.CourseDescVo;
-import com.hxgy.wechat.base.Const;
-import com.hxgy.wechat.base.ResonseCode;
 import com.hxgy.wechat.base.ServerResponse;
 import com.hxgy.wechat.entity.HealthCategory;
 import com.hxgy.wechat.entity.HealthCourseDesc;
-import com.hxgy.wechat.entity.UserEnrollCourse;
 import com.hxgy.wechat.repostory.HealthCategoryRepostory;
 import com.hxgy.wechat.repostory.HealthDescRepostory;
-import com.hxgy.wechat.repostory.UserEnrollCourseRepostory;
 import com.hxgy.wechat.service.ICourseService;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,47 +25,6 @@ public class CourseServiceimpl implements ICourseService {
 
     @Autowired
     private HealthDescRepostory healthDescRepostory;
-
-
-    @Autowired
-    private UserEnrollCourseRepostory userEnrollCourseRepostory;
-
-    public ServerResponse getCourseDetil(Long courseId){
-        HealthCourseDesc healthCourseDesc = healthDescRepostory.findOne(courseId);
-        if (healthCourseDesc == null){
-            return ServerResponse.createErrorMessage("参数错误！！！");
-        }else{
-
-            return ServerResponse.isSuccess(healthCourseDesc);
-        }
-    }
-    private CourseDescVo courseDescToVo(HealthCourseDesc healthCourseDesc){
-        CourseDescVo courseDescVo = new CourseDescVo();
-        courseDescVo.setCourseName(healthCourseDesc.getCourseName());
-        courseDescVo.setCourseCode(healthCourseDesc.getCourseCode());
-        courseDescVo.setRecommend(healthCourseDesc.getRecommend());
-        courseDescVo.setAuthorName(healthCourseDesc.getAuthorName());
-        courseDescVo.setCourseCategoryId(healthCourseDesc.getCourseCategoryId());
-        courseDescVo.setCoursePrice(healthCourseDesc.getCoursePrice());
-        courseDescVo.setForCrowd(healthCourseDesc.getForCrowd());
-        courseDescVo.setEnable(healthCourseDesc.getEnable());
-        return courseDescVo;
-    }
-    public ServerResponse signUp(Long courseId,Long userId){
-        List<UserEnrollCourse> enrollCourses = userEnrollCourseRepostory.findByCourseId(courseId);
-        if (!CollectionUtils.isEmpty(enrollCourses)){
-            for (UserEnrollCourse userEnrollCourse:enrollCourses
-                 ) {
-                if (userEnrollCourse.getUserId() == userId && userEnrollCourse.getPay() == Const.BOUGHT){
-                    return ServerResponse.createErrorCodeMessage(ResonseCode.BOUGHT.getCode(),"已经购买过该课程!!");
-                }
-                if (userEnrollCourse.getPay() == Const.NOT_PAY){
-                    return ServerResponse.isSuccess(userEnrollCourse);
-                }
-            }
-        }
-        return ServerResponse.createSuccess();
-    }
 
     /**
      * 获取所有的分类课程
