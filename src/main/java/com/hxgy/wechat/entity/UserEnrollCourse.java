@@ -3,6 +3,8 @@ package com.hxgy.wechat.entity;
 
 
 import javax.persistence.*;
+import java.util.Date;
+
 @Entity
 @Table(name = "user_enroll_course")
 public class UserEnrollCourse {
@@ -10,27 +12,46 @@ public class UserEnrollCourse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "user_id")
     private Long userId;
+
     @Column(name = "course_id")
     private Long courseId;
+
     @Column(name = "course_category_id")
-    private Long courseCategId;
+    private Long courseCategoryId;
+
     @Column(name = "total_period")
     private Long totalPeriod;
     @Column(name = "learn_period")
     private Long learnPeriod;
+
+    @Column(name = "order_num")
+    private Integer orderNo;
+
     @Column(name = "pay")
-    private Integer pay;
+    private int pay;
+
+    @Column(name = "order_date")
+    private Date orderDate;
+
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
 
     public Integer getPay() {
         return pay;
     }
 
-    public void setPay(Integer pay) {
+    public void setPay(int pay) {
         this.pay = pay;
     }
-
     public Long getId() {
         return id;
     }
@@ -55,12 +76,12 @@ public class UserEnrollCourse {
         this.courseId = courseId;
     }
 
-    public Long getCourseCategId() {
-        return courseCategId;
+    public Long getCourseCategoryId() {
+        return courseCategoryId;
     }
 
-    public void setCourseCategId(Long courseCategId) {
-        this.courseCategId = courseCategId;
+    public void setCourseCategoryId(Long courseCategoryId) {
+        this.courseCategoryId = courseCategoryId;
     }
 
     public Long getTotalPeriod() {
@@ -77,5 +98,13 @@ public class UserEnrollCourse {
 
     public void setLearnPeriod(Long learnPeriod) {
         this.learnPeriod = learnPeriod;
+    }
+
+    public Integer getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(Integer orderNo) {
+        this.orderNo = orderNo;
     }
 }

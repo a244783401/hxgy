@@ -1,9 +1,6 @@
 package com.hxgy.wechat.service;
 
-import com.hxgy.wechat.VO.ReqRandomCodeVo;
 import com.hxgy.wechat.base.ServerResponse;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * 验证码的使用
@@ -12,16 +9,21 @@ import javax.servlet.http.HttpSession;
 public interface ISmsService {
     /**
      *发送验证码到指定手机 并缓存验证码 10 min 及请求间隔时间
-     * @param reqRandomCodeVo
+     * @param phoneNum
      * @return
      */
-    ServerResponse sendSms(ReqRandomCodeVo reqRandomCodeVo) throws Exception;
+    ServerResponse<String> sendSms(String phoneNum);
+
     /**
-     *验证验证码
-     * @param phoneNum,inputCode,randomCode
+     * 获取缓存中的验证码
+     * @param phoneNum
      * @return
      */
-    ServerResponse validateSms(String phoneNum,String inputCode);
+    String getSmsCode(String phoneNum);
 
-
+    /**
+     * 移除指定缓存中的验证码
+     * @param phoneNum
+     */
+    void remove(String phoneNum);
 }

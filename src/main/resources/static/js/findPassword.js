@@ -24,20 +24,20 @@ $(function(){
 	    var repPwd = $('#seccondPass').val();  	    
 		if (check(phoneno,code,pwd,repPwd)) {
 			//验证验证码
-			excuteAjax('/validate/validateRandomCode',{'phoneno':phoneno,'inputCode':code,'codeType':'01'},function(jsonObj){
-				if (jsonObj.status == 1) {
-					showSingleDialogWithContent(jsonObj.message,null);
+			excuteAjax('validateRandomCode',{'phoneno':phoneno,'inputCode':code,'codeType':'01'},function(jsonObj){
+				if (jsonObj.code != 1) {
+					showSingleDialogWithContent(jsonObj.msg,null);
 				}else{
-					excuteAjax('/user/login/findPassword',{"phoneno" : phoneno.trim(),
-											   "channel" : "psy",
+					excuteAjax('findPassword',{"phoneno" : phoneno.trim(),
+											   "channel" : "WECHAT",
 											   "randomCode" : code,
 											   "newPassword" : pwd},function(json){
-							if (json.status == 1) {
-								showSingleDialogWithContent(json.message,null);
+							if (json.code != 1) {
+								showSingleDialogWithContent(json.msg,null);
 							}else{
-								toastSucceed(json.message);
+								toastSucceed(json.msg);
 								setTimeout(function () {
-									location.href= 'loginIndex';
+									location.href= 'myCenterIndex';
                				 	},1500);
 							}				
 					});
@@ -56,11 +56,11 @@ function random(obj){
 	var phoneno = $('#phoneno').val();
 	if (checkPhone(phoneno)) {
 		var data = {'phoneno': phoneno.trim(),'channel': '2','isRegister':'01','type': '0'};
-        excuteAjax('/validate/generateRandomCode', data, function (jsonObj) {
-            if (jsonObj.status == 1) {
-                showSingleDialogWithContent(jsonObj.message,null);
+        excuteAjax('generateRandomCode', data, function (jsonObj) {
+            if (jsonObj.code != 1) {
+                showSingleDialogWithContent(jsonObj.msg,null);
             } else {
-                toastSucceed(jsonObj.message);
+                toastSucceed(jsonObj.msg);
                 var count = 60;
                 $(obj).css({"background-color": "#dcdcdc", "color": "white"}).text("重新获取("+count+")");                
                 var countFun = window.setInterval(function changeTime() {

@@ -15,12 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 
-/**
- * 微信登陆
- *
- * @author wx
- * @create 2018-01-25 14:00
- **/
+
 @Controller
 @RequestMapping("/wechat")
 public class WechatController {
@@ -31,10 +26,7 @@ public class WechatController {
     @Autowired
     private WechatAccountConfig wechatAccountConfig;
 
-/**
- * 获取code
- *
- * */
+
     @RequestMapping("/getcode")
     public String getcode()  {
         StringBuilder url=new StringBuilder();
@@ -44,22 +36,12 @@ public class WechatController {
         url.append("&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect");
         return "redirect:"+url;
     }
-
-    /**
-     * 根据code获取授权
-     *
-     * */
     @RequestMapping("/authorize")
     public String authorize(@RequestParam("code") String code)  throws WxErrorException {
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken=wxMpService.oauth2getAccessToken(code);
         String openId = wxMpOAuth2AccessToken.getOpenId();
         return"redirect:"+wechatAccountConfig.getNotifyUrl()+"/wechat/login?openId="+openId;
     }
-
-    /**
-     * 微信登陆
-     *
-     * */
     @RequestMapping("/login")
     public String userinfo(@RequestParam("openId") String openId,HttpSession session) throws WxErrorException {
         WxMpUser wxMpUser=wxMpService.getUserService().userInfo(openId);
