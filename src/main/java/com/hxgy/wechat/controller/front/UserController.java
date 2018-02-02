@@ -79,6 +79,19 @@ public class UserController {
 
     }
     /**
+     * 验证登陆
+     *
+     */
+    @RequestMapping("/login/validateLogin")
+    public String validateLogin(HttpSession session){
+        if(session.getAttribute(Const.CURRENT_USER)!=null){
+            return "modifyInfo";
+        }
+        else {
+            return "login";
+        }
+    }
+    /**
      * 修改信息
      *
      **/
