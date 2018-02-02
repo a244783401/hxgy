@@ -1,6 +1,5 @@
 package com.hxgy.wechat.service;
 
-import com.hxgy.wechat.VO.BowerObject;
 import com.hxgy.wechat.base.ServerResponse;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
@@ -11,6 +10,5 @@ public interface IUserService {
     ServerResponse validateLogin(WxMpUser wxMpUser);
     ServerResponse getuserInfo(HttpSession session);
     ServerResponse registerNew(String phoneno,String name,String password);
-    ServerResponse addUserDetail(BowerObject bowerObject, Long userId);
-    void updateUserImage(String imageUrl,Long userId);
+    ServerResponse editPassword(String phoneno,String password);
 }
