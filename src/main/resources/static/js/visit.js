@@ -132,16 +132,6 @@ function findAllVideoByCourseId(id){
 				$('.visit_courseList').click(function(){
 					excuteAjax("/video/video_play", {'videoId':$(this).attr('videoId'),'courseId':$(this).attr('courseId')},function(result){
 							if (result.status != 0){
-								if (result.status == 11){
-									showConfirmDialog('需要购买','前往购买？？','再想想','前往购买',function(){
-										location.href='/index';
-									})
-								}
-								if (result.status == 10){
-									showConfirmDialog('前往登陆','前往登陆？？','再想想','前往登陆',function(){
-										location.href='/myCenterIndex';
-									})
-								}
 								showSingleDialogWithContent(result.message, null);
 							}else{
 								location.href=result.data
@@ -162,17 +152,39 @@ function findAllVideoByCourseId(id){
 		}
 	})
 }
+/**
+ * 日期转换
+ * @param str
+ * @returns {string}
+ */
+function getMyDate(str) {
+	var oDate = new Date(str),
+		oYear = oDate.getFullYear(),
+		oMonth = oDate.getMonth() + 1,
+		oDay = oDate.getDate(),
+		oHour = oDate.getHours(),
+		oMin = oDate.getMinutes(),
+		oSen = oDate.getSeconds(),
+		oTime = oYear + '-' + getzf(oMonth) + '-' + getzf(oDay);//最后拼接时间
+	return oTime;
+	function getzf(num) {
+		if (parseInt(num) < 10) {
+			num = '0' + num;
+		}
+		return num;
+	}
+}
 function initZXKC(data){
 	var htmlStr = "";
 	for (var i = 0; i <8 ; i++) {
 		htmlStr+='<div class="visit_courseList">'+
-        '<img src="/static/images/visit/psy_banner.png"  class="visit_courseList_img" />'+
+        '<img src="/psychologyWeb/images/visit/psy_banner.png"  class="visit_courseList_img" />'+
         '<div class="visit_courseList_text">'+
             '<div class="visit_courseList_title">人类对心理现象的认识过程和心理疾病的预防</div>'+
             '<div class="visit_courseList_author">主讲人：<span>周汝英</span></div>'+
             '<div class="visit_courseList_info">'+
-                '<img src="/static/images/visit/visit_eye.png"/><span class="visit_courseList_eye">126</span>'+
-                '<img src="/static/images/visit/visit_heart.png" style="margin-left:10px;"/><span class="visit_courseList_heart" >98</span>'+
+                '<img src="/psychologyWeb/images/visit/visit_eye.png"/><span class="visit_courseList_eye">126</span>'+
+                '<img src="/psychologyWeb/images/visit/visit_heart.png" style="margin-left:10px;"/><span class="visit_courseList_heart" >98</span>'+
                 '<div class="visit_courseList_date" style="">2017-03-23</div>'+
             '</div>'+
         '</div>'+

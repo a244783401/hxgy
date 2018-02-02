@@ -10,5 +10,4 @@ import java.util.List;
  */
 public interface HealthItemRepostory extends JpaRepository<HealthCourseItem,Long> {
     List<HealthCourseItem> findByCourseId(Long courseId);
-    List<HealthCourseItem> findByFree(Integer free);
 }
