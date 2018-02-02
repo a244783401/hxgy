@@ -14,7 +14,6 @@ import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -31,7 +30,7 @@ public class Userserviceimpl implements IUserService {
         userDetailRepostory.save(userDetail);
     }
 
-    public ServerResponse addUserDetail(BowerObject bowerObject,Long userId){
+    public ServerResponse addUserDetail(BowerObject bowerObject, Long userId){
         UserEnrollCourse userEnrollCourse = new UserEnrollCourse();
         userEnrollCourse.setCourseId(Long.parseLong(bowerObject.getCourseid()));
         userEnrollCourse.setUserId(userId);
@@ -51,7 +50,6 @@ public class Userserviceimpl implements IUserService {
         UserEnrollCourse enrollCourse = userEnrollCourseRepostory.save(userEnrollCourse);
         return ServerResponse.isSuccess(enrollCourse);
     }
-
     @Override
     public ServerResponse validateLogin(String phoneno, String password) {
          UserDetail userDetail=userDetailRepostory.findByNameOrPhoneno(phoneno,phoneno);
@@ -87,16 +85,24 @@ public class Userserviceimpl implements IUserService {
     @Override
     public ServerResponse getuserInfo(HttpSession session) {
         UserDetail userDetail= (UserDetail) session.getAttribute(Const.CURRENT_USER);
+        if(userDetail!=null) {
+            Long id = userDetail.getId();
+            UserDetail currentUser = userDetailRepostory.findOne(id);
+            if (!userDetail.equals(currentUser)) {
+                session.setAttribute(Const.CURRENT_USER, currentUser);
+            }
+            return ServerResponse.isSuccess(toObjVO(currentUser));
+        }
         return ServerResponse.isSuccess(toObjVO(userDetail));
     }
 
     @Override
     public ServerResponse registerNew(String phoneno, String name, String password) {
-        if(userDetailRepostory.findByPhoneno(phoneno)!=null){
-            return ServerResponse.createErrorMessage("该手机已被注册!");
-        }
         if(userDetailRepostory.findByName(name)!=null){
             return ServerResponse.createErrorMessage("该用户名已被注册!");
+        }
+        if(userDetailRepostory.findByPhoneno(phoneno)!=null){
+            return ServerResponse.createErrorMessage("该手机已被注册!");
         }
         UserDetail userDetail=new UserDetail();
         userDetail.setName(name);
@@ -104,6 +110,20 @@ public class Userserviceimpl implements IUserService {
         userDetail.setPassword(MD5Util.MD5EncodeUtf8(password));
         userDetailRepostory.save(userDetail);
         return  ServerResponse.isSuccess("注册成功!",userDetail);
+    }
+
+
+    @Override
+    public ServerResponse editPassword(String phoneno, String newPassword) {
+        UserDetail userDetail=userDetailRepostory.findByPhoneno(phoneno);
+        if(userDetail==null){
+            return ServerResponse.createErrorMessage("该手机未被注册!");
+        }
+        else {
+            userDetail.setPassword(MD5Util.MD5EncodeUtf8(newPassword));
+            userDetailRepostory.save(userDetail);
+            return ServerResponse.isSuccess("修改成功!请重新登陆",userDetail);
+        }
     }
 
 
