@@ -19,6 +19,8 @@ public class HealthCourseItem {
 
     private String name;
 
+    private Integer free;
+
     @Column(name = "video_desc")
     private String videoDesc;
 
@@ -62,6 +64,14 @@ public class HealthCourseItem {
     private String videoTime;
 
     private float score;
+
+    public Integer getFree() {
+        return free;
+    }
+
+    public void setFree(Integer free) {
+        this.free = free;
+    }
 
     public Long getId() {
         return id;

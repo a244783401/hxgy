@@ -6,16 +6,20 @@ import com.hxgy.wechat.base.ServerResponse;
 import com.hxgy.wechat.entity.UserDetail;
 import com.hxgy.wechat.service.ICourseService;
 import com.hxgy.wechat.service.IVideoService;
+import com.hxgy.wechat.utils.DateTimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * @author zy
@@ -62,6 +66,7 @@ public class VideoController {
         }
         return ServerResponse.createErrorCodeMessage(ResonseCode.ILLEGAL_ARGUMENT.getCode(),ResonseCode.ILLEGAL_ARGUMENT.getMsg());
     }
+
     @RequestMapping(value = "/video_play",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse videoPlay(@RequestParam("videoId") String videoId,@RequestParam("courseId") String courseId,HttpSession session){
@@ -72,7 +77,11 @@ public class VideoController {
         }
         UserDetail userDetail = (UserDetail)session.getAttribute(Const.CURRENT_USER);
         if (userDetail == null){
-            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LONGIN.getCode(),"请登陆！！！");
+            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),"请登陆！！！");
+        }
+        ServerResponse serverResponse = iVideoService.findUserCourseByCourseId(courseIdL,videoIdL);
+        if (serverResponse.getstatus() == 0){
+            iVideoService.updateVideo(videoIdL,userDetail.getId());
         }
         return iVideoService.findUserCourseByCourseId(courseIdL,videoIdL);
     }
@@ -82,11 +91,27 @@ public class VideoController {
     public ServerResponse history(HttpSession session){
         UserDetail userDetail = (UserDetail) session.getAttribute(Const.CURRENT_USER);
         if (userDetail == null){
-            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LONGIN.getCode(),"请登陆！！！");
+            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),"请登陆！！！");
         }
         Long userId = userDetail.getId();
-      return null;
+        return  iVideoService.getVideoHistory(userId);
     }
-
-
+    @RequestMapping("/get_freeCourse")
+    @ResponseBody
+    public ServerResponse getFreeCourse(){
+        return iVideoService.findFreeVideo();
+    }
+    @RequestMapping("/order")
+    public String order(@RequestParam("orderId") String id, HttpSession session, Model model){
+        UserDetail userDetail = (UserDetail) session.getAttribute(Const.CURRENT_USER);
+        if (userDetail != null){
+            Long orderId = Long.parseLong(id);
+            Map map = iVideoService.getOrderInfo(orderId);
+            model.addAttribute("price",map.get("price"));
+            model.addAttribute("date", DateTimeUtil.dateToStr((Date) map.get("date")));
+            model.addAttribute("orderNum",map.get("orderNo"));
+            return "order";
+        }
+        return "psychologyIndex";
+    }
 }
