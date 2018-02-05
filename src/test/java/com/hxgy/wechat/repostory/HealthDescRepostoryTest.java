@@ -33,4 +33,9 @@ public class HealthDescRepostoryTest {
         List<HealthCourseDesc> healthCourseDescs = heal.findByCourseCategoryIdIn(codes);
         Assert.assertNotEquals(0,healthCourseDescs.size());
     }
+    @Test
+    public void testFindByRecommend(){
+        List<HealthCourseDesc> healthCourseDescs = heal.findByRecommend(8);
+        Assert.assertNotEquals(0,healthCourseDescs.size());
+    }
 }

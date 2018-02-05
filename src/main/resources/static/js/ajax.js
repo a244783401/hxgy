@@ -18,6 +18,24 @@ function excuteAjax(url, data, fun) {
 		}
 	});
 }
+
+function judgeStatus(status){
+	if (status == 10){
+		console.log("judge")
+		showConfirmDialog("还未登陆","前往登陆？","返回","登陆",function(){
+			location.href='/myCenterIndex';
+		})
+	}
+	if (status == 13){
+		showConfirmDialog("温馨提示!","已经购买过该课程，前往观看？","返回","观看",function(){
+			location.href='/visitIndex';
+		})
+	}
+	if (status == 2){
+		showSingleDialogWithContent("参数错误!!",null);
+	}
+}
+
 function getMyDate(str) {
 	var oDate = new Date(str),
 		oYear = oDate.getFullYear(),

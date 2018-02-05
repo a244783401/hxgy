@@ -69,17 +69,6 @@ public class VideoServiceimpl implements IVideoService {
             return ServerResponse.isSuccess(healItemToVo(healthCourseItems));
         }
     }
-    public ServerResponse findUserCourseByCourseId(Long courseId,Long videoId){
-        List<UserEnrollCourse> userEnrollCourses = userEnrollCourseRepostory.findByCourseId(courseId);
-        if (CollectionUtils.isEmpty(userEnrollCourses)){
-            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_BUY.getCode(),"需要购买该课程！！！");
-        }
-        HealthCourseItem healthCourseItem = healthItemRepostory.findOne(videoId);
-        if (healthCourseItem == null){
-            return ServerResponse.createErrorCodeMessage(ResonseCode.ILLEGAL_ARGUMENT.getCode(),"参数错误");
-        }
-        return ServerResponse.isSuccess(healthCourseItem.getUrl());
-    }
 
     public ServerResponse getVideoHistory(Long userId){
         List<HealthHistory> healthHistories = healthHistoryRepostory.findVideoIdByUserId(userId);
@@ -106,6 +95,29 @@ public class VideoServiceimpl implements IVideoService {
             history.setViewDate(new Date(System.currentTimeMillis()));
         }
     }
+
+    @Override
+    public ServerResponse findVideoByCourseId(Long courseId, Long userId, Long videoId) {
+        UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(courseId,userId);
+        if (userEnrollCourse == null){
+            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_BUY.getCode(),"需要购买该课程！！！");
+        }
+        List<HealthCourseDesc> healthCourseDescs = healthDescRepostory.findByRecommend(Integer.parseInt(courseId.toString()));
+        HealthCourseItem healthCourseItem = healthItemRepostory.findOne(videoId);
+        if (CollectionUtils.isEmpty(healthCourseDescs) && healthCourseItem.getCourseId() == courseId){
+            return ServerResponse.isSuccess(healthCourseItem.getUrl());
+        }
+        if (!CollectionUtils.isEmpty(healthCourseDescs)){
+            for (HealthCourseDesc healthCourseDesc:healthCourseDescs
+                 ) {
+                if (healthCourseDesc.getId() == courseId){
+                    return ServerResponse.isSuccess(healthCourseItem.getUrl());
+                }
+            }
+        }
+        return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_BUY.getCode(),"需要购买该课程！！！");
+    }
+
     private List<HistoryVideoVo> getHistoryVo(List<HealthHistory> healthHistories){
             List<HistoryVideoVo> historyVideoVos = new ArrayList<>();
         for (HealthHistory healthHistory:healthHistories

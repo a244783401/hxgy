@@ -56,17 +56,30 @@ public class CourseServiceimpl implements ICourseService {
         return courseDescVo;
     }
     public ServerResponse signUp(Long courseId,Long userId){
-        List<UserEnrollCourse> enrollCourses = userEnrollCourseRepostory.findByCourseId(courseId);
-        if (!CollectionUtils.isEmpty(enrollCourses)){
-            for (UserEnrollCourse userEnrollCourse:enrollCourses
-                 ) {
-                if (userEnrollCourse.getUserId() == userId && userEnrollCourse.getPay() == Const.BOUGHT){
+        HealthCourseDesc healthCourseDesc = healthDescRepostory.findOne(courseId);
+        UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(courseId,userId);
+        if (healthCourseDesc.getRecommend() != 0){
+            if (userEnrollCourse != null){
+                if (userEnrollCourse.getPay() == Const.BOUGHT){
                     return ServerResponse.createErrorCodeMessage(ResonseCode.BOUGHT.getCode(),"已经购买过该课程!!");
                 }
                 if (userEnrollCourse.getPay() == Const.NOT_PAY){
                     return ServerResponse.isSuccess(userEnrollCourse);
                 }
             }
+            return ServerResponse.createSuccess();
+        }
+        Integer recommendId = healthCourseDesc.getRecommend();
+        userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(recommendId.longValue(),userId);
+        if (userEnrollCourse == null){
+            return ServerResponse.createSuccess();
+        }
+        if (userEnrollCourse.getPay() == Const.BOUGHT){
+            return ServerResponse.createErrorCodeMessage(ResonseCode.BOUGHT.getCode(),"已经购买过该课程!!");
+        }
+        if (userEnrollCourse.getPay() == Const.NOT_PAY){
+            userEnrollCourse.setCourseId(recommendId.longValue());
+            return ServerResponse.isSuccess(userEnrollCourse);
         }
         return ServerResponse.createSuccess();
     }

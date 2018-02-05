@@ -11,6 +11,8 @@ import com.hxgy.wechat.repostory.UserEnrollCourseRepostory;
 import com.hxgy.wechat.service.IUserService;
 import com.hxgy.wechat.utils.MD5Util;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
@@ -19,6 +21,7 @@ import java.util.Date;
 
 @Service("iUserService")
 public class Userserviceimpl implements IUserService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Userserviceimpl.class);
     @Autowired
     UserDetailRepostory  userDetailRepostory;
     @Autowired
@@ -26,8 +29,7 @@ public class Userserviceimpl implements IUserService {
 
     public void updateUserImage(String imageUrl,Long userId){
         UserDetail userDetail = userDetailRepostory.findOne(userId);
-        userDetail.setHeadPortrait(imageUrl);
-        userDetailRepostory.save(userDetail);
+        userDetailRepostory.updateUrlById(imageUrl,userId);
     }
 
     public ServerResponse addUserDetail(BowerObject bowerObject, Long userId){
