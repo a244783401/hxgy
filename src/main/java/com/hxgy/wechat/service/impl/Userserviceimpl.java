@@ -44,6 +44,7 @@ public class Userserviceimpl implements IUserService {
         userDetail.setPhoneno(bowerObject.getPhoneno());
         userDetail.setSex(bowerObject.getSex());
         userDetail.setName(bowerObject.getUsername());
+        LOGGER.info("bowername"+bowerObject.getUsername()+"name"+userDetail.getName());
         userDetail.setBirthDay(bowerObject.getBirthDay());
         userDetailRepostory.saveAndFlush(userDetail);
     }

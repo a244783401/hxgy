@@ -159,6 +159,7 @@ public class UserController {
         if (sex.equals("男")){
             bowerObject.setSex(Const.Sex.MALE.getCode());
         }else bowerObject.setSex(Const.Sex.FALEMALE.getCode());
+        bowerObject.setUsername(username);
         iUserService.updateUser(bowerObject,userDetail.getId());
         return ServerResponse.createSuccess();
     }
