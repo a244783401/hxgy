@@ -2,7 +2,6 @@ package com.hxgy.wechat.controller.front;
 
 
 import com.hxgy.wechat.VO.BowerObject;
-import com.hxgy.wechat.VO.LoginInfoVo;
 import com.hxgy.wechat.VO.UserVo;
 import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ResonseCode;
@@ -62,9 +61,8 @@ public class UserController {
             UserDetail userDetail=(UserDetail)session.getAttribute(Const.CURRENT_USER);
             Long id=userDetail.getId();
             ServerResponse<UserVo> serverResponse = iUserService.getuserInfo(id);
-            if (serverResponse.getstatus() == 0) {
+            session.setAttribute(Const.CURRENT_USER,serverResponse.getData());
                 return serverResponse;
-            }
         }
         return ServerResponse.createErrorMessage("请先登陆！");
     }
