@@ -14,9 +14,9 @@ import java.util.Map;
 @Component
 public interface IVideoService {
     ServerResponse findVideoByCourseId(Long courseId);
+    ServerResponse findUserCourseByCourseId(Long courseId,Long videoId);
     ServerResponse getVideoHistory(Long userId);
     void updateVideo(Long videoId,Long userId);
-    ServerResponse findVideoByCourseId(Long corrseId,Long userId,Long videoId);
     ServerResponse findFreeVideo();
     Map getOrderInfo(Long orderId);
 }

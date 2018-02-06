@@ -44,12 +44,8 @@ public class UserEnrollCourseRepostoryTest {
 
     @Test
     public void findByUserId(){
-           UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(8L,6L);
-        Assert.assertNotNull(userEnrollCourse);
+//        UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByUserId(6L);
+//        Assert.assertNotNull(userEnrollCourse);
     }
-    @Test
-    public void test(){
-        UserEnrollCourse userEnrollCourses = userEnrollCourseRepostory.findByUserId(94331L);
-        Assert.assertNotNull(userEnrollCourses);
-    }
+
 }

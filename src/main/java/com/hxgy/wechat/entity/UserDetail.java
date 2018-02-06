@@ -2,6 +2,7 @@ package com.hxgy.wechat.entity;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_detail")
@@ -37,8 +38,6 @@ public class UserDetail {
 
     @Column(name = "user_id")
     private Long userId;
-
-
     @Column(name="sex")
     private Boolean sex;
 
@@ -53,6 +52,16 @@ public class UserDetail {
 
     @Column(name = "real_name")
     private String realName;
+    @Column(name = "birthday")
+    private Date birthday;
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
     public String getRealName() {
         return realName;
