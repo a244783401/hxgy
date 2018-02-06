@@ -67,7 +67,7 @@ public class WechatController {
         if(serverResponse.getstatus()==0){
             session.setAttribute(Const.CURRENT_USER, serverResponse.getData());
         }
-        return "redirect:"+wechatAccountConfig.getNotifyUrl()+"/user/login/myCenterIndex";
+        return "redirect:"+wechatAccountConfig.getNotifyUrl()+"/myCenterIndex";
     }
 
 }

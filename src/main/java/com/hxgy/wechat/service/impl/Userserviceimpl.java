@@ -104,7 +104,8 @@ public class Userserviceimpl implements IUserService {
     public ServerResponse getuserInfo(Long id) {
         UserDetail userDetail=userDetailRepostory.findOne(id);
         if(userDetail!=null) {
-            return ServerResponse.isSuccess(getUserVo(userDetail));
+            LOGGER.info(userDetail.getHeadPortrait());
+            return ServerResponse.isSuccess(userDetail);
         }
         return ServerResponse.isSuccess(null);
     }

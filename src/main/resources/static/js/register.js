@@ -1,4 +1,4 @@
-$(function(){  
+$(function(){
 	//获取验证码
 	$('.register_code').click(function(){
 		random($(this));
