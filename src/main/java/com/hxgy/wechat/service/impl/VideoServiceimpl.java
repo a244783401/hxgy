@@ -69,6 +69,17 @@ public class VideoServiceimpl implements IVideoService {
             return ServerResponse.isSuccess(healItemToVo(healthCourseItems));
         }
     }
+    public ServerResponse findUserCourseByCourseId(Long courseId,Long videoId){
+        List<UserEnrollCourse> userEnrollCourses = userEnrollCourseRepostory.findByCourseId(courseId);
+        if (CollectionUtils.isEmpty(userEnrollCourses)){
+            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_BUY.getCode(),"需要购买该课程！！！");
+        }
+        HealthCourseItem healthCourseItem = healthItemRepostory.findOne(videoId);
+        if (healthCourseItem == null){
+            return ServerResponse.createErrorCodeMessage(ResonseCode.ILLEGAL_ARGUMENT.getCode(),"参数错误");
+        }
+        return ServerResponse.isSuccess(healthCourseItem.getUrl());
+    }
 
     public ServerResponse getVideoHistory(Long userId){
         List<HealthHistory> healthHistories = healthHistoryRepostory.findVideoIdByUserId(userId);
@@ -97,25 +108,8 @@ public class VideoServiceimpl implements IVideoService {
     }
 
     @Override
-    public ServerResponse findVideoByCourseId(Long courseId, Long userId, Long videoId) {
-        HealthCourseDesc healthCourseDesc = healthDescRepostory.findOne(courseId);
-        Integer recommend = healthCourseDesc.getRecommend();
-        UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(recommend.longValue(),userId);
-        HealthCourseItem healthCourseItem = healthItemRepostory.findOne(videoId);
-        if (userEnrollCourse != null){
-            if (userEnrollCourse.getPay() != Const.BOUGHT){
-                return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
-            }
-                return ServerResponse.isSuccess(healthCourseItem.getUrl());
-        }
-        userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(courseId,userId);
-        if (userEnrollCourse == null){
-            ServerResponse.createErrorCodeMessage(ResonseCode.NEED_BUY.getCode(),"需要购买该课程！！！");
-        }
-        if (userEnrollCourse.getPay() != Const.BOUGHT){
-            return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
-        }
-        return ServerResponse.isSuccess(healthCourseItem.getUrl());
+    public ServerResponse findVideoByCourseId(Long corrseId, Long userId, Long videoId) {
+        return null;
     }
 
     private List<HistoryVideoVo> getHistoryVo(List<HealthHistory> healthHistories){

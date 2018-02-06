@@ -39,7 +39,6 @@ public class UserDetail {
     @Column(name = "user_id")
     private Long userId;
 
-
     @Column(name="sex")
     private Integer sex;
 

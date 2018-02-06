@@ -18,7 +18,7 @@ $(function(){
 				var courseList =  jsonObj.data;
 				if(courseList!=null&&courseList.length>0){
 					for (var i = 0; i < courseList.length; i++) {
-						if (courseList[i].recommend==0) {
+						if (courseList[i].recommend==1) {
 							$('#allCourse_price').text(courseList[i].coursePrice);
 							$('#aEnroll').attr("index",courseList[i].id)
 							$('#aDetil').attr("index",courseList[i].id)
@@ -58,9 +58,25 @@ $("#aEnroll").on("click",function(){
 function clickThing(id){
 	excuteAjax("/user/course/signup_info",{'id':id},function(res){
 		if (res.status != 0){
-			judgeStatus(res.status,res.data);
+			if (res.status == 10){
+				showConfirmDialog("还未登陆","前往登陆？","返回","登陆",function(){
+					location.href='/myCenterIndex';
+				})
+			}
+			if (res.status == 13){
+				showConfirmDialog("温馨提示!","已经购买过该课程，前往观看？","返回","观看",function(){
+					location.href='/visitIndex';
+				})
+			}
+			showSingleDialogWithContent(res.message, null);
 		}else {
+			if (res.data == null){
 			location.href="/user/course/signup_info_index?id="+id;
+			}else{
+				showConfirmDialog("温馨提示!","已经报名该课程，前往支付？","返回","支付",function(){
+					location.href="/video/order?orderId="+res.data.id
+				})
+			}
 		}
 	})
 }

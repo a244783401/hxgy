@@ -1,7 +1,7 @@
 package com.hxgy.wechat.service.impl;
 
 import com.hxgy.wechat.VO.BowerObject;
-import com.hxgy.wechat.VO.LoginInfoVo;
+import com.hxgy.wechat.VO.UserVo;
 import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ServerResponse;
 import com.hxgy.wechat.entity.UserDetail;
@@ -11,17 +11,15 @@ import com.hxgy.wechat.repostory.UserEnrollCourseRepostory;
 import com.hxgy.wechat.service.IUserService;
 import com.hxgy.wechat.utils.MD5Util;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.servlet.http.HttpSession;
 import java.util.Date;
+
+import static com.hxgy.wechat.utils.DateTimeUtil.dateToStr;
 
 
 @Service("iUserService")
 public class Userserviceimpl implements IUserService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Userserviceimpl.class);
     @Autowired
     UserDetailRepostory  userDetailRepostory;
     @Autowired
@@ -29,17 +27,15 @@ public class Userserviceimpl implements IUserService {
 
     public void updateUserImage(String imageUrl,Long userId){
         UserDetail userDetail = userDetailRepostory.findOne(userId);
-        userDetailRepostory.updateUrlById(imageUrl,userId);
+        userDetail.setHeadPortrait(imageUrl);
+        userDetailRepostory.save(userDetail);
     }
 
-    public void updateUser(BowerObject bowerObject,Long userId){
-        UserDetail userDetail = userDetailRepostory.findOne(userId);
-        userDetail.setPhoneno(bowerObject.getPhoneno());
-        userDetail.setSex(bowerObject.getSex());
-        userDetail.setName(bowerObject.getUsername());
-        userDetail.setBirthDay(bowerObject.getBirthDay());
-        userDetailRepostory.saveAndFlush(userDetail);
+    @Override
+    public void updateUser(BowerObject bowerObject, Long userId) {
+
     }
+
 
     public ServerResponse addUserDetail(BowerObject bowerObject, Long userId){
         UserEnrollCourse userEnrollCourse = new UserEnrollCourse();
@@ -94,17 +90,12 @@ public class Userserviceimpl implements IUserService {
     }
 
     @Override
-    public ServerResponse getuserInfo(HttpSession session) {
-        UserDetail userDetail= (UserDetail) session.getAttribute(Const.CURRENT_USER);
+    public ServerResponse getuserInfo(Long id) {
+        UserDetail userDetail=userDetailRepostory.findOne(id);
         if(userDetail!=null) {
-            Long id = userDetail.getId();
-            UserDetail currentUser = userDetailRepostory.findOne(id);
-            if (!userDetail.equals(currentUser)) {
-                session.setAttribute(Const.CURRENT_USER, currentUser);
-            }
-            return ServerResponse.isSuccess(toObjVO(currentUser));
+            return ServerResponse.isSuccess(getUserVo(userDetail));
         }
-        return ServerResponse.isSuccess(toObjVO(userDetail));
+        return ServerResponse.isSuccess(null);
     }
 
     @Override
@@ -119,6 +110,7 @@ public class Userserviceimpl implements IUserService {
         userDetail.setName(name);
         userDetail.setPhoneno(phoneno);
         userDetail.setPassword(MD5Util.MD5EncodeUtf8(password));
+        userDetail.setLoginStatus("1");
         userDetailRepostory.save(userDetail);
         return  ServerResponse.isSuccess("注册成功!",userDetail);
     }
@@ -137,18 +129,29 @@ public class Userserviceimpl implements IUserService {
         }
     }
 
-
-    private LoginInfoVo toObjVO(UserDetail userDetail){
-        LoginInfoVo loginInfoVo=new LoginInfoVo();
-        if(userDetail!=null){
-            loginInfoVo.setName(userDetail.getName());
-            loginInfoVo.setHeadPortrait(userDetail.getHeadPortrait());
-            return loginInfoVo;
+    private UserVo getUserVo(UserDetail userDetail){
+        if(userDetail!=null) {
+            UserVo userVo = new UserVo();
+            userVo.setId(userDetail.getId());
+            if(userDetail.getSex()==null||userDetail.getSex()==0) {
+                userVo.setSex(Const.Sex.MALE.getMsg());
+            }else {
+                userVo.setSex(Const.Sex.FALEMALE.getMsg());
+            }
+            if(userDetail.getBirthDay()!=null){
+                userVo.setBirthday(dateToStr(userDetail.getBirthDay()));
+            }
+            userVo.setName(userDetail.getName());
+            userVo.setCop(userDetail.getCop());
+            userVo.setEducation(userDetail.getEducation());
+            userVo.setEmail(userDetail.getEmail());
+            userVo.setHeadPortrait(userDetail.getHeadPortrait());
+            userVo.setIdCard(userDetail.getIdCard());
+            userVo.setPhoneno(userDetail.getPhoneno());
+            userVo.setProfession(userDetail.getProfession());
+            return userVo;
         }
-        else {
-            return null;
-        }
-
+        return null;
     }
 
 

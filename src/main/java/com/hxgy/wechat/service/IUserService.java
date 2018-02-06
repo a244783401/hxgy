@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 public interface IUserService {
     ServerResponse validateLogin(String phoneno, String password);
     ServerResponse validateLogin(WxMpUser wxMpUser);
-    ServerResponse getuserInfo(HttpSession session);
+    ServerResponse getuserInfo(Long id);
     ServerResponse registerNew(String phoneno, String name, String password);
     ServerResponse editPassword(String phoneno, String password);
     ServerResponse addUserDetail(BowerObject bowerObject, Long userId);

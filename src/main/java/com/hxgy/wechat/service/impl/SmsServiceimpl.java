@@ -46,6 +46,7 @@ public class SmsServiceimpl implements ISmsService{
                 return ServerResponse.createErrorMessage("该手机号已被注册");
             } else {
                 String randomCode = getRandNum(6);
+                System.out.println(randomCode);
                 randomCodePtReqVo.setMsgContent("您正在注册账号，验证码为:" + randomCode);
                 String reqContent = JSONObject.toJSONString(randomCodePtReqVo);
                 String routeCode = Const.ROUTE_CODE_RANDOM_CODE;
@@ -65,10 +66,10 @@ public class SmsServiceimpl implements ISmsService{
         } else if ("01".equals(reqRandomCodeVo.getIsRegister())) {
             if (userDetailRepostory.findByPhoneno(reqRandomCodeVo.getPhoneno()) != null) {
                 String randomCode = getRandNum(6);
+                System.out.println(randomCode);
                 randomCodePtReqVo.setMsgContent("您正在尝试找回密码，验证码为：" + randomCode
                         + "\"}");
                 String reqContent = JSONObject.toJSONString(randomCodePtReqVo);
-                System.out.println(reqContent);
                 String routeCode = Const.ROUTE_CODE_RANDOM_CODE;
                 String url = "";
                 String[] params = {randomCode,"1"};

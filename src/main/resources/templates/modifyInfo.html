@@ -18,7 +18,7 @@
     <link rel="stylesheet" th:href="@{/css/signupInfo.css}" type="text/css"/>
 </head>
 <body style="background-color:#EBEBEB;">
-<form action="/user/course/updateHeadImg" id="user_form" method="post"  enctype="multipart/form-data" >
+<form action="updateHeadImg" id="user_form" method="post"  enctype="multipart/form-data" >
     <div class="signupInfo_item" style="height:110px;line-height:110px;">
     <span>上传头像</span>
         <a href="javascript:;" class="file" id="file_a" >
@@ -31,18 +31,14 @@
 </form>
     <div class="loadImg_notice"></div>
     <div class="weui-progress__bar" style="display: none;"><div class="weui-progress__inner-bar js_progress"></div></div>
-<form id="detailForm" method="post"
-enctype="application/x-www-form-urlencoded" action="/user/enterForUser">
     <div class="signupInfo_item" style="margin-top:6px;"><span>手机号</span>
-    <!--<span id="phoneno" class="normal-right pull-right" ></span>-->
-        <input id="phoneno" name="phoneno" placeholder="请输入手机号"/>
     </div>
-    <div class="signupInfo_item"><span>姓名</span><input id="username" name="username" placeholder="请输入姓名"/></div>
+    <div class="signupInfo_item"><span>姓名</span><input id="username" placeholder="请输入姓名"/></div>
     <div class="signupInfo_item"><span>性别</span>
         <div class="sex-group pull-right">
             <span class="span-sex male pull-left sex-active">男</span>
             <span class="span-sex female pull-left">女</span>
-            <input type="hidden"  id="sex" name="sex" value="男"/>
+            <input type="hidden"  id="sex" name="sex" />
         </div>
     </div>
     <div class="signupInfo_item"><span>出生日期</span>
@@ -50,7 +46,6 @@ enctype="application/x-www-form-urlencoded" action="/user/enterForUser">
             <input class="weui-input" type="date" style="float:none;width:135px;" id="birthday"  name="birthDay" />
         </div>
     </div>
-</form>
     <a id="modifySubmit" class="sigunupInfo_submit">提交</a>
 </body>
 <script type="text/javascript" th:src="@{/js/modifyInfo.js}"></script>
