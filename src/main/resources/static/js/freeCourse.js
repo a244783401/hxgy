@@ -26,9 +26,11 @@ $(function () {
         $('.history_list_item').click(function(){
             excuteAjax("/video/video_play", {"videoId":$(this).attr('videoId'),"courseId":$(this).attr('courseId')},function(re){
                 if (re.status != 0){
-                    showConfirmDialog("还未登陆","前往登陆?","不了","登陆",function(){
-                        location.href="/myCenterIndex"
-                    })
+                    if (status == 12){
+                        showConfirmDialog("还未登陆","前往登陆?","不了","登陆",function(){
+                            location.href="/myCenterIndex"
+                        })
+                    }
                 }else location.href = re.data
             })
         });

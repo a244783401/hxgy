@@ -9,7 +9,22 @@ function validate(formData, jqForm, options) {
 var options;
 var isOK = true;
 var isTrue = true;
+var isLogin = false;
 $(function(){
+
+	excuteAjax("/user/course/getUserDetail",null,function(res){
+		if (res.status == 0){
+			var formObj = document.forms[1].elements;
+			formObj.username.value=res.data.name;
+			formObj.phoneno.value = res.data.phoneno;
+			isLogin = true;
+		}else if(res.status = 10){
+			showConfirmDialog("还未登陆","请登陆","返回","登陆",function(){
+				location.href = "myCenterIndex"
+			})
+		}
+	})
+
 	if (userInfo!=null||userInfo!=undefined) {
 		if(userInfo.headPortrait!=null){
 			$('#headUrl').val(userInfo.headPortrait);
@@ -92,7 +107,7 @@ $(function(){
     });
     
     $('#modifySubmit').click(function(){
-		if (isOK && isTrue){
+		if (isOK && isTrue && isLogin){
 			$("#detailForm").ajaxSubmit({
 				dataType : 'json',
 				beforeSubmit: validate,
@@ -112,6 +127,10 @@ $(function(){
 			showSingleDialogWithContent("请选择合适的图片！！！",null);
 		}else if(!isTrue){
 			showSingleDialogWithContent("请输入正确的电话号码！！！",null);
+		}else if(!isLogin){
+			showConfirmDialog("还未登陆","请登陆","返回","登陆",function(){
+				location.href = "myCenterInfo"
+			})
 		}
     });
 });

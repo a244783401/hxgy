@@ -117,4 +117,5 @@ public class VideoController {
         }
         return "psychologyIndex";
     }
+
 }

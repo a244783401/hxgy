@@ -92,7 +92,7 @@ public class CourseController {
     public ServerResponse getUserDetail(HttpSession session){
         UserDetail userDetail = (UserDetail)session.getAttribute(Const.CURRENT_USER);
         if (userDetail == null){
-            return ServerResponse.createError();
+            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),"请登陆！！");
         }
         return ServerResponse.isSuccess(getUserVo(userDetail));
     }

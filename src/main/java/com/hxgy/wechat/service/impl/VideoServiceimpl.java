@@ -102,6 +102,9 @@ public class VideoServiceimpl implements IVideoService {
         Integer recommend = healthCourseDesc.getRecommend();
         UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(recommend.longValue(),userId);
         HealthCourseItem healthCourseItem = healthItemRepostory.findOne(videoId);
+        if (healthCourseItem.getFree() == Const.FREE){
+            return ServerResponse.isSuccess(healthCourseItem.getUrl());
+        }
         if (userEnrollCourse != null){
             if (userEnrollCourse.getPay() != Const.BOUGHT){
                 return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
@@ -110,7 +113,7 @@ public class VideoServiceimpl implements IVideoService {
         }
         userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(courseId,userId);
         if (userEnrollCourse == null){
-            ServerResponse.createErrorCodeMessage(ResonseCode.NEED_BUY.getCode(),"需要购买该课程！！！");
+           return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_BUY.getCode(),"需要购买该课程！！！");
         }
         if (userEnrollCourse.getPay() != Const.BOUGHT){
             return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());

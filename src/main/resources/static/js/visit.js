@@ -142,7 +142,7 @@ function findAllVideoByCourseId(id){
 										location.href='/myCenterIndex';
 									})
 								}
-								showSingleDialogWithContent(result.message, null);
+								else showSingleDialogWithContent(result.message, null);
 							}else{
 								location.href=result.data
 							}
