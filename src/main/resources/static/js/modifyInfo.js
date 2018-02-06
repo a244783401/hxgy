@@ -43,7 +43,7 @@ $(function(){
     		type:"post",
     		dataType:"json",
     		success:function(jsonObj){
-    			if (jsonObj.code=='1') {
+    			if (jsonObj.status==0) {
     				$('.js_progress').animate({'width':'100%'});
     				setTimeout(function() {
     				$('.js_progress').animate({'width':'0'});
@@ -74,14 +74,14 @@ $(function(){
     	var birthday = $('#birthday').val();
     	var data ={'userId':userInfo.userId,'phoneno':userInfo.phoneno,
     				'name':name,'sex':sex,'birthday':birthday,'headPortrait':headPortrait}
-    	excuteAjax('improveUserInformation', data, function(jsonObj) {
-    		if (jsonObj!='1') {
-				toastSucceed(jsonObj.msg);
+    	excuteAjax('/user/login/improveUserInformation', data, function(jsonObj) {
+    		if (jsonObj.status==0) {
+				toastSucceed(jsonObj.message);
 				setTimeout(function() {
 					location.href='myCenterIndex';
 				}, 1000);
 			} else {
-				showSingleDialogWithContent(jsonObj.msg, null);
+				showSingleDialogWithContent(jsonObj.message, null);
 			}
     	})
     });
