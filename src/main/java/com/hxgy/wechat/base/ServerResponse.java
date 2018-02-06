@@ -28,7 +28,6 @@ public class ServerResponse<T> {
         this.message = message;
         this.status = status;
     }
-
     public ServerResponse(int status, String message, T data) {
         this.status = status;
         this.message = message;
@@ -70,13 +69,15 @@ public class ServerResponse<T> {
     public static<T> ServerResponse<T> createSuccessMessage(String msg){
         return new ServerResponse(msg,ResonseCode.SUCCESS.getCode());
     }
+    public static<T> ServerResponse createSuccess(T data,int code){
+        return new ServerResponse(data,code);
+    }
     public static<T> ServerResponse<T> isSuccess(T data){
         return new ServerResponse(data,ResonseCode.SUCCESS.getCode());
     }
     public static<T> ServerResponse<T> isSuccess(String msg,T data){
         return new ServerResponse(ResonseCode.SUCCESS.getCode(),msg,data);
     }
-
     public static<T> ServerResponse<T> createError(){
         return new ServerResponse(ResonseCode.ERROR.getCode());
     }

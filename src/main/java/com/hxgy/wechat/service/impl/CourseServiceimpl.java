@@ -58,13 +58,13 @@ public class CourseServiceimpl implements ICourseService {
     public ServerResponse signUp(Long courseId,Long userId){
         HealthCourseDesc healthCourseDesc = healthDescRepostory.findOne(courseId);
         UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(courseId,userId);
-        if (healthCourseDesc.getRecommend() != 0){
+        if (healthCourseDesc.getRecommend() == 0){
             if (userEnrollCourse != null){
                 if (userEnrollCourse.getPay() == Const.BOUGHT){
                     return ServerResponse.createErrorCodeMessage(ResonseCode.BOUGHT.getCode(),"已经购买过该课程!!");
                 }
                 if (userEnrollCourse.getPay() == Const.NOT_PAY){
-                    return ServerResponse.isSuccess(userEnrollCourse);
+                    return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
                 }
             }
             return ServerResponse.createSuccess();
@@ -78,8 +78,7 @@ public class CourseServiceimpl implements ICourseService {
             return ServerResponse.createErrorCodeMessage(ResonseCode.BOUGHT.getCode(),"已经购买过该课程!!");
         }
         if (userEnrollCourse.getPay() == Const.NOT_PAY){
-            userEnrollCourse.setCourseId(recommendId.longValue());
-            return ServerResponse.isSuccess(userEnrollCourse);
+            return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
         }
         return ServerResponse.createSuccess();
     }

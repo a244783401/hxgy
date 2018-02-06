@@ -17,39 +17,35 @@ import java.util.List;
 public class UserEnrollCourseRepostoryTest {
     @Autowired
     private UserEnrollCourseRepostory userEnrollCourseRepostory;
-    @Test
-    public void getData(){
-        UserEnrollCourse userEnrollCourse=userEnrollCourseRepostory.findOne(6L);
-//        System.out.println(JSONObject.toJSONString(userEnrollCourse));
-    }
-    @Test
-    public void addData(){
-        UserEnrollCourse userEnrollCourse=new UserEnrollCourse();
+//    @Test
+//    public void getData(){
+//        UserEnrollCourse userEnrollCourse=userEnrollCourseRepostory.findOne(6L);
+////        System.out.println(JSONObject.toJSONString(userEnrollCourse));
+//    }
+//    @Test
+//    public void addData(){
+//        UserEnrollCourse userEnrollCourse=new UserEnrollCourse();
+//
+//        userEnrollCourse.setCourseId(2L);
+//        userEnrollCourse.setLearnPeriod(5L);
+//        userEnrollCourse.setTotalPeriod(10L);
+//        userEnrollCourse.setUserId(22222L);
+//        userEnrollCourseRepostory.save(userEnrollCourse);
+//    }
+//    @Test
+//    public void deleteData(){
+//        userEnrollCourseRepostory.delete(58L);
+//    }
+//    @Test
+//    public void findByCourseId(){
+//        List<UserEnrollCourse> userEnrollCourses= userEnrollCourseRepostory.findByCourseId(2L);
+//        Assert.assertNotEquals(0,userEnrollCourses.size());
+//    }
+//
+//    @Test
+//    public void findByUserId(){
+//           UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(8L,6L);
+//            Assert.assertNotNull(userEnrollCourse);
+//    }
 
-        userEnrollCourse.setCourseId(2L);
-        userEnrollCourse.setLearnPeriod(5L);
-        userEnrollCourse.setTotalPeriod(10L);
-        userEnrollCourse.setUserId(22222L);
-        userEnrollCourseRepostory.save(userEnrollCourse);
-    }
-    @Test
-    public void deleteData(){
-        userEnrollCourseRepostory.delete(58L);
-    }
-    @Test
-    public void findByCourseId(){
-        List<UserEnrollCourse> userEnrollCourses= userEnrollCourseRepostory.findByCourseId(2L);
-        Assert.assertNotEquals(0,userEnrollCourses.size());
-    }
-
-    @Test
-    public void findByUserId(){
-           UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(8L,6L);
-        Assert.assertNotNull(userEnrollCourse);
-    }
-    @Test
-    public void test(){
-        UserEnrollCourse userEnrollCourses = userEnrollCourseRepostory.findByUserId(94331L);
-        Assert.assertNotNull(userEnrollCourses);
-    }
 }

@@ -132,20 +132,9 @@ function findAllVideoByCourseId(id){
 				$('.visit_courseList').click(function(){
 					excuteAjax("/video/video_play", {'videoId':$(this).attr('videoId'),'courseId':$(this).attr('courseId')},function(result){
 							if (result.status != 0){
-								//if (result.status == 11){
-								//	showConfirmDialog('需要购买','前往购买？？','再想想','前往购买',function(){
-								//		location.href='/index';
-								//	})
-								//}
-								//if (result.status == 10){
-								//	showConfirmDialog('前往登陆','前往登陆？？','再想想','前往登陆',function(){
-								//		location.href='/myCenterIndex';
-								//	})
-								//}
-								////else showSingleDialogWithContent(result.message, null);
-								judgeStatus(result.status);
+								judgeStatus(result.status,result.data);
 							}else{
-								location.href=result.data
+							location.href=result.data
 							}
 					})
 				});

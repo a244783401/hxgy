@@ -14,4 +14,5 @@ public interface IUserService {
     ServerResponse editPassword(String phoneno, String password);
     ServerResponse addUserDetail(BowerObject bowerObject, Long userId);
     void updateUserImage(String imageUrl,Long userId);
+    void updateUser(BowerObject bowerObject,Long userId);
 }

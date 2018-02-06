@@ -103,7 +103,9 @@ public class VideoController {
         return iVideoService.findFreeVideo();
     }
     @RequestMapping("/order")
-    public String order(@RequestParam("orderId") String id, HttpSession session, Model model){
+    public String order(@RequestParam(value = "orderId",required = false) String id,
+                        @RequestParam(value = "courseId",required = false) String courseId,
+                        HttpSession session, Model model){
         UserDetail userDetail = (UserDetail) session.getAttribute(Const.CURRENT_USER);
         if (userDetail != null){
             Long orderId = Long.parseLong(id);

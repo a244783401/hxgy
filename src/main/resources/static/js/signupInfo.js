@@ -53,7 +53,6 @@ $(function() {
 	//表单提交(两张表单)
  $('.sigunupInfo_submit').click(function() {
 		//图片上传
-	 alert("start")
 		if (isTrue){
 			$('#user_form').ajaxSubmit({
 				dataType : 'json',
@@ -70,7 +69,6 @@ $(function() {
 		}
 //表单提交
 function updateInfo(){
-	alert("start2")
 	$('#detailForm').ajaxSubmit({
 		dataType : 'json',
 		beforeSubmit: validate,

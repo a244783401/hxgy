@@ -98,24 +98,24 @@ public class VideoServiceimpl implements IVideoService {
 
     @Override
     public ServerResponse findVideoByCourseId(Long courseId, Long userId, Long videoId) {
-        UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(courseId,userId);
-        if (userEnrollCourse == null){
-            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_BUY.getCode(),"需要购买该课程！！！");
-        }
-        List<HealthCourseDesc> healthCourseDescs = healthDescRepostory.findByRecommend(Integer.parseInt(courseId.toString()));
+        HealthCourseDesc healthCourseDesc = healthDescRepostory.findOne(courseId);
+        Integer recommend = healthCourseDesc.getRecommend();
+        UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(recommend.longValue(),userId);
         HealthCourseItem healthCourseItem = healthItemRepostory.findOne(videoId);
-        if (CollectionUtils.isEmpty(healthCourseDescs) && healthCourseItem.getCourseId() == courseId){
-            return ServerResponse.isSuccess(healthCourseItem.getUrl());
-        }
-        if (!CollectionUtils.isEmpty(healthCourseDescs)){
-            for (HealthCourseDesc healthCourseDesc:healthCourseDescs
-                 ) {
-                if (healthCourseDesc.getId() == courseId){
-                    return ServerResponse.isSuccess(healthCourseItem.getUrl());
-                }
+        if (userEnrollCourse != null){
+            if (userEnrollCourse.getPay() != Const.BOUGHT){
+                return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
             }
+                return ServerResponse.isSuccess(healthCourseItem.getUrl());
         }
-        return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_BUY.getCode(),"需要购买该课程！！！");
+        userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(courseId,userId);
+        if (userEnrollCourse == null){
+            ServerResponse.createErrorCodeMessage(ResonseCode.NEED_BUY.getCode(),"需要购买该课程！！！");
+        }
+        if (userEnrollCourse.getPay() != Const.BOUGHT){
+            return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
+        }
+        return ServerResponse.isSuccess(healthCourseItem.getUrl());
     }
 
     private List<HistoryVideoVo> getHistoryVo(List<HealthHistory> healthHistories){

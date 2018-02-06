@@ -1,12 +1,15 @@
 package com.hxgy.wechat.controller.front;
 
 
+import com.hxgy.wechat.VO.BowerObject;
 import com.hxgy.wechat.VO.LoginInfoVo;
 import com.hxgy.wechat.base.Const;
+import com.hxgy.wechat.base.ResonseCode;
 import com.hxgy.wechat.base.ServerResponse;
 import com.hxgy.wechat.entity.UserDetail;
 import com.hxgy.wechat.service.ISmsService;
 import com.hxgy.wechat.service.IUserService;
+import com.hxgy.wechat.utils.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -142,7 +145,27 @@ public class UserController {
                 return ServerResponse.createErrorMessage("输入信息有误!");
             }
         }
-
+    @RequestMapping("/enterForUser")
+    @ResponseBody
+    public ServerResponse enterForUser(@RequestParam("phoneno") String phoneno,
+                                       @RequestParam("username") String username,
+                                       @RequestParam("sex") String sex,
+                                       @RequestParam("birthDay") String birthDay,
+                                       HttpSession session
+                                        ){
+        UserDetail userDetail = (UserDetail) session.getAttribute(Const.CURRENT_USER);
+        if (userDetail== null){
+            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),ResonseCode.NEED_LOGIN.getMsg());
+        }
+        BowerObject bowerObject = new BowerObject();
+        bowerObject.setBirthDay(DateTimeUtil.strToDate(birthDay));
+        bowerObject.setPhoneno(phoneno);
+        if (sex.equals("男")){
+            bowerObject.setSex(Const.Sex.MALE.getCode());
+        }else bowerObject.setSex(Const.Sex.FALEMALE.getCode());
+        iUserService.updateUser(bowerObject,userDetail.getId());
+        return ServerResponse.createSuccess();
+    }
 
 
 

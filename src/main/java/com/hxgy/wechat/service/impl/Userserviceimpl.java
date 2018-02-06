@@ -32,6 +32,15 @@ public class Userserviceimpl implements IUserService {
         userDetailRepostory.updateUrlById(imageUrl,userId);
     }
 
+    public void updateUser(BowerObject bowerObject,Long userId){
+        UserDetail userDetail = userDetailRepostory.findOne(userId);
+        userDetail.setPhoneno(bowerObject.getPhoneno());
+        userDetail.setSex(bowerObject.getSex());
+        userDetail.setName(bowerObject.getUsername());
+        userDetail.setBirthDay(bowerObject.getBirthDay());
+        userDetailRepostory.saveAndFlush(userDetail);
+    }
+
     public ServerResponse addUserDetail(BowerObject bowerObject, Long userId){
         UserEnrollCourse userEnrollCourse = new UserEnrollCourse();
         userEnrollCourse.setCourseId(Long.parseLong(bowerObject.getCourseid()));

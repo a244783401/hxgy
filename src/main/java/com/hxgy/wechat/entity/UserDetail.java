@@ -2,6 +2,7 @@ package com.hxgy.wechat.entity;
 
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_detail")
@@ -40,7 +41,7 @@ public class UserDetail {
 
 
     @Column(name="sex")
-    private Boolean sex;
+    private Integer sex;
 
     @Column(name = "password")
     private String password;
@@ -53,6 +54,9 @@ public class UserDetail {
 
     @Column(name = "real_name")
     private String realName;
+
+    @Column(name = "birthday")
+    private Date birthDay;
 
     public String getRealName() {
         return realName;
@@ -86,11 +90,19 @@ public class UserDetail {
         this.password = password;
     }
 
-    public Boolean getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public Date getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 

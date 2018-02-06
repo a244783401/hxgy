@@ -1,11 +1,15 @@
 package com.hxgy.wechat.VO;
 
+import java.util.Date;
+
 /**
  * @author zy
  * @create 2018-01-31 11:00
  **/
 public class BowerObject {
 
+    private int sex;
+    private Date birthDay;
     private String username;
     private String idCard;
     private String profession;
@@ -16,6 +20,23 @@ public class BowerObject {
     private String headPortrait;
     private String courseid;
     private String coursecategid;
+
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+
+    public Date getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
+    }
 
     public String getUsername() {
         return username;

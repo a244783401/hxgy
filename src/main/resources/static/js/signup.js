@@ -58,15 +58,9 @@ $("#aEnroll").on("click",function(){
 function clickThing(id){
 	excuteAjax("/user/course/signup_info",{'id':id},function(res){
 		if (res.status != 0){
-			judgeStatus(res.status);
+			judgeStatus(res.status,res.data);
 		}else {
-			if (res.data == null){
 			location.href="/user/course/signup_info_index?id="+id;
-			}else{
-				showConfirmDialog("温馨提示!","已经报名该课程，前往支付？","返回","支付",function(){
-					location.href="/video/order?orderId="+res.data.id
-				})
-			}
 		}
 	})
 }
