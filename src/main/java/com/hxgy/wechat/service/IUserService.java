@@ -15,4 +15,5 @@ public interface IUserService {
     ServerResponse addUserDetail(BowerObject bowerObject, Long userId);
     void updateUserImage(String imageUrl,Long userId);
     void updateUser(BowerObject bowerObject,Long userId);
+    boolean judgePhoneNum(String phoneNum,Long userId);
 }

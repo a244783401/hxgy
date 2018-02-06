@@ -7,7 +7,8 @@ function validate(formData, jqForm, options) {
 	}
 }
 var options;
-var isOK;
+var isOK = true;
+var isTrue = true;
 $(function(){
 	if (userInfo!=null||userInfo!=undefined) {
 		if(userInfo.headPortrait!=null){
@@ -41,11 +42,27 @@ $(function(){
     	var size = $(this)[0].files[0].size;
     	if(size>=1024*1024){
     		$('.loadImg_notice').css({'color':'red','display':'block'}).text('请上传小于1M的图片!');
-    		setTimeout(function() {
-    			$('.loadImg_notice').css('display','none');
-    		}, 3000);
+    		//setTimeout(function() {
+    		//	$('.loadImg_notice').css('display','none');
+    		//}, 3000);
+			isOK = false;
     	return;
     	}
+		/**
+		 * 判断图片格式
+		 */
+		var location = $("input[name = 'file']").val();
+		var point = location.lastIndexOf(".");
+		var type = location.substr(point);
+		alert(type+location)
+		if (type == ".jpg" || type == ".gif" || type == ".JPG" || type == ".png" || type ==".GIF" || type ==".PNG"){
+			isOK = true;
+		}else{
+			showSingleDialogWithContent("图片格式有错！！！",null);
+			isOK = false;
+		}
+
+
     	$('.weui-progress__bar').css('display','block');
     	$('.js_progress').animate({'width':'80%'},3000);	
 
@@ -61,14 +78,8 @@ $(function(){
 					$('.weui-progress__bar').css('display','none');
 					$('.loadImg_notice').css({'color':'green','display':'block'}).text('上传成功!');
     				},1000);
-    				setTimeout(function() {
-    					$('.loadImg_notice').css('display','none');
-    				}, 3000);
-    				//$('#headUrl').val(res.imgUrl);
     			}else{
-
 					judgeStatus(res.status,res.data);
-
     				$('.js_progress').animate({'width':'0'});
 					$('.weui-progress__bar').css('display','none');
 					$('.loadImg_notice').css({'color':'red','display':'block'}).text('上传失败!');
@@ -81,33 +92,35 @@ $(function(){
     });
     
     $('#modifySubmit').click(function(){
-		$("#detailForm").ajaxSubmit({
-			dataType : 'json',
-			beforeSubmit: validate,
-			success:function(res){
-				if (res.status == 0){
-						location.href="myCenterIndex"
-				}else {
-					showSingleDialogWithContent(res.message,null);
-				}
-			}
-		})
+		if (isOK && isTrue){
+			$("#detailForm").ajaxSubmit({
+				dataType : 'json',
+				beforeSubmit: validate,
+				success:function(res){
+					if (res.status == 0){
+						$("#user_form").ajaxSubmit(options);
+						setTimeout(function(){
+							location.href = "myCenterIndex";
+						},2000)
 
-    	var headPortrait = $('#headUrl').val();
-    	var name = $('#username').val();
-    	var sex = $('#sex').val();
-    	var birthday = $('#birthday').val();
-    	var data ={'userId':userInfo.userId,'phoneno':userInfo.phoneno,
-    				'name':name,'sex':sex,'birthday':birthday,'headPortrait':headPortrait}
-    	excuteAjax('/user/login/improveUserInformation', data, function(jsonObj) {
-    		if (jsonObj.status==0) {
-				toastSucceed(jsonObj.message);
-				setTimeout(function() {
-					location.href='myCenterIndex';
-				}, 1000);
-			} else {
-				showSingleDialogWithContent(jsonObj.message, null);
-			}
-    	})
+					}else {
+						showSingleDialogWithContent(res.message,null);
+					}
+				}
+			})
+		}else if (!isOK){
+			showSingleDialogWithContent("请选择合适的图片！！！",null);
+		}else if(!isTrue){
+			showSingleDialogWithContent("请输入正确的电话号码！！！",null);
+		}
     });
 });
+$("#phoneno").blur(function(){
+	excuteAjax("/user/judge",{"phoneNum":$("#phoneno").val()},function(res){
+		if (res.status != 0){
+			isTrue = false;
+			showSingleDialogWithContent("此手机号已被注册！！！",null);
+		}else isTrue = true;
+	})
+})
+

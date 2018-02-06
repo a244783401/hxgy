@@ -27,13 +27,16 @@ public class Userserviceimpl implements IUserService {
     @Autowired
     private UserEnrollCourseRepostory userEnrollCourseRepostory;
 
+    public boolean judgePhoneNum(String phoneNum,Long userId){
+        UserDetail userDetail = userDetailRepostory.findByPhoneno(phoneNum);
+        if (userDetail != null && userDetail.getId() != userDetailRepostory.findOne(userId).getId()){
+            return false;
+        }
+        return true;
+    }
+
     public void updateUserImage(String imageUrl,Long userId){
-        UserDetail userDetail = userDetailRepostory.findOne(userId);
-        LOGGER.info("oldUrl"+userDetail.getHeadPortrait());
-        userDetail.setHeadPortrait(imageUrl);
-        userDetailRepostory.save(userDetail);
-        userDetail = userDetailRepostory.findOne(userId);
-        LOGGER.info("newUrl"+userDetail.getHeadPortrait());
+        userDetailRepostory.updateUrlById(imageUrl,userId);
     }
 
     public void updateUser(BowerObject bowerObject,Long userId){
