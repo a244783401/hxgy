@@ -53,7 +53,7 @@ public class SmsServiceimpl implements ISmsService{
                 String msgContent="您正在注册账号，验证码为：";
                 String randomCode = getRandNum(6);
                 logger.info("注册"+randomCode);
-                String stringurl="{\"header\": {\"tid\": null,\"routeCode\": \""+Const.ROUTE_CODE_RANDOM_CODE+"\",\"routeParam\": null,\"authData\": null},\"body\": {\"content\": \"{\\\"msgType\\\":\\\""+randomCodePtReqVo.getMsgType()+"\\\",\\\"productType\\\":\\\""+randomCodePtReqVo.getProductType()+"\\\",\\\"templateId\\\":\\\""+Const.RANDOM_CODE_MSG+"\\\",\\\"channelType\\\":\\\""+Const.CHANNEL_CODE_APP+"\\\",\\\"msgDest\\\":\\\""+reqRandomCodeVo.getPhoneno()+"\\\",\\\"msgContent\\\":\\\"{\\\\\\\""+msgContent+"\\\\\\\":\\\\\\\""+randomCode+"\\\\\\\"}\\\"}\"}}";
+                String stringurl="{\"header\": {\"tid\": null,\"routeCode\": \""+Const.ROUTE_CODE_RANDOM_CODE+"\",\"routeParam\": null,\"authData\": null},\"body\": {\"content\": \"{\\\"msgType\\\":\\\""+randomCodePtReqVo.getMsgType()+"\\\",\\\"productType\\\":\\\""+randomCodePtReqVo.getProductType()+"\\\",\\\"templateId\\\":\\\""+Const.RANDOM_CODE_MSG+"\\\",\\\"channelType\\\":\\\""+Const.CHANNEL_CODE_APP+"\\\",\\\"msgDest\\\":\\\""+reqRandomCodeVo.getPhoneno()+"\\\",\\\"msgContent\\\":\\\"{\\\\\\\"AUTHCODE\\\\\\\":\\\\\\\""+randomCode+"\\\\\\\"}\\\"}\"}}";
                 Map mapcontent=new HashMap<>();
                 mapcontent.put("param",stringurl);
                 String url = Const.UNIFORM_SERVICE;
@@ -85,7 +85,7 @@ public class SmsServiceimpl implements ISmsService{
                 String msgContent="您正在尝试更改密码，验证码为：";
                 String randomCode = getRandNum(6);
                 logger.info("修改密码"+randomCode);
-                String stringurl="{\"header\": {\"tid\": null,\"routeCode\": \""+Const.ROUTE_CODE_RANDOM_CODE+"\",\"routeParam\": null,\"authData\": null},\"body\": {\"content\": \"{\\\"msgType\\\":\\\""+randomCodePtReqVo.getMsgType()+"\\\",\\\"productType\\\":\\\""+randomCodePtReqVo.getProductType()+"\\\",\\\"templateId\\\":\\\""+Const.RANDOM_CODE_MSG+"\\\",\\\"channelType\\\":\\\""+Const.CHANNEL_CODE_APP+"\\\",\\\"msgDest\\\":\\\""+reqRandomCodeVo.getPhoneno()+"\\\",\\\"msgContent\\\":\\\"{\\\\\\\""+msgContent+"\\\\\\\":\\\\\\\""+randomCode+"\\\\\\\"}\\\"}\"}}";
+                String stringurl="{\"header\": {\"tid\": null,\"routeCode\": \""+Const.ROUTE_CODE_RANDOM_CODE+"\",\"routeParam\": null,\"authData\": null},\"body\": {\"content\": \"{\\\"msgType\\\":\\\""+randomCodePtReqVo.getMsgType()+"\\\",\\\"productType\\\":\\\""+randomCodePtReqVo.getProductType()+"\\\",\\\"templateId\\\":\\\""+Const.RANDOM_CODE_MSG+"\\\",\\\"channelType\\\":\\\""+Const.CHANNEL_CODE_APP+"\\\",\\\"msgDest\\\":\\\""+reqRandomCodeVo.getPhoneno()+"\\\",\\\"msgContent\\\":\\\"{\\\\\\\"AUTHCODE\\\\\\\":\\\\\\\""+randomCode+"\\\\\\\"}\\\"}\"}}";
                 Map mapcontent=new HashMap<>();
                 mapcontent.put("param",stringurl);
                 String url = Const.UNIFORM_SERVICE;
