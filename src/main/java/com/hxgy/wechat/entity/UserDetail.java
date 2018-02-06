@@ -38,8 +38,6 @@ public class UserDetail {
 
     @Column(name = "user_id")
     private Long userId;
-
-
     @Column(name="sex")
     private Integer sex;
 
@@ -54,6 +52,16 @@ public class UserDetail {
 
     @Column(name = "real_name")
     private String realName;
+    @Column(name = "birthday")
+    private Date birthday;
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
     @Column(name = "birthday")
     private Date birthDay;
