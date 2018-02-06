@@ -1,11 +1,15 @@
 package com.hxgy.wechat.VO;
 
+import java.util.Date;
+
 /**
  * @author zy
  * @create 2018-01-30 13:41
  **/
 public class UserVo {
 
+    private Long id;
+    private String sex;
     private String cop;
     private String headPortrait;
     private String name;
@@ -14,6 +18,31 @@ public class UserVo {
     private String education;
     private String email;
     private String phoneno;
+    private String birthday;
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCop() {
         return cop;

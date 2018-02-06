@@ -1,3 +1,4 @@
+
 function validate(formData, jqForm, options) {
 	var form = jqForm[1];
 	if ($("#phoneno").val() == "" || $("#username").val() == "" || $("#birthday").val() == "") {
@@ -47,12 +48,13 @@ $(function(){
     	}
     	$('.weui-progress__bar').css('display','block');
     	$('.js_progress').animate({'width':'80%'},3000);	
+
     	options = {
     		url:"/user/course/updateHeadImg",
     		type:"post",
     		dataType:"json",
-    		success:function(res){
-    			if (res.status==0) {
+    		success:function(jsonObj){
+    			if (jsonObj.status==0) {
     				$('.js_progress').animate({'width':'100%'});
     				setTimeout(function() {
     				$('.js_progress').animate({'width':'0'});
@@ -64,7 +66,15 @@ $(function(){
     				}, 3000);
     				//$('#headUrl').val(res.imgUrl);
     			}else{
+
 					judgeStatus(res.status,res.data);
+
+    				$('.js_progress').animate({'width':'0'});
+					$('.weui-progress__bar').css('display','none');
+					$('.loadImg_notice').css({'color':'red','display':'block'}).text('上传失败!');
+    				setTimeout(function() {
+    					$('.loadImg_notice').css('display','none');
+    				}, 3000);
    			 	}
     		}
     	};
@@ -83,5 +93,21 @@ $(function(){
 			}
 		})
 
+    	var headPortrait = $('#headUrl').val();
+    	var name = $('#username').val();
+    	var sex = $('#sex').val();
+    	var birthday = $('#birthday').val();
+    	var data ={'userId':userInfo.userId,'phoneno':userInfo.phoneno,
+    				'name':name,'sex':sex,'birthday':birthday,'headPortrait':headPortrait}
+    	excuteAjax('/user/login/improveUserInformation', data, function(jsonObj) {
+    		if (jsonObj.status==0) {
+				toastSucceed(jsonObj.message);
+				setTimeout(function() {
+					location.href='myCenterIndex';
+				}, 1000);
+			} else {
+				showSingleDialogWithContent(jsonObj.message, null);
+			}
+    	})
     });
 });

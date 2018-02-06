@@ -8,8 +8,6 @@ import java.util.Date;
  **/
 public class BowerObject {
 
-    private int sex;
-    private Date birthDay;
     private String username;
     private String idCard;
     private String profession;
@@ -20,7 +18,8 @@ public class BowerObject {
     private String headPortrait;
     private String courseid;
     private String coursecategid;
-
+    private Date birthDay;
+    private int sex;
 
     public int getSex() {
         return sex;

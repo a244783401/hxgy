@@ -5,27 +5,6 @@ $(function(){
 	$('#visitIndex,#history,#msg,#setting,#loginIndex').click(function(){
 		location.href=''+$(this).attr('id')+'';
 	});
-	//注销
-    $('#logOut').click(function () {
-
-            $.ajax({
-                url:"/user/login/logOut",
-                type : "post",
-                dataType : 'json',
-                success:function (jsonObj) {
-                    if (jsonObj.status==1) {
-                        showSingleDialogWithContent(jsonObj.message,null);
-                    } else {
-                        showConfirmDialog('注销','确认注销？','否','是',function () {
-                            toastSucceed(jsonObj.message);
-                            setTimeout(function() {
-                                location.href= 'myCenterIndex';
-                            }, 1500)
-                        })
-                    }
-            }
-        });
-    });
 	//初始化加载
     	$.ajax({
 			url:"/user/login/getuserInfo",

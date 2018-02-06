@@ -28,6 +28,7 @@ public class ServerResponse<T> {
         this.message = message;
         this.status = status;
     }
+
     public ServerResponse(int status, String message, T data) {
         this.status = status;
         this.message = message;
@@ -78,6 +79,7 @@ public class ServerResponse<T> {
     public static<T> ServerResponse<T> isSuccess(String msg,T data){
         return new ServerResponse(ResonseCode.SUCCESS.getCode(),msg,data);
     }
+
     public static<T> ServerResponse<T> createError(){
         return new ServerResponse(ResonseCode.ERROR.getCode());
     }

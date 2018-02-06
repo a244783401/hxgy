@@ -3,6 +3,7 @@ package com.hxgy.wechat.controller.front;
 
 import com.hxgy.wechat.VO.BowerObject;
 import com.hxgy.wechat.VO.LoginInfoVo;
+import com.hxgy.wechat.VO.UserVo;
 import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ResonseCode;
 import com.hxgy.wechat.base.ServerResponse;
@@ -58,7 +59,9 @@ public class UserController {
     @ResponseBody
     public ServerResponse getuserInfo(HttpSession session){
         if(session.getAttribute(Const.CURRENT_USER)!=null) {
-            ServerResponse<LoginInfoVo> serverResponse = iUserService.getuserInfo(session);
+            UserDetail userDetail=(UserDetail)session.getAttribute(Const.CURRENT_USER);
+            Long id=userDetail.getId();
+            ServerResponse<UserVo> serverResponse = iUserService.getuserInfo(id);
             if (serverResponse.getstatus() == 0) {
                 return serverResponse;
             }
@@ -85,11 +88,6 @@ public class UserController {
      * 修改信息
      *
      **/
-    @RequestMapping("/login/modifyInfo")
-    public ServerResponse modifyInfo(){
-        return null;
-
-    }
 
 
     /**
@@ -158,12 +156,11 @@ public class UserController {
             return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),ResonseCode.NEED_LOGIN.getMsg());
         }
         BowerObject bowerObject = new BowerObject();
-        bowerObject.setBirthDay(DateTimeUtil.strToDate(birthDay,"yyyy-MM-dd"));
+        bowerObject.setBirthDay(DateTimeUtil.strToDate(birthDay));
         bowerObject.setPhoneno(phoneno);
         if (sex.equals("男")){
             bowerObject.setSex(Const.Sex.MALE.getCode());
         }else bowerObject.setSex(Const.Sex.FALEMALE.getCode());
-        bowerObject.setUsername(username);
         iUserService.updateUser(bowerObject,userDetail.getId());
         return ServerResponse.createSuccess();
     }
