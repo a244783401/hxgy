@@ -48,4 +48,20 @@ public class UserEnrollCourseRepostoryTest {
 //            Assert.assertNotNull(userEnrollCourse);
 //    }
 
+//    @Test
+//    public void deleteData(){
+//        userEnrollCourseRepostory.delete(58L);
+//    }
+//    @Test
+//    public void findByCourseId(){
+//        List<UserEnrollCourse> userEnrollCourses= userEnrollCourseRepostory.findByCourseId(2L);
+//        Assert.assertNotEquals(0,userEnrollCourses.size());
+//    }
+//
+//    @Test
+//    public void findByUserId(){
+////        UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByUserId(6L);
+////        Assert.assertNotNull(userEnrollCourse);
+//    }
+
 }

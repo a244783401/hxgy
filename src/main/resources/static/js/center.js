@@ -1,5 +1,4 @@
-$(function(){
-    var userInfo=null;
+$(function(){  
 	var marginTop = $(window).height()>560?$(window).height()-560:0;
 	$('.center_footImg').css("margin-top",marginTop);
 	//观看历史
@@ -27,21 +26,13 @@ $(function(){
             }
         });
     });
-    //修改资料
-    $('.center_header').click(function () {
-        if(userInfo!=null){
-            location.href='modifyInfo';
-        }else {
-            location.href='loginIndex';
-        }
-    });
 	//初始化加载
     	$.ajax({
 			url:"/user/login/getuserInfo",
             type : "post",
             dataType : 'json',
 			success:function (jsonObj) {
-                userInfo=jsonObj.data;
+                var userInfo=jsonObj.data;
                 if (userInfo!=null) {
                     $('#loginIndex').unbind('click').css({
                         'background': 'none',

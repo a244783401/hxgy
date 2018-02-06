@@ -79,11 +79,12 @@ public class VideoController {
         if (userDetail == null){
             return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),"请登陆！！！");
         }
-        ServerResponse serverResponse = iVideoService.findUserCourseByCourseId(courseIdL,videoIdL);
+        ServerResponse serverResponse = iVideoService.findVideoByCourseId(courseIdL, userDetail.getId(), videoIdL);
         if (serverResponse.getstatus() == 0){
             iVideoService.updateVideo(videoIdL,userDetail.getId());
         }
-        return iVideoService.findUserCourseByCourseId(courseIdL,videoIdL);
+        return serverResponse;
+
     }
 
     @RequestMapping("/history")

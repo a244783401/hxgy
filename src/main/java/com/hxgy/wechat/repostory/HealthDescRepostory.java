@@ -11,4 +11,5 @@ import java.util.List;
 public interface HealthDescRepostory extends JpaRepository<HealthCourseDesc,Long> {
     List<HealthCourseDesc> findByCourseCodeIn(List<String> codes);
     List<HealthCourseDesc> findByCourseCategoryIdIn(List<Long> ids);
+    List<HealthCourseDesc> findByRecommend(Integer recommend);
 }

@@ -24,5 +24,4 @@ public interface ISmsService {
     ServerResponse validateSms(String phoneNum, String inputCode);
 
 
-
 }

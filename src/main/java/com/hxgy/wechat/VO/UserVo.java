@@ -5,9 +5,7 @@ package com.hxgy.wechat.VO;
  * @create 2018-01-30 13:41
  **/
 public class UserVo {
-    private Long id;
-    private String sex;
-    private String birthday;
+
     private String cop;
     private String headPortrait;
     private String name;
@@ -16,39 +14,6 @@ public class UserVo {
     private String education;
     private String email;
     private String phoneno;
-    private String realName;
-
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
 
     public String getCop() {
         return cop;
