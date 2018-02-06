@@ -158,11 +158,12 @@ public class UserController {
             return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),ResonseCode.NEED_LOGIN.getMsg());
         }
         BowerObject bowerObject = new BowerObject();
-        bowerObject.setBirthDay(DateTimeUtil.strToDate(birthDay));
+        bowerObject.setBirthDay(DateTimeUtil.strToDate(birthDay,"yyyy-MM-dd"));
         bowerObject.setPhoneno(phoneno);
         if (sex.equals("男")){
             bowerObject.setSex(Const.Sex.MALE.getCode());
         }else bowerObject.setSex(Const.Sex.FALEMALE.getCode());
+        bowerObject.setUsername(username);
         iUserService.updateUser(bowerObject,userDetail.getId());
         return ServerResponse.createSuccess();
     }

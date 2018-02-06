@@ -49,10 +49,6 @@ public class UserDetailRepostoryTest {
     @Test
     public void get(){
         UserDetail userDetail=userDetailRepostory.findOne(6L);
-        logger.info(userDetail.getHeadPortrait());
-        userDetailRepostory.updateUrlById("",6L);
-        userDetail=userDetailRepostory.findOne(6L);
-        logger.info(userDetail.getHeadPortrait());
 
     }
 }
