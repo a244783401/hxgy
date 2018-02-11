@@ -95,7 +95,7 @@ $(function() {
 				$('#editorDiv').css("display","none");
 				table.ajax.reload();
 			} else {
-				alert(""+addOrUpdate=="add"?"添加":"修改失败"+"添加失败");
+				alert(jsonObj.message);
 			}
         });
     });

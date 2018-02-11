@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by 10104 on 2018/1/24.
  */
-@Service
+@Service("iAdminService")
 public class AdminServiceImpl implements IAdminService{
     @Autowired
     private AdminRepostory adminRepostory;
