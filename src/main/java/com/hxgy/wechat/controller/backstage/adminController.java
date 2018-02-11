@@ -32,6 +32,7 @@ public class adminController {
     public ModelAndView redirect(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
         if (session.getAttribute(Const.CURRENT_ADMIN) == null) {
+//            return ""
             modelAndView.setViewName("ManagerLogin");
         } else {
             modelAndView.setViewName("indexHtml");

@@ -4,11 +4,11 @@
     /*text-align: center;*/
 /*}*/
 .itemView{
-display:flex;
-justify-content:center;
-text-align: center;
+	flex: 1;
+	text-align: center;
 }
 .itemFont{
+	display: inline-block;
 	height:50px;
 	line-height:50px;
 	padding-bottom:11px;
@@ -109,6 +109,8 @@ text-align: center;
 }
 #midItems{
 	width: 100%;height:50px;background-color: white;border-bottom:1px solid #dddcdc;
+	display: flex;
+	justify-content: center;
 }
 .swiper-wrappersssssss{
 	text-align: center;

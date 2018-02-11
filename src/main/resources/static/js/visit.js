@@ -6,7 +6,6 @@ $(function(){
 
 function initUI(){
 	excuteAjax('/video/allcourse_info', {'periodNum':44}, function(jsonObj) {
-		console.log(jsonObj)
 		if (jsonObj.status !=0 ) {
 			showSingleDialogWithContent(jsonObj.message, null);
 		} else {
@@ -17,7 +16,7 @@ function initUI(){
 			if (descList!=null && descList.length>0) {
 				var num = 0;
 				for (var i = 0; i < descList.length; i++) {					
-					if (descList[i].category!=0) {
+					if (descList[i].enable!=0 && descList[i].stand ==0) {
 						if (num==0) {
 							itemStr += '<div class="itemView"  onclick="findAllVideoByCourseId(' + descList[i].id  + ')" num="'+num+'"><span class="itemFont fontSelect">'+descList[i].courseName+'</span></div>';
 							findAllVideoByCourseId(descList[i].id);
