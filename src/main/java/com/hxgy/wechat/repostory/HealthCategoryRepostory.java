@@ -26,4 +26,8 @@ public interface HealthCategoryRepostory extends JpaRepository<HealthCategory,Lo
     @Modifying
     @Query(value="update HealthCategory hc set hc.push = 0 where hc.version not in:version")
     int updateByVersion(@Param("version")int version);
+    @Transactional
+    @Modifying
+    @Query(value="update HealthCategory hc set hc.push = :push where hc.version in:version")
+    int updateByVersion(@Param("version")int version,@Param("push") int push);
 }

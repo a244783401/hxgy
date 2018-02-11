@@ -61,6 +61,7 @@ public class CategServiceImpl implements ICategService {
         healthCategory.setCategoryDesc(categoryDesc);
         healthCategory.setStand(stand == null ? null : stand);
         healthCategory.setVersion(version == null ? null : version);
+        healthCategoryRepostory.updateByVersion(version,push);
         if(push==1){
             healthCategoryRepostory.updateByVersion(version);
         }
@@ -76,6 +77,7 @@ public class CategServiceImpl implements ICategService {
         healthCategory.setCategoryDesc(categoryDesc);
         healthCategory.setStand(stand == null ? null : stand);
         healthCategory.setVersion(version == null ? null : version);
+        healthCategoryRepostory.updateByVersion(version,push);
         if(push==1){
             healthCategoryRepostory.updateByVersion(version);
         }
