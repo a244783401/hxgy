@@ -22,7 +22,7 @@ import java.util.ListIterator;
 /**
  * Created by 10104 on 2018/1/29.
  */
-@Service
+@Service("iCategService")
 public class CategServiceImpl implements ICategService {
     @Autowired
     HealthCategoryRepostory healthCategoryRepostory;
@@ -61,6 +61,9 @@ public class CategServiceImpl implements ICategService {
         healthCategory.setCategoryDesc(categoryDesc);
         healthCategory.setStand(stand == null ? null : stand);
         healthCategory.setVersion(version == null ? null : version);
+        if(stand==1&&healthCategoryRepostory.findByVersionAndStand(version,stand)!=null){
+           return ServerResponse.createErrorMessage("已经存在"+version+"期全套课程分类");
+        }
         healthCategoryRepostory.updateByVersion(version,push);
         if(push==1){
             healthCategoryRepostory.updateByVersion(version);
@@ -77,6 +80,9 @@ public class CategServiceImpl implements ICategService {
         healthCategory.setCategoryDesc(categoryDesc);
         healthCategory.setStand(stand == null ? null : stand);
         healthCategory.setVersion(version == null ? null : version);
+        if(stand==1&&healthCategoryRepostory.findByVersionAndStand(version,stand)!=null){
+            return ServerResponse.createErrorMessage("已经存在"+version+"期全套课程分类");
+        }
         healthCategoryRepostory.updateByVersion(version,push);
         if(push==1){
             healthCategoryRepostory.updateByVersion(version);
@@ -99,8 +105,8 @@ public class CategServiceImpl implements ICategService {
                 deletIds.add(Long.parseLong(id));
         }
         status = healthCategoryRepostory.deleteById(deletIds);
-        if(status==1){
-            return ServerResponse.createError();
+        if(status==0){
+            return ServerResponse.createErrorMessage("删除分类失败");
         }
         return ServerResponse.createSuccessMessage("删除分类成功");
     }

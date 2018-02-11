@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by 10104 on 2018/2/7.
  */
-@Service
+@Service("iManagerCourseService")
 public class ManagerCourseServiceImpl implements IManagerCourseService {
     @Autowired
     private HealthCategoryRepostory healthCategoryRepostory;

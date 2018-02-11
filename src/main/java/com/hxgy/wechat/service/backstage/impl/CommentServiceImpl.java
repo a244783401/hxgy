@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by 10104 on 2018/2/1.
  */
-@Service
+@Service("iCommentService")
 public class CommentServiceImpl implements ICommentService {
     @Autowired
     HealthCommentRepostory healthCommentRepostory;
