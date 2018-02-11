@@ -1,4 +1,4 @@
-package com.hxgy.wechat.service;
+package com.hxgy.wechat.service.user;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

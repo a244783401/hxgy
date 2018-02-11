@@ -5,11 +5,10 @@ import com.hxgy.wechat.VO.UserVo;
 import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ResonseCode;
 import com.hxgy.wechat.base.ServerResponse;
-import com.hxgy.wechat.entity.HealthCourseDesc;
 import com.hxgy.wechat.entity.UserDetail;
-import com.hxgy.wechat.service.ICourseService;
-import com.hxgy.wechat.service.IFileService;
-import com.hxgy.wechat.service.IUserService;
+import com.hxgy.wechat.service.user.ICourseService;
+import com.hxgy.wechat.service.user.IFileService;
+import com.hxgy.wechat.service.user.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * 报名
@@ -43,6 +43,9 @@ public class CourseController {
      */
     @RequestMapping("/sign_up")
     public String signUp(Model model){
+
+        Map map = iCourseService.findCurrentCourse();
+        model.addAttribute("version",map.get("currentVersion"));
         return "signup";
     }
 
@@ -74,7 +77,7 @@ public class CourseController {
      */
     @RequestMapping(value = "/signup_info",method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse signupInfo(@RequestParam("id") String id,HttpSession session){
+    public ServerResponse signupInfo(@RequestParam("courseId") String id,HttpSession session){
         UserDetail userDetail = (UserDetail) session.getAttribute(Const.CURRENT_USER);
         if (userDetail == null){
             return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),"请登陆！！！");
@@ -83,7 +86,7 @@ public class CourseController {
     }
 
     @RequestMapping("/signup_info_index")
-    public String signInfoIndex(@RequestParam("id") String id){
+    public String signInfoIndex(@RequestParam("courseId") String courseId,@RequestParam("courseCategoryId") String courseCategoryId){
         return "signupinfo";
     }
 

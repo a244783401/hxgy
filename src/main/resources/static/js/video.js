@@ -1,27 +1,28 @@
 $(function() {
+	function getUrlParam (name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r!=null) return unescape(r[2]); return null;
+	}
+	var videoId = getUrlParam("videoId");
 	getHistory(videoId);
 	Media = document.getElementById("videoPlayer");
 	// 加载视频详情	
-	excuteAjax('getVideoById', {
-		'videoId' : videoId
-	}, function(jsonObj) {
-		if (jsonObj.code != 1) {
+	excuteAjax('/video/getVideoById', {'videoId' : videoId}, function(jsonObj) {
+		if (jsonObj.status != 0) {
 			showSingleDialogWithContent(jsonObj.msg, null);
 		} else {
-			var video = jsonObj.video;
-			var user = jsonObj.userInfo;
-			$('#videoPlayer').attr({
-				'src' : video.url,
-				'poster' : video.coverurl
-			});
+			var video = jsonObj.data;
+			$('#videoPlayer').attr({'src' : video.url,
+									'poster' : video.coverurl});
 			$('.video_lookNum').text(video.viewnum);
 			$('.video_date').text(video.createdatestr);
 			$('.video_collection').attr(jsonObj.isPraise == '1' ? {
 				'act' : 'yes',
-				'src' : 'images/video/collection_selected.png'
+				'src' : '/static/images/video/collection_selected.png'
 			} : {
 				'act' : 'no',
-				'src' : 'images/video/collection.png'
+				'src' : '/static/images/video/collection.png'
 			});
 			$('.video_info_title').text(video.name);
 			$('.video_info_intro').text(
@@ -32,55 +33,52 @@ $(function() {
 			// 设置评论按钮属性
 			$('.video_comment_publish').attr({
 				'videoId' : video.id,
-				'courseId' : video.courseid,
-				'userId' : user.userId,
-				'userHead' : user.headPortrait,
-				'userName' : user.name
+				'courseId' : video.courseId,
+				'userId' : video.userId,
+				'userHead' : video.headPortrait,
+				'userName' : video.userName
 			})
 		}
 	});
-
-	
 	// 加载评论列表
-	excuteAjax(
-			'getCommentList',
-			{
-				'videoId' : videoId
-			},
-			function(jsonObj) {
-				var commentStr = '';
-				if (jsonObj.code != 1) {
-					showSingleDialogWithContent(jsonObj.msg, null);
+	getComments();
+	function getComments(){
+		excuteAjax('/user/getCommentList', {'videoId' : videoId}, function(jsonObj) {
+			var commentStr = '';
+			if (jsonObj.status != 0) {
+				showSingleDialogWithContent(jsonObj.msg, null);
+			} else {
+				var commentList = jsonObj.data;
+				if (commentList == null) {
+					$('.video_commentNum').text("0");
+					commentStr = '<div class="video_nocomment">'
+						+ '<img src="/psychologyWeb/images/video/nocomment.png" />'
+						+ '<div class="video_nocomment_text">还没有评论，赶紧抢沙发吧~</div>'
+						+ '</div>';
 				} else {
-					var commentList = jsonObj.commentList;
 					$('.video_commentNum').text(commentList.length);
-					if (commentList.length == 0) {
-						commentStr = '<div class="video_nocomment">'
-								+ '<img src="/psychologyWeb/images/video/nocomment.png" />'
-								+ '<div class="video_nocomment_text">还没有评论，赶紧抢沙发吧~</div>'
-								+ '</div>';
-					} else {
-						for (var i = 0; i < commentList.length; i++) {
-							commentStr += '<div class="video_comment_item">'
-									+ '<img src="'
-									+ (commentList[i].userhead == null ? ''
-											: commentList[i].userhead)
-									+ '"  onerror="this.src=\'\/psychologyWeb\/images\/video\/defaulthead.png\'"/>'
-									+ '<div class="video_comment_content">'
-									+ '<div class="video_comment_account">'
-									+ (commentList[i].username == null ? '匿名用户'
-											: commentList[i].username)
-									+ '</div>'
-									+ '<div class="video_comment_date">2017-06-02 15:50</div>'
-									+ '<div class="video_comment_text">'
-									+ commentList[i].commentdesc + '</div>'
-									+ '</div>' + '</div>'
-						}
+					for (var i = 0; i < commentList.length; i++) {
+						commentStr += '<div class="video_comment_item">'
+							+ '<img src="'
+							+ (commentList[i].userHead == null ? ''
+								: commentList[i].userHead)
+							+ '"  onerror="this.src=\'\/static\/images\/video\/defaulthead.png\'"/>'
+							+ '<div class="video_comment_content">'
+							+ '<div class="video_comment_account">'
+							+ (commentList[i].userName == null ? '匿名用户'
+								: commentList[i].userName)
+							+ '</div>'
+							+ '<div class="video_comment_date">2017-06-02 15:50</div>'
+							+ '<div class="video_comment_text">'
+							+ commentList[i].commentDesc + '</div>'
+							+ '</div>' + '</div>'
 					}
-					$('.video_commentList').html(commentStr);
-					$('.video_comment_content').width($(window).width() - 95);
 				}
-			});
+				$('.video_commentList').html(commentStr);
+				$('.video_comment_content').width($(window).width() - 95);
+			}
+		});
+	}
 
 	// 滑动固定评论栏
 	var navH = $(".video_commentDiv").offset().top - 200;
@@ -103,13 +101,13 @@ $(function() {
 		if (action == 'down') {
 			$('.video_info_intro').removeClass('down');
 			$(this).attr({
-				'src' : '/psychologyWeb/images/video/up.png',
+				'src' : '/static/images/video/up.png',
 				'act' : 'up'
 			});
 		} else if (action == 'up') {
 			$('.video_info_intro').addClass('down');
 			$(this).attr({
-				'src' : '/psychologyWeb/images/video/down.png',
+				'src' : '/static/images/video/down.png',
 				'act' : 'down'
 			});
 		}
@@ -120,12 +118,12 @@ $(function() {
 		var action = $(this).attr('act');
 		if (action == 'no') {
 			$(this).attr({
-				'src' : '/psychologyWeb/images/video/collection_selected.png',
+				'src' : '/static/images/video/collection_selected.png',
 				'act' : 'yes'
 			});
 		} else if (action == 'yes') {
 			$(this).attr({
-				'src' : '/psychologyWeb/images/video/collection.png',
+				'src' : '/static/images/video/collection.png',
 				'act' : 'no'
 			});
 		}
@@ -139,29 +137,45 @@ $(function() {
 	});
 	// 快速评论
 	$('.video_quick_content').click(function() {
-		$('.video_comment_textarea').text($(this).text());
+		$('.comment').val($(this).text());
 	});
 	// 评论
 	$('.video_comment_publish').click(function() {
 		var data = {
-			'videoId' : $(this).attr('videoId'),
+			'courseitemId' : $(this).attr('videoId'),
 			'courseId' : $(this).attr('courseId'),
-			'commentDesc' : $('.video_comment_textarea').text(),
+			'commentDesc' : $('.comment').val(),
 			'userHead' : $(this).attr('userHead'),
-			'userName' : $(this).attr('userName')
+			'userName' : $(this).attr('userName'),
+			'commentDate':new Date()
 		}
-		excuteAjax('addComment', data, function(jsonObj) {
-
+		console.log( data)
+		excuteAjax('/video/addComment', data, function(res) {
+			if (res.status ==0 ){
+				showSingleDialogWithContent("评论成功！！！",null);
+				$('.comment').val(""),
+				setTimeout(cancelComment,2000);
+				getComments();
+			}else{
+				showSingleDialogWithContent(res.message,null);
+			}
 		});
 	});
 	// 取消评论
-	$('.video_comment_cancel').click(function() {
+	$('.video_comment_cancel').on("click",cancelComment);
+	function cancelComment(){
+		console.log("start")
 		$(".video_comment_editor").animate({
 			left : '100%'
-		}).css('display', 'none');
+		}, function () {
+			console.log("satrt1")
+			$(".video_comment_editor").hide();
+		})
 		$('.video_content').css('display', 'block');
-	});
+	}
 });
+
+
 
 //添加历史记录
 function addWatchHistory() {
@@ -191,16 +205,16 @@ function getHistory(videoId) {
     var data = {
         videoId: videoId
     }
-    excuteAjax('getHistory', data , function(res) {
-            if (res.code == '1') {
+    excuteAjax('/video/getHistory', data , function(res) {
+            if (res.status == 0) {
                 var history = res.data;
                 //alert(JSON.stringify(history))
                 if (history) {
-                    videoCurrentTime = history.videocurrenttime;
+                   var videoCurrentTime = history.videoCurrentTime;
                     Media.currentTime = videoCurrentTime;
                 }
             } else {
-                console.log(res.msg);
+                judgeStatus(res.status,res.data);
             }
     });
 }

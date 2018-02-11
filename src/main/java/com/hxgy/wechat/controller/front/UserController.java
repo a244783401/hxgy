@@ -7,8 +7,9 @@ import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ResonseCode;
 import com.hxgy.wechat.base.ServerResponse;
 import com.hxgy.wechat.entity.UserDetail;
-import com.hxgy.wechat.service.ISmsService;
-import com.hxgy.wechat.service.IUserService;
+import com.hxgy.wechat.service.user.ISmsService;
+import com.hxgy.wechat.service.user.IUserService;
+import com.hxgy.wechat.service.user.IVideoService;
 import com.hxgy.wechat.utils.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,8 @@ public class UserController {
     IUserService iUserService;
     @Autowired
     ISmsService iSmsService;
-
+    @Autowired
+    private IVideoService iVideoService;
     /**
      * 普通登陆
      *
@@ -171,7 +173,14 @@ public class UserController {
             return ServerResponse.createSuccess();
         }else return ServerResponse.createError();
     }
-
-
+    @RequestMapping("/getCommentList")
+    @ResponseBody
+    public ServerResponse getCommentList(@RequestParam("videoId") String videoId,HttpSession session){
+        UserDetail userDetail = (UserDetail) session.getAttribute(Const.CURRENT_USER);
+        if (userDetail== null){
+            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),ResonseCode.NEED_LOGIN.getMsg());
+        }
+        return iVideoService.getCommentByVideoId(Long.parseLong(videoId));
+    }
 
 }

@@ -4,7 +4,7 @@ package com.hxgy.wechat.controller.front;
 import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ServerResponse;
 import com.hxgy.wechat.config.WechatAccountConfig;
-import com.hxgy.wechat.service.IUserService;
+import com.hxgy.wechat.service.user.IUserService;
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;

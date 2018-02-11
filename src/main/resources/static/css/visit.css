@@ -1,7 +1,12 @@
+/*.itemView{*/
+    /*float:left;*/
+    /*width: 33.33%;*/
+    /*text-align: center;*/
+/*}*/
 .itemView{
-    float:left;
-    width: 33.33%;
-    text-align: center;
+display:flex;
+justify-content:center;
+text-align: center;
 }
 .itemFont{
 	height:50px;
@@ -82,6 +87,7 @@
 	color:#898989;
 }
 .visit_null_sun{
+	text-align: center;
 	width:110px;
 	margin-top:35%;
 }
@@ -103,4 +109,7 @@
 }
 #midItems{
 	width: 100%;height:50px;background-color: white;border-bottom:1px solid #dddcdc;
+}
+.swiper-wrappersssssss{
+	text-align: center;
 }

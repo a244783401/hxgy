@@ -11,6 +11,8 @@ import java.util.Date;
 public class HistoryVideoVo {
     private Long id;
 
+    private Long videoId;
+
     private String name;
 
     private String coverurl;
@@ -22,6 +24,14 @@ public class HistoryVideoVo {
     private Integer vedioCurrentTime;
 
     private Long courseId;
+
+    public Long getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(Long videoId) {
+        this.videoId = videoId;
+    }
 
     public Long getCourseId() {
         return courseId;

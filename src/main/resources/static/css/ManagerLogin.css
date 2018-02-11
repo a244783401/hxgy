@@ -5,6 +5,7 @@
     background: rgba(158, 158, 158, 0.41);
     border-radius: 5px;
     box-shadow: 0px 0px 5px #888888;
+    -webkit-box-reflect: below 5px linear-gradient(transparent 30%,rgba(0,0,0,.5));
 }
 .login_menu_container > h3{
     text-align: center;

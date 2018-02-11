@@ -3,9 +3,10 @@ package com.hxgy.wechat.controller.front;
 import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ResonseCode;
 import com.hxgy.wechat.base.ServerResponse;
+import com.hxgy.wechat.entity.HealthComment;
 import com.hxgy.wechat.entity.UserDetail;
-import com.hxgy.wechat.service.ICourseService;
-import com.hxgy.wechat.service.IVideoService;
+import com.hxgy.wechat.service.user.ICourseService;
+import com.hxgy.wechat.service.user.IVideoService;
 import com.hxgy.wechat.utils.DateTimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -52,14 +55,14 @@ public class VideoController {
     public ServerResponse allCourse(@RequestParam("periodNum") String periodNum){
         Integer periodNumInt = Integer.parseInt(periodNum);
         if (periodNumInt != null){
-            return iCourseService.findAllCourseByVersion(periodNumInt);
+            return iCourseService.getAllInineCourse();
         }
         return ServerResponse.createErrorCodeMessage(ResonseCode.ILLEGAL_ARGUMENT.getCode(),ResonseCode.ILLEGAL_ARGUMENT.getMsg());
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/find_all_video")
     @ResponseBody
-    public ServerResponse findAllVideoByCourseId(@RequestParam(value = "courseId",defaultValue = "4") String courseId){
+    public ServerResponse findAllVideoByCourseId(@RequestParam(value = "courseId") String courseId){
          Long courseIdL = Long.parseLong(courseId);
         if (courseIdL != null){
             return iVideoService.findVideoByCourseId(courseIdL);
@@ -117,5 +120,47 @@ public class VideoController {
         }
         return "psychologyIndex";
     }
+    @RequestMapping("/history_delete")
+    @ResponseBody
+    public ServerResponse deleteHistory(@RequestParam("ids") String ids,HttpSession session){
+        UserDetail userDetail = (UserDetail)session.getAttribute(Const.CURRENT_USER);
+        if (userDetail == null){
+            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),ResonseCode.NEED_LOGIN.getMsg());
+        }
+        String[] idList = ids.split(",");
+        List<Long> longs = new ArrayList<>();
+        for (String id:idList
+             ) {
+            longs.add(Long.parseLong(id));
+        }
+        return iVideoService.deleteHistory(userDetail.getId(),longs);
 
+    }
+    @RequestMapping("/getHistory")
+    @ResponseBody
+    public ServerResponse getHistory(@RequestParam("videoId") String videoId,HttpSession session){
+        UserDetail userDetail = (UserDetail)session.getAttribute(Const.CURRENT_USER);
+        if (userDetail == null){
+            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),ResonseCode.NEED_LOGIN.getMsg());
+        }
+        return iVideoService.getHistory(userDetail.getId(),Long.parseLong(videoId));
+    }
+    @RequestMapping("/getVideoById")
+    @ResponseBody
+    public ServerResponse getVideoById(@RequestParam ("videoId")String videoId,HttpSession session){
+        UserDetail userDetail = (UserDetail)session.getAttribute(Const.CURRENT_USER);
+        if (userDetail == null){
+            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),ResonseCode.NEED_LOGIN.getMsg());
+        }
+        return iVideoService.getVideoById(userDetail.getId(),Long.parseLong(videoId));
+    }
+    @RequestMapping("/addComment")
+    @ResponseBody
+    public ServerResponse addComment(HealthComment healthComment,HttpSession session){
+        UserDetail userDetail = (UserDetail)session.getAttribute(Const.CURRENT_USER);
+        if (userDetail == null){
+            return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_LOGIN.getCode(),ResonseCode.NEED_LOGIN.getMsg());
+        }
+        return iVideoService.addComment(healthComment);
+    }
 }

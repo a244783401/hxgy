@@ -1,4 +1,4 @@
-package com.hxgy.wechat.service;
+package com.hxgy.wechat.service.user;
 
 import com.hxgy.wechat.VO.ReqRandomCodeVo;
 import com.hxgy.wechat.base.ServerResponse;

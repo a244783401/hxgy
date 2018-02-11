@@ -11,6 +11,10 @@ public class Const {
     public static final int BOUGHT = 200;
     public static final int FREE = 11;
     public static final int NO_FREE = 12;
+    public static final int SINGLE = 0;
+    public static final int PUSH = 1;
+    public static final int TOTAL = 1;
+    public static final String CURRENT_ADMIN = "currentAdmin";
     public static final String CHANNEL_CODE_APP="WECHAT";
     public static final String RANDOM_CODE_MSG="9FB5EB88099FEA41069CC0F565719DC9";
     public static final String RANDOM_CODE_VOICE="94153951891C905D991ED076B3F3177D";

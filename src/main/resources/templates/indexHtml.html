@@ -15,8 +15,8 @@
     <div class="banner_left"><img th:src="@{/images/login_logo.png}"/><span>视频资源管理</span></div>
     <div class="banner_right">
         <img th:src="@{/images/user_green.png}" style="height:20px;"/>
-        <span class="useraccount">admin</span>
-        <span class="loginout">退出</span>
+        <span class="useraccount" th:text="${session.currentAdmin}"></span>
+        <span class="loginout"><a href="/admin/logOut">退出</a></span>
     </div>
     </div>
     <div id="content" style="height:100%;width:100%;">

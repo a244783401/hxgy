@@ -1,8 +1,10 @@
-package com.hxgy.wechat.service;
+package com.hxgy.wechat.service.user;
 
 import com.hxgy.wechat.base.ServerResponse;
+import com.hxgy.wechat.entity.HealthComment;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,4 +21,9 @@ public interface IVideoService {
     ServerResponse findVideoByCourseId(Long corrseId, Long userId, Long videoId);
     ServerResponse findFreeVideo();
     Map getOrderInfo(Long orderId);
+    ServerResponse deleteHistory(Long userId,List ids);
+    ServerResponse getHistory(Long userId,Long videoId);
+    ServerResponse getVideoById(Long userId,Long videoId);
+    ServerResponse getCommentByVideoId(Long videoId);
+    ServerResponse addComment(HealthComment healthComment);
 }

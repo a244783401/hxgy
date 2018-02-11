@@ -14,6 +14,8 @@ public class VideoVO {
 
     private String name;
 
+    private Integer enable;
+
     private String authorName;
 
     private Long viewNum;
@@ -25,6 +27,14 @@ public class VideoVO {
     private Long courseId;
 
     private String videoTime;
+
+    public Integer getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Integer enable) {
+        this.enable = enable;
+    }
 
     public String getVideoTime() {
         return videoTime;

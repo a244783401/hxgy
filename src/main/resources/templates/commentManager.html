@@ -5,12 +5,42 @@
 <head>
     <meta charset="UTF-8"/>
     <title>评论管理</title>
-    <script type="text/javascript" th:src="@{/js/jquery-3.1.0.js}"></script>
-    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css"/>
-    <link rel="stylesheet" th:href="@{/css/index.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/weui.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/iframeStyle.css}" type="text/css"/><script type="text/javascript" th:src="@{/js/jquery-3.1.0.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/dialog.js}"></script>
+    <script type="text/javascript" th:src="@{/js/ajaxBackstage.js}"></script>
+    <script type="text/javascript" th:src="@{/js/comment.js}"></script>
 </head>
 <body>
-    评论管理
+<div class="iframe_menu">
+         <span style="float: left;">
+                            视频管理系统&nbsp;&nbsp;>&nbsp;&nbsp;
+         </span>
+    <span style="color: red">
+        评论管理
+         </span>
+    <div style="float:right;">
+        <button id="delete">删除</button>
+    </div>
+    <div class="iframe_tableDiv">
+        <table id="example" class="display" cellspacing="0">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>用户名</th>
+                <th>评论内容</th>
+                <th>评分</th>
+                <th>评论课程</th>
+                <th>评论视频</th>
+                <th>评论时间</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
 </body>
 </html>

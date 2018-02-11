@@ -22,6 +22,16 @@ public class HealthCategory {
 
     private Integer stand;
 
+    private Integer push;
+
+    public Integer getPush() {
+        return push;
+    }
+
+    public void setPush(Integer push) {
+        this.push = push;
+    }
+
     public Integer getVersion() {
         return version;
     }

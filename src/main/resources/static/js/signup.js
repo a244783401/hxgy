@@ -1,5 +1,8 @@
 $(function(){
+	//加载当前推送期数信息
 	//加载课程信息
+	var periodNum = $("#periodNum").text()
+	console.log(periodNum);
 	start();
 	var marginTop = $(window).height()>560?$(window).height()-560:20;
 	$('.center_footImg').css("margin-top",marginTop);
@@ -9,7 +12,7 @@ $(function(){
 	});	
 	
 	function start(){
-		excuteAjax('/user/course/sign_list', {'periodNum':'44'}, function(jsonObj) {
+		excuteAjax('/user/course/sign_list', {'periodNum':periodNum}, function(jsonObj) {
 			if (jsonObj.status!=0) {
 				showSingleDialogWithContent(jsonObj.message, null);
 			} else {
@@ -18,11 +21,12 @@ $(function(){
 				var courseList =  jsonObj.data;
 				if(courseList!=null&&courseList.length>0){
 					for (var i = 0; i < courseList.length; i++) {
-						if (courseList[i].recommend==0) {
+						if (courseList[i].stand == 1 && courseList[i].enable == 1) {
 							$('#allCourse_price').text(courseList[i].coursePrice);
 							$('#aEnroll').attr("index",courseList[i].id)
+							$('#aEnroll').attr("action",courseList[i].courseCategoryId)
 							$('#aDetil').attr("index",courseList[i].id)
-						}else{
+						}else if(courseList[i].enable == 1){
 							totalStr+= '<span>'+courseList[i].courseName+'</span>'+
 								'<img src="/static/images/signup/add.png"/>';
 							singleStr += '<div class="signup_singleCourse" style="margin-top:10px;">'+
@@ -33,7 +37,7 @@ $(function(){
 									'</div>'+
 								'</div>'+
 								'<div class="sign_singleCourse_button">'+
-								'<a id="sign_up" onclick="clickThing(' + courseList[i].id  + ')" class="sign_singleCourse_btn_sign">报名</a>'+
+								'<a id="sign_up" onclick="clickThing(' + courseList[i].id  +','+courseList[i].courseCategoryId+ ')" class="sign_singleCourse_btn_sign">报名</a>'+
 								'<a onclick="getDetilInfo(' + courseList[i].id  + ')" class="sign_singleCourse_btn_desc">详情</a>'+
 								'</div>'+
 								'</div>';
@@ -52,15 +56,15 @@ $(function(){
  * 点击报名
  */
 $("#aEnroll").on("click",function(){
-	clickThing($(this).attr("index"))
+	clickThing($(this).attr("index"),$(this).attr("action"))
 })
 
-function clickThing(id){
-	excuteAjax("/user/course/signup_info",{'id':id},function(res){
+function clickThing(courseId,courseCategoryId){
+	excuteAjax("/user/course/signup_info",{'courseId':courseId},function(res){
 		if (res.status != 0){
 			judgeStatus(res.status,res.data);
 		}else {
-			location.href="/user/course/signup_info_index?id="+id;
+			location.href="/user/course/signup_info_index?courseId="+courseId+"&courseCategoryId="+courseCategoryId;
 		}
 	})
 }

@@ -3,12 +3,13 @@ $(function(){
 	excuteAjax('/video/history','', function(result) {
 	var historyStr = '';
 	if (result.status != 0) {
-		showSingleDialogWithContent(result.message, null);
+		//showSingleDialogWithContent(result.message, null);
+		judgeStatus(result.status,result.data);
 	}else {			
 		var historyList = result.data;
 	for (var i = 0; i < historyList.length; i++) {
-		historyStr+='<div class="history_list_item" courseId = "'+historyList[i].courseId+'" videoId="'+historyList[i].id+'" >'+
-            		'<div class="history_list_circle" action="0" id="'+i+'">'+
+		historyStr+='<div class="history_list_item" courseId = "'+historyList[i].courseId+'" videoId="'+historyList[i].videoId+'" >'+
+            		'<div class="history_list_circle" action="0" id="'+historyList[i].videoId+'">'+
             			'<img src="images/history/circle.png"/>'+
             		'</div>'+
             		'<div class="history_list_cover">'+
@@ -29,10 +30,11 @@ $(function(){
 	$('.history_list').html(historyStr);	
 	
 	$('.history_list_item').click(function(){
-		excuteAjax("/video/video_play", {"videoId":$(this).attr('videoId'),"courseId":$(this).attr('courseId')},function(re){
+		var videoId = $(this).attr('videoId');
+		excuteAjax("/video/video_play", {"videoId":videoId,"courseId":$(this).attr('courseId')},function(re){
 			if (re.status != 0){
 				showSingleDialogWithContent(re.message, null);
-			}else location.href = re.data
+			}else location.href = location.href = "videoPlay?videoId="+videoId
 		})
 	});
 	});
@@ -136,8 +138,15 @@ $(function(){
 				}
 			});
 			showConfirmDialog('确认删除','选中'+num+'条历史记录，确认删除？','再想想','确定删除',function(){
-				excuteAjax('',null,function(jsonObj){
-					
+				excuteAjax('/video/history_delete',{"ids":ids},function(res){
+					if (res.status != 0){
+						judgeStatus(res.status,res.data);
+					}else{
+						showSingleDialogWithContent("删除成功！！",null);
+						setTimeout(function () {
+							location.href="history";
+						},3000);
+					}
 				});
 			},null);
 		}

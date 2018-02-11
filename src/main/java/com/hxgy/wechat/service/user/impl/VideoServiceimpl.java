@@ -1,22 +1,17 @@
-package com.hxgy.wechat.service.impl;
+package com.hxgy.wechat.service.user.impl;
 
 import com.hxgy.wechat.VO.HistoryVideoVo;
+import com.hxgy.wechat.VO.VideoPlayVo;
 import com.hxgy.wechat.VO.VideoVO;
 import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ResonseCode;
 import com.hxgy.wechat.base.ServerResponse;
-import com.hxgy.wechat.entity.HealthCourseDesc;
-import com.hxgy.wechat.entity.HealthCourseItem;
-import com.hxgy.wechat.entity.HealthHistory;
-import com.hxgy.wechat.entity.UserEnrollCourse;
-import com.hxgy.wechat.repostory.HealthDescRepostory;
-import com.hxgy.wechat.repostory.HealthHistoryRepostory;
-import com.hxgy.wechat.repostory.HealthItemRepostory;
-import com.hxgy.wechat.repostory.UserEnrollCourseRepostory;
-import com.hxgy.wechat.service.IVideoService;
+import com.hxgy.wechat.entity.*;
+import com.hxgy.wechat.repostory.*;
+import com.hxgy.wechat.service.user.IVideoService;
+import com.hxgy.wechat.utils.DateTimeUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -29,16 +24,77 @@ import java.util.*;
 public class VideoServiceimpl implements IVideoService {
 
     @Autowired
+    private HealthCommentRepostory commentRepostory;
+
+    @Autowired
     private HealthItemRepostory healthItemRepostory;
 
     @Autowired
+    private HealthCategoryRepostory healthCategoryRepostory;
+
+    @Autowired
     private UserEnrollCourseRepostory userEnrollCourseRepostory;
+
+    @Autowired
+    private UserDetailRepostory userDetailRepostory;
 
     @Autowired
     private HealthDescRepostory healthDescRepostory;
 
     @Autowired
     private HealthHistoryRepostory healthHistoryRepostory;
+
+
+    public ServerResponse addComment(HealthComment healthComment){
+        HealthComment healthComment1 = commentRepostory.save(healthComment);
+        if (healthComment1 == null){
+         return ServerResponse.createErrorMessage("评论失败！！");
+        }
+        return ServerResponse.createSuccess();
+    }
+
+    public ServerResponse getCommentByVideoId(Long videoId){
+
+        List<HealthComment> healthComments = commentRepostory.findByCourseitemId(videoId);
+        if (!CollectionUtils.isEmpty(healthComments)){
+            return ServerResponse.isSuccess(healthComments);
+        }
+        return ServerResponse.createSuccess();
+    }
+
+    public ServerResponse getVideoById(Long userId,Long videoId){
+        UserDetail userDetail = userDetailRepostory.findOne(userId);
+        HealthCourseItem healthCourseItem = healthItemRepostory.findOne(videoId);
+        VideoPlayVo videoPlayVo = new VideoPlayVo();
+        videoPlayVo.setCourseId(healthCourseItem.getCourseId());
+        videoPlayVo.setAuthorname(healthCourseItem.getAuthorName());
+        videoPlayVo.setHeadPortrait(userDetail.getHeadPortrait());
+        videoPlayVo.setCoverurl(healthCourseItem.getCoverUrl());
+        videoPlayVo.setCreatedatestr(DateTimeUtil.dateToStr(healthCourseItem.getCreateDate()));
+        videoPlayVo.setId(healthCourseItem.getId());
+        videoPlayVo.setUrl(healthCourseItem.getUrl());
+        videoPlayVo.setUserId(userId);
+        videoPlayVo.setVideodesc(healthCourseItem.getVideoDesc());
+        videoPlayVo.setViewnum(Integer.parseInt(healthCourseItem.getViewNum().toString()));
+        videoPlayVo.setUserName(userDetail.getName());
+        return ServerResponse.isSuccess(videoPlayVo);
+    }
+
+    public ServerResponse getHistory(Long userId,Long videoId){
+        HealthHistory healthHistory = healthHistoryRepostory.findByVideoIdAndUserId(videoId,userId);
+        if (healthHistory == null){
+            return ServerResponse.createError();
+        }
+        return ServerResponse.isSuccess(healthHistory);
+    }
+
+    public ServerResponse deleteHistory(Long userId,List ids){
+        int res = healthHistoryRepostory.deleteVideoByIds(ids,userId);
+        if (res > 0){
+            return ServerResponse.createSuccess();
+        }
+        return ServerResponse.createError();
+    }
 
     public Map getOrderInfo(Long orderId){
         UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findOne(orderId);
@@ -64,7 +120,7 @@ public class VideoServiceimpl implements IVideoService {
     public ServerResponse findVideoByCourseId(Long courseId){
         List<HealthCourseItem> healthCourseItems = healthItemRepostory.findByCourseId(courseId);
         if (CollectionUtils.isEmpty(healthCourseItems)){
-            return ServerResponse.createErrorMessage("当前课程为空");
+            return ServerResponse.createSuccess();
         }else{
             return ServerResponse.isSuccess(healItemToVo(healthCourseItems));
         }
@@ -83,7 +139,7 @@ public class VideoServiceimpl implements IVideoService {
         HealthCourseItem healthCourseItem = healthItemRepostory.findOne(videoId);
         healthCourseItem.setViewNum(healthCourseItem.getViewNum()+1);
         healthItemRepostory.save(healthCourseItem);
-        HealthHistory history = healthHistoryRepostory.findByVideoId(videoId);
+        HealthHistory history = healthHistoryRepostory.findByVideoIdAndUserId(videoId,userId);
         if (history == null){
             HealthHistory healthHistory = new HealthHistory();
             healthHistory.setCourseId(healthCourseItem.getCourseId());
@@ -93,30 +149,32 @@ public class VideoServiceimpl implements IVideoService {
             healthHistoryRepostory.save(healthHistory);
         }else {
             history.setViewDate(new Date(System.currentTimeMillis()));
+            healthHistoryRepostory.saveAndFlush(history);
         }
     }
 
     @Override
     public ServerResponse findVideoByCourseId(Long courseId, Long userId, Long videoId) {
-        HealthCourseDesc healthCourseDesc = healthDescRepostory.findOne(courseId);
-        Integer recommend = healthCourseDesc.getRecommend();
-        UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(recommend.longValue(),userId);
         HealthCourseItem healthCourseItem = healthItemRepostory.findOne(videoId);
         if (healthCourseItem.getFree() == Const.FREE){
             return ServerResponse.isSuccess(healthCourseItem.getUrl());
         }
+        UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(courseId, userId);
         if (userEnrollCourse != null){
-            if (userEnrollCourse.getPay() != Const.BOUGHT){
+            if (userEnrollCourse.getPay() == Const.NOT_PAY ){
                 return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
             }
-                return ServerResponse.isSuccess(healthCourseItem.getUrl());
+            return ServerResponse.isSuccess(healthCourseItem.getUrl());
         }
-        userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(courseId,userId);
-        if (userEnrollCourse == null){
-           return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_BUY.getCode(),"需要购买该课程！！！");
-        }
-        if (userEnrollCourse.getPay() != Const.BOUGHT){
-            return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
+        HealthCourseDesc healthCourseDesc = healthDescRepostory.findOne(courseId);
+        HealthCategory category = healthCategoryRepostory.findOne(healthCourseDesc.getCourseCategoryId());
+        HealthCategory healthCategory = healthCategoryRepostory.findByVersionAndStand(category.getVersion(),Const.TOTAL);
+        userEnrollCourse = userEnrollCourseRepostory.findByCourseCategoryIdAndUserId(healthCategory.getId(),userId);
+        if (userEnrollCourse != null){
+            if (userEnrollCourse.getPay() == Const.NOT_PAY ){
+                return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
+            }
+            return ServerResponse.isSuccess(healthCourseItem.getUrl());
         }
         return ServerResponse.isSuccess(healthCourseItem.getUrl());
     }
@@ -132,7 +190,7 @@ public class VideoServiceimpl implements IVideoService {
             historyVideoVo.setName(healthCourseItem.getName());
             historyVideoVo.setAuthorName(healthCourseItem.getAuthorName());
             historyVideoVo.setCoverurl(healthCourseItem.getCoverUrl());
-            historyVideoVo.setId(healthCourseItem.getId());
+            historyVideoVo.setVideoId(healthCourseItem.getId());
             historyVideoVo.setCourseId(healthCourseItem.getCourseId());
             historyVideoVos.add(historyVideoVo);
         }
@@ -151,6 +209,7 @@ public class VideoServiceimpl implements IVideoService {
             videoVO.setCreatedatestr(healthCourseItem.getCreateDate());
             videoVO.setViewNum(healthCourseItem.getViewNum());
             videoVO.setPraiseNum(healthCourseItem.getPraiseNum());
+            videoVO.setEnable(healthCourseItem.getEnable());
             videoVO.setCourseId(healthCourseItem.getCourseId());
             videoVOs.add(videoVO);
         }

@@ -1,11 +1,31 @@
-function validate(formData, jqForm, options) { 
-	    var form = jqForm[0]; 
-	    if (!form.username.value || !form.idCard.value || !form.phoneno) { 
-	    	showSingleDialogWithContent("姓名、身份证号、联系方式不能为空", null);
-	        return false; 
-	    } 
+var isMatch = true;
+function validate(formData, jqForm, options) {
+	    var form = jqForm[0];
+		if (!form.username.value || !form.idCard.value || !form.phoneno) {
+		showSingleDialogWithContent("姓名、身份证号、联系方式不能为空", null);
+		return false;
 	}
+}
 
+	$("#idCard").blur(function () {
+		var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+		if (!reg.test($(this).val())){
+			showSingleDialogWithContent("请输入正确的身份证号码！！！",null);
+		}else isMatch = true;
+	})
+	$("#phoneno").blur(function(){
+		console.log("phoneno")
+		var reg = /^1[3|4|5|8][0-9]\d{4,8}$/;
+		if (!reg.test($(this).val())){
+			showSingleDialogWithContent("请输入正确的手机号码！！!",null);
+		}else excuteAjax("/user/judge",{"phoneNum":$("#phoneno").val()},function(res){
+			if (res.status != 0){
+				isMatch = false;
+				showSingleDialogWithContent("此手机号已被注册！！！",null);
+			}else isMatch = true;
+		})
+
+	})
 function getUrlParam (name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
         var r = window.location.search.substr(1).match(reg);
@@ -44,8 +64,8 @@ function loadUserDetail() {
 $(function() {
 	var isOk;
 	loadUserDetail();
-	$('#courseid').val(getUrlParam('id'));
-	$('#courseceducationategid').val(getUrlParam('coursecategid'));
+	$('#courseid').val(getUrlParam('courseId'));
+	$('#coursecategid').val(getUrlParam('courseCategoryId'));
 	$('#job,#rtl').click(function() {
 		$(this).css('color', '#444');
 	});
@@ -53,7 +73,7 @@ $(function() {
 	//表单提交(两张表单)
  $('.sigunupInfo_submit').click(function() {
 		//图片上传
-		if (isTrue){
+		if (isTrue && isMatch){
 			$('#user_form').ajaxSubmit({
 				dataType : 'json',
 				success:function(res){
@@ -64,8 +84,10 @@ $(function() {
 					}
 				}
 			})
-		} else{
+		} else if (!isTrue){
 			showSingleDialogWithContent("所选图片格式大小不对!!",null);
+		}else if(!isMatch){
+			showSingleDialogWithContent("请输入正确的信息!!",null);
 		}
 //表单提交
 function updateInfo(){

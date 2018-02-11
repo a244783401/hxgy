@@ -92,5 +92,10 @@ public class HomeController {
     public String intro_teacher(){
         return "centerIntro/introTeacher";
     }
+    @GetMapping("/videoPlay")
+    public String videoPlay(){
+        return "videoPlay";
+    }
+
 
 }

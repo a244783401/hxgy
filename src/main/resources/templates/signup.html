@@ -15,7 +15,7 @@
     <link rel="stylesheet" th:href="@{/css/signup.css}" type="text/css"/>
 </head>
 <body style="background-color:#EBEBEB;">
-<div class="signup_top"> 四川西南心理咨询师培训班(<span id="periodNum">44</span>期)</div>
+<div class="signup_top"> 四川西南心理咨询师培训班(<span id="periodNum" th:text="${version}"></span>期)</div>
 <div class="signup_allCourseImg"><img th:src="@{/images/signup/allCourse.png}" /></div>
 <div class="signup_allCourseDiv">
     <div class="sign_allCourseDvi_title">

@@ -1,5 +1,6 @@
 package com.hxgy.wechat.repostory;
 
+import com.hxgy.wechat.entity.HealthCategory;
 import com.hxgy.wechat.entity.HealthCourseDesc;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,7 +36,12 @@ public class HealthDescRepostoryTest {
     }
     @Test
     public void testFindByRecommend(){
-        List<HealthCourseDesc> healthCourseDescs = heal.findByRecommend(8);
+        List<HealthCourseDesc> healthCourseDescs = heal.findByCategory(8);
         Assert.assertNotEquals(0,healthCourseDescs.size());
+    }
+    @Test
+    public void test(){
+//        HealthCategory healthCategory = heal.findByCourseCategoryId(3L);
+//        Assert.assertNotNull(healthCategory);
     }
 }

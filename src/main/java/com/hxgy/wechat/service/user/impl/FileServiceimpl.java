@@ -1,6 +1,6 @@
-package com.hxgy.wechat.service.impl;
+package com.hxgy.wechat.service.user.impl;
 
-import com.hxgy.wechat.service.IFileService;
+import com.hxgy.wechat.service.user.IFileService;
 import com.hxgy.wechat.utils.OSSClientUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

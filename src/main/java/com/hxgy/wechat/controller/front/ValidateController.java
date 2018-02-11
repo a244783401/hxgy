@@ -2,8 +2,8 @@ package com.hxgy.wechat.controller.front;
 
 import com.hxgy.wechat.VO.ReqRandomCodeVo;
 import com.hxgy.wechat.base.ServerResponse;
-import com.hxgy.wechat.service.ISmsService;
-import com.hxgy.wechat.service.IUserService;
+import com.hxgy.wechat.service.user.ISmsService;
+import com.hxgy.wechat.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

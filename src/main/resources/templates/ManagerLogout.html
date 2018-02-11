@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>退出成功</title>
+</head>
+<body>
+<script>
+    var time = 3;
+    function GoBack() {
+        if (time >= 0) {
+            time--;
+            document.getElementById("timer").innerText = time;
+        }
+        if (time == 0) {
+            window.location.href="/admin/check";
+        }
+    }
+    setInterval(GoBack, 1000);
+</script>
+<span>账号退出成功，还有<span id="timer">3</span>秒跳转，如果未正常跳转请点击此<a href="/admin/check">链接</a></span>
+</body>
+</html>

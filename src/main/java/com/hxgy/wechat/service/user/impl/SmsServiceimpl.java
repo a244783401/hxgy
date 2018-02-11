@@ -1,4 +1,4 @@
-package com.hxgy.wechat.service.impl;
+package com.hxgy.wechat.service.user.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.hxgy.wechat.VO.RandomCodePtReqVo;
 import com.hxgy.wechat.VO.ReqRandomCodeVo;
@@ -6,7 +6,7 @@ import com.hxgy.wechat.base.Const;
 import com.hxgy.wechat.base.ServerResponse;
 import com.hxgy.wechat.config.SmsConfig;
 import com.hxgy.wechat.repostory.UserDetailRepostory;
-import com.hxgy.wechat.service.ISmsService;
+import com.hxgy.wechat.service.user.ISmsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

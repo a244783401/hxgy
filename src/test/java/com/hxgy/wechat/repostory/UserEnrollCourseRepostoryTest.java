@@ -17,11 +17,12 @@ import java.util.List;
 public class UserEnrollCourseRepostoryTest {
     @Autowired
     private UserEnrollCourseRepostory userEnrollCourseRepostory;
-//    @Test
-//    public void getData(){
-//        UserEnrollCourse userEnrollCourse=userEnrollCourseRepostory.findOne(6L);
-////        System.out.println(JSONObject.toJSONString(userEnrollCourse));
-//    }
+    @Test
+    public void getData(){
+        UserEnrollCourse userEnrollCourse=userEnrollCourseRepostory.findOne(20L);
+        Assert.assertNotNull(userEnrollCourse);
+//        System.out.println(JSONObject.toJSONString(userEnrollCourse));
+    }
 //    @Test
 //    public void addData(){
 //        UserEnrollCourse userEnrollCourse=new UserEnrollCourse();
@@ -63,5 +64,9 @@ public class UserEnrollCourseRepostoryTest {
 ////        UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByUserId(6L);
 ////        Assert.assertNotNull(userEnrollCourse);
 //    }
-
+    @Test
+    public void test(){
+        UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseCategoryIdAndUserId(3L,94338L);
+        Assert.assertNotNull(userEnrollCourse);
+    }
 }

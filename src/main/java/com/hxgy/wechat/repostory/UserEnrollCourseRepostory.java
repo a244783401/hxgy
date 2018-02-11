@@ -11,4 +11,5 @@ public interface UserEnrollCourseRepostory extends JpaRepository<UserEnrollCours
         List<UserEnrollCourse> findByCourseId(Long courseId);
         UserEnrollCourse findByUserId(Long userId);
         UserEnrollCourse findByCourseIdAndUserId(Long courseId,Long userId);
+        UserEnrollCourse findByCourseCategoryIdAndUserId(Long courseCategoryId,Long userId);
 }

@@ -14,7 +14,7 @@
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>  
     <script type="text/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script> 
     <script type="text/javascript" th:src="@{/js/dialog.js}"></script> 
-    <script type="text/javascript" th:src="@{/js/ajax.js}"></script> 
+    <script type="text/javascript" th:src="@{/js/ajaxBackstage.js}"></script>
 </head>
 <body>
     <div class="iframe_menu">
@@ -36,6 +36,7 @@
                 <tr>
                     <th>Id</th>
                     <th>名称</th>
+                    <th>视频描述</th>
                     <th>视频地址</th>
                     <th>视频图片地址</th>
                     <th>观看次数</th>
@@ -49,12 +50,13 @@
             </thead>      
         </table>
     </div>
-    <div id="editorDiv" class="iframe_editorDiv" style="width:320px;height:520px;top:10%;left:35%;">
+    <div id="editorDiv" class="iframe_editorDiv" style="width:320px;height:auto;top:10%;left:35%;">
         <div id="titleDiv" class="iframe_editorDiv_title" style="padding-left:42%;">添加视频</div>
         <input type="hidden" id="addOrUpdate"/>
         <div class="iframe_editorDiv_item" style="margin-top:20px;"><span>视频名称:</span><input type="text" id="videoName"/>
         <div id="nameCheck" style="display:none;height:20px;color:red;font-size:10px;padding-left:70px;">名称不能为空!</div>
         </div>
+        <div class="iframe_editorDiv_item" style="margin-top:20px;"><span>视频介绍:</span><input type="text" id="videoDesc"/></div>
         <div  class="iframe_editorDiv_item"><span>视频地址:</span><input type="text" id="videoUrl" /></div>
         <div  class="iframe_editorDiv_item"><span>图片地址:</span><input type="text" id="coverurl" /></div>
         <div  class="iframe_editorDiv_item"><span>是否发布:</span>

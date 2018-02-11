@@ -1,4 +1,4 @@
-package com.hxgy.wechat.service.impl;
+package com.hxgy.wechat.service.user.impl;
 
 import com.hxgy.wechat.VO.BowerObject;
 import com.hxgy.wechat.VO.UserVo;
@@ -8,7 +8,7 @@ import com.hxgy.wechat.entity.UserDetail;
 import com.hxgy.wechat.entity.UserEnrollCourse;
 import com.hxgy.wechat.repostory.UserDetailRepostory;
 import com.hxgy.wechat.repostory.UserEnrollCourseRepostory;
-import com.hxgy.wechat.service.IUserService;
+import com.hxgy.wechat.service.user.IUserService;
 import com.hxgy.wechat.utils.MD5Util;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.slf4j.Logger;
@@ -56,6 +56,7 @@ public class Userserviceimpl implements IUserService {
         userEnrollCourse.setPay(Const.NOT_PAY);
         userEnrollCourse.setOrderNo((int)System.currentTimeMillis());
         userEnrollCourse.setOrderDate(new Date());
+        userEnrollCourse.setCourseCategoryId(Long.parseLong(bowerObject.getCoursecategid()));
         UserDetail userDetail = userDetailRepostory.findOne(userId);
         userDetail.setRealName(bowerObject.getUsername());
         userDetail.setProfession(bowerObject.getProfession());

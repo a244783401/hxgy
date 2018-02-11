@@ -12,6 +12,8 @@ public class CourseDescVo {
 
     private String coursePrice;
 
+    private Integer stand;
+
     private Long courseCategoryId;
 
     private String courseName;
@@ -23,6 +25,24 @@ public class CourseDescVo {
     private Integer enable;
 
     private String authorName;
+
+    private Integer category;
+
+    public Integer getCategory() {
+        return category;
+    }
+
+    public void setCategory(Integer category) {
+        this.category = category;
+    }
+
+    public Integer getStand() {
+        return stand;
+    }
+
+    public void setStand(Integer stand) {
+        this.stand = stand;
+    }
 
     public String getAuthorName() {
         return authorName;

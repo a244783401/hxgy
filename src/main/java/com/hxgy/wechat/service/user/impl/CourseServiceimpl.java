@@ -1,4 +1,4 @@
-package com.hxgy.wechat.service.impl;
+package com.hxgy.wechat.service.user.impl;
 
 import com.hxgy.wechat.VO.CourseDescVo;
 import com.hxgy.wechat.base.Const;
@@ -10,13 +10,15 @@ import com.hxgy.wechat.entity.UserEnrollCourse;
 import com.hxgy.wechat.repostory.HealthCategoryRepostory;
 import com.hxgy.wechat.repostory.HealthDescRepostory;
 import com.hxgy.wechat.repostory.UserEnrollCourseRepostory;
-import com.hxgy.wechat.service.ICourseService;
+import com.hxgy.wechat.service.user.ICourseService;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zy
@@ -34,6 +36,20 @@ public class CourseServiceimpl implements ICourseService {
     @Autowired
     private UserEnrollCourseRepostory userEnrollCourseRepostory;
 
+
+    public Map findCurrentCourse(){
+        List<HealthCategory> healthCategories = healthCategoryRepostory.findByPush(Const.PUSH);
+        Map map = new HashMap<>();
+        if (!CollectionUtils.isEmpty(healthCategories)) {
+            for (HealthCategory healthCategory : healthCategories
+                    ) {
+                map.put("currentVersion", healthCategory.getVersion());
+                return map;
+            }
+        }
+        return null;
+    }
+
     public ServerResponse getCourseDetil(Long courseId){
         HealthCourseDesc healthCourseDesc = healthDescRepostory.findOne(courseId);
         if (healthCourseDesc == null){
@@ -48,6 +64,7 @@ public class CourseServiceimpl implements ICourseService {
         courseDescVo.setCourseName(healthCourseDesc.getCourseName());
         courseDescVo.setCourseCode(healthCourseDesc.getCourseCode());
         courseDescVo.setRecommend(healthCourseDesc.getRecommend());
+        courseDescVo.setCategory(healthCourseDesc.getCategory());
         courseDescVo.setAuthorName(healthCourseDesc.getAuthorName());
         courseDescVo.setCourseCategoryId(healthCourseDesc.getCourseCategoryId());
         courseDescVo.setCoursePrice(healthCourseDesc.getCoursePrice());
@@ -56,9 +73,11 @@ public class CourseServiceimpl implements ICourseService {
         return courseDescVo;
     }
     public ServerResponse signUp(Long courseId,Long userId){
-        HealthCourseDesc healthCourseDesc = healthDescRepostory.findOne(courseId);
+        HealthCourseDesc  healthCourseDesc = healthDescRepostory.findOne(courseId);
+        HealthCategory healthCategory = healthCategoryRepostory.findOne(healthCourseDesc.getCourseCategoryId());
+        Integer stand = healthCategory.getStand();
         UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(courseId,userId);
-        if (healthCourseDesc.getRecommend() == 0){
+        if (stand == Const.TOTAL){
             if (userEnrollCourse != null){
                 if (userEnrollCourse.getPay() == Const.BOUGHT){
                     return ServerResponse.createErrorCodeMessage(ResonseCode.BOUGHT.getCode(),"已经购买过该课程!!");
@@ -69,19 +88,33 @@ public class CourseServiceimpl implements ICourseService {
             }
             return ServerResponse.createSuccess();
         }
-        Integer recommendId = healthCourseDesc.getRecommend();
-        userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(recommendId.longValue(),userId);
-        if (userEnrollCourse == null){
-            return ServerResponse.createSuccess();
-        }
-        if (userEnrollCourse.getPay() == Const.BOUGHT){
-            return ServerResponse.createErrorCodeMessage(ResonseCode.BOUGHT.getCode(),"已经购买过该课程!!");
-        }
-        if (userEnrollCourse.getPay() == Const.NOT_PAY){
-            return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
+        Long totalCourseId = healthCategoryRepostory.findByVersionAndStand(healthCategory.getVersion(),Const.TOTAL).getId();
+        userEnrollCourse = userEnrollCourseRepostory.findByCourseCategoryIdAndUserId(totalCourseId,userId);
+        if (userEnrollCourse != null){
+            if (userEnrollCourse.getPay() == Const.BOUGHT){
+                return ServerResponse.createErrorCodeMessage(ResonseCode.BOUGHT.getCode(),"已经购买过该课程!!");
+            }
+            if (userEnrollCourse.getPay() == Const.NOT_PAY){
+                return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
+            }
         }
         return ServerResponse.createSuccess();
+
+
     }
+
+
+    public ServerResponse getAllInineCourse(){
+        Integer version = 0;
+        List<HealthCategory> healthCategories = healthCategoryRepostory.findByPush(Const.PUSH);
+        for (HealthCategory healthCategory: healthCategories
+                ) {
+            version = healthCategory.getVersion();
+            break;
+        }
+        return findAllCourseByVersion(version);
+    }
+
 
     /**
      * 获取所有的分类课程
@@ -115,13 +148,15 @@ public class CourseServiceimpl implements ICourseService {
                  ) {
                 CourseDescVo courseDescVo = new CourseDescVo();
                 courseDescVo.setId(courseDesc.getId());
+                courseDescVo.setStand(healthCategoryRepostory.findOne(courseDesc.getCourseCategoryId()).getStand());
                 courseDescVo.setCourseCategoryId(courseDesc.getCourseCategoryId());
                 courseDescVo.setCoursePrice(courseDesc.getCoursePrice());
                 courseDescVo.setRecommend(courseDesc.getRecommend());
+                courseDescVo.setCategory(courseDesc.getCategory());
                 courseDescVo.setCourseName(courseDesc.getCourseName());
-                courseDescVo.setRecommend(courseDesc.getRecommend());
                 courseDescVo.setCourseCode(courseDesc.getCourseCode());
-                courseDesc.setEnable(courseDesc.getEnable());
+                courseDescVo.setCourseCategoryId(courseDesc.getCourseCategoryId());
+                courseDescVo.setEnable(courseDesc.getEnable());
                 courseDescVos.add(courseDescVo);
             }
             return courseDescVos;
