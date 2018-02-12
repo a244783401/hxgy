@@ -94,7 +94,7 @@ function findAllVideoByCourseId(id){
 								judgeStatus(result.status,result.data);
 							}else{
 								//location.href=result.data
-								location.href = "videoPlay?videoId="+videoId
+								location.href = "/videoPlay?videoId="+videoId
 							}
 					})
 				});

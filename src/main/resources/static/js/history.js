@@ -145,7 +145,7 @@ $(function(){
 						showSingleDialogWithContent("删除成功！！",null);
 						setTimeout(function () {
 							location.href="history";
-						},3000);
+						},1000);
 					}
 				});
 			},null);

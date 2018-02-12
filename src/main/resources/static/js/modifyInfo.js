@@ -69,7 +69,6 @@ $(function(){
 		var location = $("input[name = 'file']").val();
 		var point = location.lastIndexOf(".");
 		var type = location.substr(point);
-		alert(type+location)
 		if (type == ".jpg" || type == ".gif" || type == ".JPG" || type == ".png" || type ==".GIF" || type ==".PNG"){
 			isOK = true;
 		}else{

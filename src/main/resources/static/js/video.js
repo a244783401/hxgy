@@ -10,7 +10,7 @@ $(function() {
 	// 加载视频详情	
 	excuteAjax('/video/getVideoById', {'videoId' : videoId}, function(jsonObj) {
 		if (jsonObj.status != 0) {
-			showSingleDialogWithContent(jsonObj.msg, null);
+			judgeStatus(jsonObj.status,jsonObj.data);
 		} else {
 			var video = jsonObj.data;
 			$('#videoPlayer').attr({'src' : video.url,
@@ -46,7 +46,7 @@ $(function() {
 		excuteAjax('/user/getCommentList', {'videoId' : videoId}, function(jsonObj) {
 			var commentStr = '';
 			if (jsonObj.status != 0) {
-				showSingleDialogWithContent(jsonObj.msg, null);
+				judgeStatus(jsonObj.status,jsonObj.data);
 			} else {
 				var commentList = jsonObj.data;
 				if (commentList == null) {
@@ -68,7 +68,7 @@ $(function() {
 							+ (commentList[i].userName == null ? '匿名用户'
 								: commentList[i].userName)
 							+ '</div>'
-							+ '<div class="video_comment_date">2017-06-02 15:50</div>'
+							+ '<div class="video_comment_date">'+timestampToTime(commentList[i].commentDate)+'</div>'
 							+ '<div class="video_comment_text">'
 							+ commentList[i].commentDesc + '</div>'
 							+ '</div>' + '</div>'

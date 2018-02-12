@@ -24,14 +24,11 @@ $(function () {
         $('.history_list').html(historyStr);
 
         $('.history_list_item').click(function(){
-            excuteAjax("/video/video_play", {"videoId":$(this).attr('videoId'),"courseId":$(this).attr('courseId')},function(re){
+            var videoId = $(this).attr('videoId');
+            excuteAjax("/video/video_play", {"videoId":videoId,"courseId":$(this).attr('courseId')},function(re){
                 if (re.status != 0){
-                    if (status == 12){
-                        showConfirmDialog("还未登陆","前往登陆?","不了","登陆",function(){
-                            location.href="/myCenterIndex"
-                        })
-                    }
-                }else location.href = re.data
+                    judgeStatus(re.status,re.data);
+                }else location.href = "/videoPlay?videoId="+videoId
             })
         });
     })

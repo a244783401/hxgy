@@ -43,7 +43,6 @@ public class CourseController {
      */
     @RequestMapping("/sign_up")
     public String signUp(Model model){
-
         Map map = iCourseService.findCurrentCourse();
         model.addAttribute("version",map.get("currentVersion"));
         return "signup";

@@ -23,7 +23,7 @@ function judgeStatus(status,data){
 	if (status == 10){
 		console.log("judge")
 		showConfirmDialog("还未登陆","前往登陆？","返回","登陆",function(){
-			location.href='/myCenterIndex';
+			location.href='/loginIndex';
 		})
 	}
 	if (status == 13){
@@ -33,7 +33,7 @@ function judgeStatus(status,data){
 	}
 	if (status == 11){
 		showConfirmDialog('需要购买','前往购买？？','再想想','前往购买',function(){
-			location.href='/index';
+			location.href='/user/course/sign_up';
 		})
 	}
 	if (status == 2){
@@ -45,7 +45,16 @@ function judgeStatus(status,data){
 		})
 	}
 }
-
+function timestampToTime(timestamp) {
+	var date = new Date(timestamp);
+	Y = date.getFullYear() + '-';
+	M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+	D = date.getDate() + ' ';
+	h = date.getHours() + ':';
+	m = date.getMinutes() + ':';
+	s = date.getSeconds();
+	return Y+M+D+h+m+s
+}
 function getMyDate(str) {
 	var oDate = new Date(str),
 		oYear = oDate.getFullYear(),

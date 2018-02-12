@@ -86,6 +86,9 @@ public class ServerResponse<T> {
     public static<T> ServerResponse<T> createErrorMessage(String errormsg){
         return new ServerResponse(errormsg,ResonseCode.ERROR.getCode());
     }
+    public static<T> ServerResponse<T> createErrorData(int errorCode,T data){
+        return new ServerResponse<T>(data,errorCode);
+    }
     public static<T> ServerResponse<T> createErrorCodeMessage(int errorCode,String errorMessage){
         return new ServerResponse<T>(errorMessage,errorCode);
     }

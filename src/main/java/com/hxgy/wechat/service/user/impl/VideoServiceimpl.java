@@ -162,7 +162,7 @@ public class VideoServiceimpl implements IVideoService {
         UserEnrollCourse userEnrollCourse = userEnrollCourseRepostory.findByCourseIdAndUserId(courseId, userId);
         if (userEnrollCourse != null){
             if (userEnrollCourse.getPay() == Const.NOT_PAY ){
-                return ServerResponse.createSuccess(userEnrollCourse,ResonseCode.NEED_PAY.getCode());
+                return ServerResponse.createErrorData(ResonseCode.NEED_PAY.getCode(),userEnrollCourse);
             }
             return ServerResponse.isSuccess(healthCourseItem.getUrl());
         }
@@ -176,7 +176,7 @@ public class VideoServiceimpl implements IVideoService {
             }
             return ServerResponse.isSuccess(healthCourseItem.getUrl());
         }
-        return ServerResponse.isSuccess(healthCourseItem.getUrl());
+        return ServerResponse.createErrorCodeMessage(ResonseCode.NEED_BUY.getCode(),ResonseCode.NEED_BUY.getMsg());
     }
 
     private List<HistoryVideoVo> getHistoryVo(List<HealthHistory> healthHistories){
