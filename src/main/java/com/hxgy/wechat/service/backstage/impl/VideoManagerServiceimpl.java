@@ -44,6 +44,7 @@ public class VideoManagerServiceimpl implements IVideoManagerService {
         oldCourseItem.setAuthorDeptName(healthCourseItem.getAuthorDeptName());
         oldCourseItem.setAuthorHospName(healthCourseItem.getAuthorHospName());
         oldCourseItem.setVideoDesc(healthCourseItem.getVideoDesc());
+        oldCourseItem.setFree(healthCourseItem.getFree());
         healthItemRepostory.save(oldCourseItem);
         return ServerResponse.createSuccessMessage("修改成功");
     }
@@ -68,6 +69,7 @@ public class VideoManagerServiceimpl implements IVideoManagerService {
             courseItemVO.setAuthorhospname(Item.getAuthorHospName());
             courseItemVO.setCourseid(Item.getCourseId() == null ? null : Item.getCourseId());
             courseItemVO.setVideoDesc(Item.getVideoDesc());
+            courseItemVO.setFree(Item.getFree()==11?"免费":"付费");
             courseItemVOList.add(courseItemVO);
         }
         return ServerResponse.isSuccess(courseItemVOList);

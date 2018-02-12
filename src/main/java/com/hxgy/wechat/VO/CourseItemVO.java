@@ -17,6 +17,7 @@ public class CourseItemVO {
     private String authorhospname;
     private String videoDesc;
     private long courseid;
+    private String free;
 
     public long getId() {
         return id;
@@ -120,5 +121,13 @@ public class CourseItemVO {
 
     public void setVideoDesc(String videoDesc) {
         this.videoDesc = videoDesc;
+    }
+
+    public String getFree() {
+        return free;
+    }
+
+    public void setFree(String free) {
+        this.free = free;
     }
 }

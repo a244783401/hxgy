@@ -13,6 +13,7 @@ $(function() {
                     { 'data': 'coverurl','width':250 },
                     { 'data': 'viewnum' },
                     { 'data': 'enable' },
+                    { 'data': 'free' },
                     { 'data': 'courseName' },
                     { 'data': 'createTime' },
                     { 'data': 'authorname' },
@@ -65,6 +66,7 @@ $(function() {
     			$('#videoDept').val(data.authordeptname);
     			$('#videoHospital').val(data.authorhospname);
     			$('#enable').val(data.enable=="是"?"1":"0");
+                $('#free').val(data.free=="是"?"11":"12");
     			$('#videoDesc').val(data.videoDesc);
     			$('#courseCoverUrl').val(data.courseCoverUrl);
     			$('#courseCode').val(data.courseCode);
@@ -109,7 +111,8 @@ $(function() {
     				"url":$('#videoUrl').val(),
     				"coverUrl":$('#coverurl').val(),
     				"courseId":$('#course').val(),
-    				"enable":$('#enable').val(),   				
+    				"enable":$('#enable').val(),
+                    "free":$('#free').val(),
     				"authorName":$('#videoAuthor').val().replace(/[ ]/g,""),
     				"authorDeptName":$('#videoDept').val().replace(/[ ]/g,""),
     				"authorHospName":$('#videoHospital').val().replace(/[ ]/g,""),
