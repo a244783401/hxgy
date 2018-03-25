@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 课程Service
  *
- * @author zy
+ * @author wx
  * @create 2018-01-24 10:35
  **/
 public interface ICourseService {

@@ -1,7 +1,7 @@
 package com.hxgy.wechat.VO;
 
 /**
- * Created by 10104 on 2018/1/29.
+ * Created by wx on 2018/1/29.
  */
 public class CourseItemVO {
     private long id;

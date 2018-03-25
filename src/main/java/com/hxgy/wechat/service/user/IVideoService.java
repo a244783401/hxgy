@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * 视频
  *
- * @author zy
+ * @author wx
  * @create 2018-01-26 11:35
  **/
 @Component

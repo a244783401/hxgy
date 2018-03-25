@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author zy
+ * @author wx
  * @create 2018-01-23 16:54
  **/
 @Controller

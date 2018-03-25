@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 文件上传
  *
- * @author zy
+ * @author wx
  * @create 2018-01-26 9:07
  **/
 @Component

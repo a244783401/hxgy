@@ -1,7 +1,7 @@
 package com.hxgy.wechat.base;
 
 /**
- * @author zy
+ * @author wx
  * @create 2018-01-18 22:12
  **/
 public enum ResonseCode {

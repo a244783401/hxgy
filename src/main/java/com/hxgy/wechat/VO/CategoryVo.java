@@ -1,7 +1,7 @@
 package com.hxgy.wechat.VO;
 
 /**
- * Created by 10104 on 2018/1/25.
+ * Created by wx on 2018/1/25.
  */
 public class CategoryVo {
     private Long id;

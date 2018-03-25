@@ -3,7 +3,7 @@ package com.hxgy.wechat.VO;
 import java.util.Date;
 
 /**
- * @author zy
+ * @author wx
  * @create 2018-02-08 10:12
  **/
 public class VideoPlayVo {

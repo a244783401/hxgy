@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * @author zy
+ * @author wx
  * @create 2018-01-18 22:43
  **/
 @Component

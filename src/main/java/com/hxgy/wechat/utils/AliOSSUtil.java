@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author zy
+ * @author wx
  * @create 2018-01-25 15:56
  **/
 public class AliOSSUtil {

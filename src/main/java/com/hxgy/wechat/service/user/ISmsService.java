@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * 验证码的使用
- * Created by zy on 2018/1/20.
+ * Created by wx on 2018/1/20.
  */
 public interface ISmsService {
     /**

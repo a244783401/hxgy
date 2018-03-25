@@ -3,7 +3,7 @@ package com.hxgy.wechat.utils;
 import java.security.MessageDigest;
 
 /**
- * @author zy
+ * @author wx
  * @create 2018-01-23 11:25
  **/
 public class MD5Util {

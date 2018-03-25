@@ -16,7 +16,7 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 /**
  * 前端配置
  *
- * @author zy
+ * @author wx
  * @create 2018-01-18 19:13
  **/
 @Configuration

@@ -16,7 +16,7 @@ import java.util.Random;
 /**
  * 图片服务器
  *
- * @author zy
+ * @author wx
  * @create 2018-01-19 14:15
  **/
 public class OSSClientUtil {

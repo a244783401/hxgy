@@ -1,7 +1,7 @@
 package com.hxgy.wechat.VO;
 
 /**
- * @author zy
+ * @author wx
  * @create 2018-01-24 11:13
  **/
 public class CourseDescVo {

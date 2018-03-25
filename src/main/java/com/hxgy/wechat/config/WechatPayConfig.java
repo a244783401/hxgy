@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * payConfig
  *
- * @author zy
+ * @author wx
  * @create 2018-01-18 23:00
  **/
 @Component

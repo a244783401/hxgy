@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * web错误全局错误
- * @author zy
+ * @author wx
  * @create 2018-01-18 14:35
  **/
 @Controller

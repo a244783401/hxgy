@@ -3,7 +3,7 @@ package com.hxgy.wechat.VO;
 import java.util.Date;
 
 /**
- * @author zy
+ * @author wx
  * @create 2018-01-31 11:00
  **/
 public class BowerObject {

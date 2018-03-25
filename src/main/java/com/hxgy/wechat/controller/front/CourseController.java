@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * 报名
  *
- * @author zy
+ * @author wx
  * @create 2018-01-23 14:00
  **/
 @Controller

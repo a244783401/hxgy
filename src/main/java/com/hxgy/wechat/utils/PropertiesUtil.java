@@ -11,7 +11,7 @@ import java.util.Properties;
 /**
  * 配置文件获取类
  *
- * @author zy
+ * @author wx
  * @create 2018-01-19 14:18
  **/
 public class PropertiesUtil {

@@ -4,7 +4,7 @@ import com.hxgy.wechat.base.ServerResponse;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by 15520 on 2018/3/9.
+ * Created by wx on 2018/3/9.
  */
 @Component
 public interface IDiscussService {

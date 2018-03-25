@@ -3,7 +3,7 @@ package com.hxgy.wechat.VO;
 import java.util.Date;
 
 /**
- * Created by 10104 on 2018/2/1.
+ * Created by wx on 2018/2/1.
  */
 public class CommentVo {
     private long id;

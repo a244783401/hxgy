@@ -3,7 +3,7 @@ package com.hxgy.wechat.VO;
 import java.util.Date;
 
 /**
- * Created by 10104 on 2018/1/26.
+ * Created by wx on 2018/1/26.
  */
 public class CourseVo {
     private Long Id;

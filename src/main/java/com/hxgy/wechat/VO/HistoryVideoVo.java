@@ -5,7 +5,7 @@ import com.hxgy.wechat.entity.HealthCourseItem;
 import java.util.Date;
 
 /**
- * @author zy
+ * @author wx
  * @create 2018-01-29 11:34
  **/
 public class HistoryVideoVo {

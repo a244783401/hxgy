@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @author zy
+ * @author wx
  * @create 2018-01-30 15:12
  **/
 @Service("iFileService")

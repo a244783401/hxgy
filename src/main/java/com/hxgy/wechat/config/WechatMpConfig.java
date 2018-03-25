@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 /**
  * 微信配置
  *
- * @author zy
+ * @author wx
  * @create 2018-01-18 22:29
  **/
 @Component

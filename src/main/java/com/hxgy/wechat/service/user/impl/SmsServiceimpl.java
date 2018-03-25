@@ -23,7 +23,7 @@ import static com.hxgy.wechat.utils.TokenCacheUtil.setKey;
 /**
  * 短信验证实现类
  *
- * @author zy
+ * @author wx
  * @create 2018-01-20 15:07
  **/
 @Service("iSmsService")

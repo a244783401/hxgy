@@ -4,7 +4,7 @@ import com.hxgy.wechat.utils.MD5Util;
 
 /**
  * 返回类
- * @author zy
+ * @author wx
  * @create 2018-01-18 22:06
  **/
 public class ServerResponse<T> {

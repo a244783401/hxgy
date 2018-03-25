@@ -15,7 +15,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 /**
- * @author zy
+ * @author wx
  * @create 2018-01-18 21:15
  **/
 @Configuration
